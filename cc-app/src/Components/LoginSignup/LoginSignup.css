@@ -4,10 +4,11 @@
     margin: auto;
     margin-top: 200px;
     width: 600px;
-    background: white;
+    background: rgb(247, 243, 243);
     padding-bottom: 30px;
 }
-.header{
+
+.header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,15 +16,15 @@
     width: 100%;
     margin-top: 30px;
 }
-.text{
-    color: blue;
-    font-size: 48px;    
+.text {
+    color: rgb(159, 4, 4);
+    font-size: 9px;    
     font-weight: 700;
 }
 .underline{
     width: 61px;
     height: 6px;
-    background: rgb(120, 5, 97);
+    background: rgb(98, 77, 203);
     border-radius: 9px;
 
 }
@@ -39,7 +40,7 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: rgba(114, 121, 228, 0.767);
+    background: rgba(159, 54, 8, 0.13);
     border-radius: 6px;
 }
 .input img{
@@ -51,7 +52,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: rgba(81, 90, 5, 0.772);
+    color: rgba(9, 10, 0, 0.772);
     font-size: 19px;
 }
 
@@ -61,8 +62,8 @@
     color: grey;
     font-size: 20px;
 }
-.forgot-password{
-    color: blue;
+.forgot-password span{
+    color: rgb(0, 5, 4);
     cursor: pointer;
 }
 .submit-container{
@@ -76,11 +77,14 @@
     align-items: center;
     width: 220px;
     height: 59px;
-    color: beige;
-    background:purple ;
+    color: #f5f5dc;
+    background: rgb(76, 48, 115);
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
-
 }
+/* .gray{
+    background: cornsilk;
+    color: rgb(200, 216, 216);
+} */
