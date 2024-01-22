@@ -1,7 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
 import org.launchcode.caninecoach.models.Course;
-import org.launchcode.caninecoach.models.data.CourseRepository;
+import org.launchcode.caninecoach.data.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
