@@ -9,8 +9,9 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f190cecb;
-
+  background: url('./Components/Assets/bg1.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 code {
