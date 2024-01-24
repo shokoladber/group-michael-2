@@ -1,9 +1,14 @@
 package org.launchcode.caninecoach.models;
 
-public class Course {
+import jakarta.persistence.Entity;
+
+@Entity
+public class Course extends AbstractEntity{
+
     private String name;
     private String type;
     private String description;
+    private int price;
 
     public String getName() {
         return name;
@@ -29,12 +34,22 @@ public class Course {
         this.description = description;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "models.Classes{" +
+        return "Course{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", price=" + price +
                 '}';
     }
+
 }
