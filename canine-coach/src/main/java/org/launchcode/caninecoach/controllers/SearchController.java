@@ -21,24 +21,9 @@ public class SearchController {
     @Autowired
     private CourseRepository courseRepository;
 
-    @GetMapping(value = "")
-    public String search(Model model) {
-        model.addAttribute("columns", columnChoices);
-        return "search";
-    }
-
-    @PostMapping(value = "results")
-    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
-        ArrayList<Course> courses;
-        if (searchTerm.isBlank()) {
-            courses = (ArrayList<Course>) courseRepository.findAll();
-        } else {
-            courses = courseRepository.findByColumnAndValue(searchType, searchTerm);
-        }
-        model.addAttribute("title", "Classes with " + columnChoices.get(searchType) + ": " + searchTerm);
-        model.addAttribute("Classes", courses);
-        model.addAttribute("columns", columnChoices);
-
-        return "search";
+    @RequestMapping("")
+    public String index(Model model) {
+        model.addAttribute("courses", courseRepository.findAll());
+        return "index";
     }
 }
