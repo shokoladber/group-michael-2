@@ -1,5 +1,5 @@
 import React from "react";
-import {Navbar} from "../../LoginSignup";
+import Navbar from "../navbar";
 import './Header.css';
 
 function Header () {
@@ -11,9 +11,9 @@ function Header () {
                 <a href="/" className="header-logo">Canine Coach</a>
             </section>
             <section className="header-top__navbar">
-                <img src="img_K94.jpg" alt="dog head"/>
+                <img src="cc1.jpg" alt=""/>
                 <section className="header-top__navigation">
-            <Navbar/> 
+            {/* <Navbar/>  */}
             </section>
             <hr className="header-top__seperator"/>
             </section>

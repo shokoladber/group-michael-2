@@ -1,8 +1,8 @@
 .header{
-    margin-top: 100px;
-    display: flex;
+    margin-top: 50px;
+    display: flex ;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
 
 }
 .header-top{
@@ -18,8 +18,8 @@
 }
 .header-logo{
     color: rgb(115, 90, 174);
-    text-decoration: inherit;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: wavy;
+    font-family: fantasy;
     font-size: 100px;
     
 }
@@ -29,9 +29,9 @@
     flex-direction: column;
 }
 .header-top__seperator{
-    width: 75%;
+    width: 100%;
     border: none;
-    height: 6px;
+    height: 10px;
     margin-top: 2px;
     background-color: rgb(150, 9, 117);
 
@@ -57,30 +57,6 @@
 .header-bottom__phone{
     margin-right: 65px;
 }
-/* .header-bottom__bag{
-    position: absolute;
-    display: flex;
-}
-.header-bottom__bag-icon{
-    position: relative;
-    display: flex;
-    left: -5px;
-    width: 30px;
-    height: 30px; 
-}
-.header-bottom__bag-count{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    right: 0px;
-    top: -5px;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 10px;
-    color: cornsilk;
-    
-}
- */
+
+
+

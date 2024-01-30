@@ -6,8 +6,10 @@ function Navbar (){
 
     return(
         <section className="navbar">
+           
             <a href="/" className="navbar-item">Home</a>
             <a href="/blog" className="navbar-item">Blog</a>
+            <a href="/blog" className="navbar-item">Shop</a>
             <a href="/contact" className="navbar-item">Contact Us</a>
         </section>
 
