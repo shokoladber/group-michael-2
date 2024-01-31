@@ -15,8 +15,12 @@ import jakarta.validation.Valid;
 @Controller
 public class RegistrationController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/register")
     public String registerForm(Model model) {
@@ -26,7 +30,7 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegistrationForm registrationForm,
-                                          BindingResult result, Model model) {
+                                          BindingResult result) {
         if (result.hasErrors()) {
             return "register";
         }
