@@ -1,55 +1,53 @@
 package org.launchcode.caninecoach.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @Entity
 public class Course extends AbstractEntity{
 
-    private String name;
-    private String type;
-    private String description;
-    private int price;
+    @ManyToOne
+    private Type type;
 
-    public String getName() {
-        return name;
+    private Details details;
+
+    private Curriculum curriculum;
+
+    public Course(Type type, Details details, Curriculum curriculum) {
+        this.type = type;
+        this.details = details;
+        this.curriculum = curriculum;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Course() {
+
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public String getDescription() {
-        return description;
+    public Details getDetails() {
+        return details;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDetails(Details details) {
+        this.details = details;
     }
 
-    public int getPrice() {
-        return price;
+    public Curriculum getCurriculum() {
+        return curriculum;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setCurriculum(Curriculum curriculum) {
+        this.curriculum = curriculum;
     }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
-
 }
