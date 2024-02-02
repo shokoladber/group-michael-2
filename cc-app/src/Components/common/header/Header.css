@@ -1,4 +1,4 @@
-.header{
+  .header{
     margin-top: 50px;
     display: flex ;
     flex: 1;
@@ -28,15 +28,21 @@
     flex: 1;
     flex-direction: column;
 }
-.header-top__seperator{
+.fa-solid fa-dog{
+    display: flex;
+    height: 12px;
+    width:25% ;
+
+}
+/* .header-top__seperator{
     width: 100%;
     border: none;
     height: 10px;
     margin-top: 2px;
     background-color: rgb(150, 9, 117);
 
-}
-.header-top__navigation{
+} */
+ .header-top__navigation{
     display: flex;
     flex: 1;
     flex-direction: row;
@@ -44,19 +50,4 @@
     margin-right: 55px;
     
 }
-.header-bottom{
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 6px;
-}
-.header-bottom__email{
-    margin-right: 55px;
-}
-.header-bottom__phone{
-    margin-right: 65px;
-}
-
-
 
