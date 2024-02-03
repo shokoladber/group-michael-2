@@ -6,4 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CaninecoachApplicationTests {
 
+	@Test
+	void contextLoads() {
+	}
+
 }
