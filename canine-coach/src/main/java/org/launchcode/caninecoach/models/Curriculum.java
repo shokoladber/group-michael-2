@@ -2,9 +2,9 @@ package org.launchcode.caninecoach.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 @Entity
 public class Curriculum extends AbstractEntity{
@@ -21,16 +21,23 @@ public class Curriculum extends AbstractEntity{
 
     private String week6;
 
-    @JoinColumn(name = "curriculum_id")
-    private ArrayList<Course> courses = new ArrayList<>();
+    @OneToOne
+    @NotNull
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-    public Curriculum(String week1, String week2, String week3, String week4, String week5, String week6) {
+    public Curriculum(String week1, String week2, String week3, String week4, String week5, String week6, Course course) {
         this.week1 = week1;
         this.week2 = week2;
         this.week3 = week3;
         this.week4 = week4;
         this.week5 = week5;
         this.week6 = week6;
+        this.course = course;
+    }
+
+    public Curriculum(Course course) {
+        this.course = course;
     }
 
     public Curriculum() {
@@ -84,7 +91,8 @@ public class Curriculum extends AbstractEntity{
         this.week6 = week6;
     }
 
-    public ArrayList<Course> getCourses() {
-        return courses;
+    public Course getCourse() {
+        return course;
     }
 }
+

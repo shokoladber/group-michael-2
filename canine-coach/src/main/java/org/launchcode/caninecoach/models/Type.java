@@ -2,7 +2,9 @@ package org.launchcode.caninecoach.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 
@@ -15,9 +17,11 @@ public class Type extends AbstractEntity {
     public Type(String name) {
         this.name = name;
     }
+
     @ManyToMany
-    @JoinColumn(name = "type_id")
-    private ArrayList<Course> courses = new ArrayList<>();
+    @NotNull
+    @JoinTable(name = "course_info", joinColumns = { @JoinColumn(name = "type_id")}, inverseJoinColumns = { @JoinColumn(name = "course_id")})
+    private final ArrayList<Course> courses = new ArrayList<>();
 
     public Type() {
     }

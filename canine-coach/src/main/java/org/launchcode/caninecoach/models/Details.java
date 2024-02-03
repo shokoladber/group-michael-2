@@ -2,7 +2,9 @@ package org.launchcode.caninecoach.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +19,15 @@ public class Details extends AbstractEntity{
 
     private Integer price;
 
-    @JoinColumn(name = "details_id")
-    private ArrayList<Course> courses = new ArrayList<>();
+    @OneToOne
+    @NotNull
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public Details() {
     }
 
-    public Details(String length, String description, Integer price) {
+    public Details(String length, String description, Integer price, Course course) {
         this.length = length;
         this.description = description;
         this.price = price;
@@ -53,7 +57,7 @@ public class Details extends AbstractEntity{
         this.price = price;
     }
 
-    public ArrayList<Course> getCourses() {
-        return courses;
+    public Course getCourse() {
+        return course;
     }
 }
