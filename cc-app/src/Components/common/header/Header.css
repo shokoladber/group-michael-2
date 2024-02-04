@@ -1,0 +1,46 @@
+  .header{
+    margin-top: 20px;
+    display: flex ;
+    flex: 1;
+    flex-direction: row;
+
+}
+.header-top{
+    display: flex;
+    width: 900px;
+    height: 100px;
+}
+.header-top__logo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-right: 10px;
+}
+.header-logo{
+    color: rgb(115, 90, 174);
+    text-decoration: wavy;
+    font-family: fantasy;
+    font-size: 100px;
+    
+}
+.header-top__navbar{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+} 
+ .img {
+    display: flex;
+    height: 12px;
+    width:25% ;
+
+}
+
+ .header-top__navigation{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 55px;
+    
+}
+

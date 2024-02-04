@@ -1,0 +1,105 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 200px;
+    width: 600px;
+    background: transparent;
+    border:2px solid rgb(188, 142, 142) ;
+    backdrop-filter: blur (30px);
+    box-shadow: 0 0 10px black;
+    padding-bottom: 30px;
+    border-radius: 60px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;   
+    width: 100%;
+    margin-top: 30px;
+}
+.text {
+    color: rgb(98, 77, 203);
+    font-size: 50px;    
+    font-weight: 700;
+}
+.underline{
+    width: 200px;
+    height: 6px;
+    background: rgb(98, 77, 203);
+    border-radius: 9px;
+
+}
+.inputs{
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.input{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+    height: 80px;
+    background: rgba(40, 37, 36, 0.13);
+    border-radius: 6px;
+}
+.input img{
+    margin: 0px 22px;
+}
+.input input{
+    height: 5px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(9, 10, 0, 0.772);
+    font-size: 18px;
+    padding: 20px 20px 20px;
+}
+
+.forgot-password{
+    padding-left: 62px;
+    margin-top: 27px;
+    color: rgb(31, 30, 30);
+    font-size: 20px;
+}
+.forgot-password span{
+    color: rgb(52, 52, 166);
+    cursor: pointer;
+}
+.forgot-password span:hover{
+    color: rgb(208, 12, 107);
+    cursor: pointer;
+    text-decoration: underline ;
+}
+.submit-container{
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 59px;
+    color: #f5f5dc;
+    background: rgb(76, 48, 115);
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.gray{
+    background: cornsilk;
+    color: rgb(200, 216, 216);
+}
+/* Mobile Version (Responsiveness)*/
+
+@media only screen and (max-width: 600px) {
+    
+}
