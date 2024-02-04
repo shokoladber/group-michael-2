@@ -1,7 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
 import org.launchcode.caninecoach.forms.RegistrationForm;
-import org.launchcode.caninecoach.services.UserService;
+import org.launchcode.caninecoach.services.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +15,11 @@ import jakarta.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
+    public RegistrationController(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/register")
@@ -35,7 +35,7 @@ public class RegistrationController {
             return "register";
         }
 
-        userService.registerUser(registrationForm);
+        userDetailsService.registerUser(registrationForm);
         return "redirect:/login";
     }
 }
