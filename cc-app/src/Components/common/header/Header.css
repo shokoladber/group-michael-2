@@ -1,5 +1,5 @@
   .header{
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex ;
     flex: 1;
     flex-direction: row;
@@ -12,7 +12,7 @@
 }
 .header-top__logo {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     margin-right: 10px;
 }
@@ -26,22 +26,15 @@
 .header-top__navbar{
     display: flex;
     flex: 1;
-    flex-direction: column;
-}
-.fa-solid fa-dog{
+    flex-direction: row;
+} 
+ .img {
     display: flex;
     height: 12px;
     width:25% ;
 
 }
-/* .header-top__seperator{
-    width: 100%;
-    border: none;
-    height: 10px;
-    margin-top: 2px;
-    background-color: rgb(150, 9, 117);
 
-} */
  .header-top__navigation{
     display: flex;
     flex: 1;

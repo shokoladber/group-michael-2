@@ -1,4 +1,5 @@
 import React from "react";
+// import logo from 'K9 4.jpg'
 //  import Navbar from "../navbar";
 import './Header.css';
 
@@ -8,14 +9,15 @@ function Header () {
         <sectiion className="header">
             <section className="header-top">
             <section className="header-top__logo">
-                <a href="/" className="header-logo">Canine Coach</a>
+                <a href="/" className="header-logo">Canine  Coach</a>
             </section>
             <section className="header-top__navbar">
-            <i class="fa-solid fa-dog"></i>
-                <section className="header-top__navigation">
+            {/* <img src= {logo} alt=""/> */}
+            
+            <section className="header-top__navigation">
             {/* <Navbar/>  */}
             </section>
-            <hr className="header-top__seperator"/>
+        
             </section>
             </section>
             <section className="header-bottom">

@@ -6,11 +6,12 @@ import { Navbar } from './Components/common';
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <App />
-    <Navbar/>
     
   </React.StrictMode>
 );
