@@ -18,7 +18,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public String processLoginForm(@ModelAttribute LoginForm loginForm) {
-        // Authentication is handled by Spring Security
-        return "redirect:/home"; // Redirect after successful login
+        return "redirect:/home";
     }
 }

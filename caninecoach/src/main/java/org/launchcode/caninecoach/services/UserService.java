@@ -22,10 +22,10 @@ public class UserService {
     }
 
     public User registerUser(RegistrationForm registrationForm) {
-        // Assuming you handle the case where the user might already exist
+
         User user = new User();
         user.setEmail(registrationForm.getEmail());
-        // Here you'd typically encrypt the password before setting it
+
         user.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
         return userRepository.save(user);
     }
@@ -34,16 +34,16 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    // Example of a method that could be used for OAuth2 user handling
+
     public User registerOrRetrieveUser(String email, String defaultPassword) {
         Optional<User> existingUser = userRepository.findByEmail(email);
 
         return existingUser.orElseGet(() -> {
             User newUser = new User(email, passwordEncoder.encode(defaultPassword));
-            // Additional setup for the newUser object
+
             return userRepository.save(newUser);
         });
     }
 
-    // Other UserService methods...
+
 }

@@ -36,19 +36,19 @@ public class GoogleClassroomService {
         InputStream serviceAccountStream = resourceLoader.getResource("classpath:google-service-account.json").getInputStream();
 
 
-        // Authenticate using the service account for Google Classroom API
+
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccountStream)
                 .createScoped(Collections.singletonList("https://www.googleapis.com/auth/classroom.courses.readonly"));
 
 
-        // Build the Classroom service
+
         classroom = new Classroom.Builder(GoogleNetHttpTransport.newTrustedTransport(), GsonFactory.getDefaultInstance(), new HttpCredentialsAdapter(credentials))
                 .setApplicationName("Canine Coach")
                 .build();
     }
 
 
-    // Example method: List courses
+
     public ListCoursesResponse listCourses() throws IOException {
         Classroom.Courses.List request = classroom.courses().list();
         return request.execute();

@@ -21,25 +21,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        // Process the OAuth2 user details
+
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String email = (String) attributes.get("email");
 
-        // Handle user lookup or creation logic here
+
         User user = userRepository.findByEmail(email)
                 .orElseGet(() -> {
-                    // Create and return a new User object if not found
-                    // This is a simplified example; include your user creation logic here
                     User newUser = new User();
                     newUser.setEmail(email);
-                    // Set other necessary user details here
+
                     return userRepository.save(newUser);
                 });
 
-        // Define custom authorities or roles
+
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        // Add more roles based on your needs
+
 
         return new CustomOAuth2User(attributes, authorities, "email");
     }
