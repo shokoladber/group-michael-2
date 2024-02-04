@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.apis:google-api-services-classroom:v1-rev20231121-2.0.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.google.apis" artifactId="google-api-services-classroom" version="v1-rev20231121-2.0.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-classroom/v1-rev20231121-2.0.0/3477660c4b68638ec6967b2c3755a743370e3ba1/google-api-services-classroom-v1-rev20231121-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-classroom/v1-rev20231121-2.0.0/598216c6451ce7414752577292579afa21424b5c/google-api-services-classroom-v1-rev20231121-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
