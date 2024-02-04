@@ -9,11 +9,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -25,27 +21,29 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        // Process the OAuth2 user details, for example, extracting email
+        // Process the OAuth2 user details
         Map<String, Object> attributes = oAuth2User.getAttributes();
-        String email = (String) attributes.get("email"); // Ensure the attribute key matches your IdP's response
+        String email = (String) attributes.get("email");
 
-        // Perform database operations, e.g., find or create user
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            // Handle new or existing user according to your application's requirements
-            // For new users, you might want to create a new User entity and store it in your database
-        }
+        // Handle user lookup or creation logic here
+        User user = userRepository.findByEmail(email)
+                .orElseGet(() -> {
+                    // Create and return a new User object if not found
+                    // This is a simplified example; include your user creation logic here
+                    User newUser = new User();
+                    newUser.setEmail(email);
+                    // Set other necessary user details here
+                    return userRepository.save(newUser);
+                });
 
-        // Define custom authorities or roles based on your needs
+        // Define custom authorities or roles
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        // Add more roles/authorities based on the user or other criteria
+        // Add more roles based on your needs
 
-        // Create a new OAuth2User with custom authorities
-        return new CustomOAuth2User(attributes, authorities, "email"); // Use a custom OAuth2User implementation if necessary
+        return new CustomOAuth2User(attributes, authorities, "email");
     }
 
-    // Example CustomOAuth2User class for custom OAuth2User implementation
     public static class CustomOAuth2User implements OAuth2User {
         private Map<String, Object> attributes;
         private Set<SimpleGrantedAuthority> authorities;
