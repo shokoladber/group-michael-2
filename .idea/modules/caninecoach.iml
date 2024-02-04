@@ -10,6 +10,10 @@
       <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/build" />
     </content>
+    <content url="file://$MODULE_DIR$/../../caninecoach">
+      <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/build" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
