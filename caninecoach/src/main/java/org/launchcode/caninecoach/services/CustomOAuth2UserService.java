@@ -1,5 +1,7 @@
 package org.launchcode.caninecoach.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.launchcode.caninecoach.models.User;
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import java.util.Collections;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomOAuth2UserService.class);
 
     @Autowired
     private UserRepository userRepository;
