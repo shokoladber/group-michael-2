@@ -1,7 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
 import org.launchcode.caninecoach.forms.RegistrationForm;
-import org.launchcode.caninecoach.services.UserDetailsService;
+import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +15,10 @@ import jakarta.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private final UserDetailsService userDetailsService;
+    private final UserService userDetailsService;
 
     @Autowired
-    public RegistrationController(UserDetailsService userDetailsService) {
+    public RegistrationController(UserService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
