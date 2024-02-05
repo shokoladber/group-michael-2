@@ -1,0 +1,10 @@
+{ "web":
+{"client_id":"69584465123-5jtromhi806jqtfub443an2u6218pvtp.apps.googleusercontent.com",
+  "project_id":"canine-coach","auth_uri":"https://accounts.google.com/o/oauth2/auth",
+  "token_uri":"https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+  "client_secret":"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",
+  "redirect_uris":["http://localhost:8080/login/oauth2/code/google"],
+  "javascript_origins":["http://localhost:8080"]}
+}
+

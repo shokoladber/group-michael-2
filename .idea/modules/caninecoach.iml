@@ -10,14 +10,12 @@
       <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/build" />
     </content>
+    <content url="file://$MODULE_DIR$/../../caninecoach" />
     <content url="file://$MODULE_DIR$/../../caninecoach">
       <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/build" />
     </content>
-    <content url="file://$MODULE_DIR$/../../caninecoach">
-      <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/.gradle" />
-      <excludeFolder url="file://$MODULE_DIR$/../../caninecoach/build" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../caninecoach" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
