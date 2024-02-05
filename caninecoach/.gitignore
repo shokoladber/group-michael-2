@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 .DS_Store
 
+
 ### STS ###
 .apt_generated
 .classpath
@@ -39,4 +40,6 @@ out/
 
 ### Google Crendentials ###
 src/main/resources/application-secret.properties
+src/main/resources/google-classroom-api.json
+
 
