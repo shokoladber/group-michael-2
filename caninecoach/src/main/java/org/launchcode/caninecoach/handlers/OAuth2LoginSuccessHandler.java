@@ -14,7 +14,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        // Custom logic after successful authentication
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

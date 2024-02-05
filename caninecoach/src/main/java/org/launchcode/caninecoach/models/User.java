@@ -13,6 +13,6 @@ public class User {
     private Long id;
     private String email;
     private String name;
-    // Standard getters and setters
+
 }
 
