@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class GoogleClassroomService {
@@ -27,7 +28,7 @@ public class GoogleClassroomService {
 
     @RequestScope
     public Classroom classroomService() throws IOException, GeneralSecurityException {
-        GoogleCredentials credentials = GoogleCredentials.fromStream(getClass().getResourceAsStream("/" + credentialsFilePath))
+        GoogleCredentials credentials = GoogleCredentials.fromStream(Objects.requireNonNull(getClass().getResourceAsStream("/" + credentialsFilePath)))
                 .createScoped(ClassroomScopes.all());
 
         if (credentials == null) {
