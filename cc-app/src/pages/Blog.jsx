@@ -1,13 +1,13 @@
 import React from 'react'
-import { Header, Navbar } from '../Components/common'
-
+import Logo from '../Components/Assets/cc1.jpg';
 
 function Blog() {
   return (
     <div>
-        <Navbar/>
-        <Header/>
-        <h2>Blog Page</h2>
+        <h2>Blog Page</h2>            
+        <img src={Logo} alt=''/> 
+    
+
     </div>
   )
 }

@@ -29,7 +29,7 @@
     font-size: 20px;
 }
 .btn--medium:hover, .btn--large:hover {
-    background: rgb(13, 181, 181);
-    color: rgb(41, 39, 39);
+    background: rgb(199, 167, 230);
+    color: rgb(32, 3, 46);
     transform: 250ms;
 }
