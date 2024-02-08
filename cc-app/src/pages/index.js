@@ -1,0 +1,5 @@
+export * from './Home'
+export * from './Blog'
+export * from './Classes'
+export * from './Contact'
+export * from './NoPage'

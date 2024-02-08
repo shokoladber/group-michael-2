@@ -4,11 +4,13 @@ import {Link} from 'react-router-dom'
 import Button from '../button';
 import { RiLockPasswordFill, GiSittingDog } from "react-icons/ri";
 import { LiaAccusoft } from "react-icons/lia";
+import Dropdown from '../dropdown';
 
 function Navbar (){
 
     const [click, setClick]= useState(false);
     const [button, setButton]= useState(false);
+    const [dropdown, setDropdown] = useState(false);
 
     const handleClick = ()=> setClick(!click);
     const closeMobileMenu= ()=>setClick(false);
@@ -28,35 +30,39 @@ function Navbar (){
 
         return(
             <div className='navbar'>
-                <div className='navbar__container'>
-                
-                    <h2 className='navbar__logo'> <LiaAccusoft />  Cc</h2>
+                                
+                    <h2 className='navbar__logo'> <LiaAccusoft />  CC</h2>
                       
-                        {/* <div className='menu__icon'>
-                            <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
-                        </div>
-                 */}
+                            <div className='menu__icon'> 
+                                <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
+                            </div>
+                            <div className='menu'>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+                 
                     <ul className= {click?'nav__menu active':'nav__menu'}>
                         <li className='nav__item'>
                             <Link to="/" className='nav__links' onClick={closeMobileMenu}>Home</Link>
                         </li>
                         <li className='nav__item'>
-                            <Link to="/Classes" className='nav__links' onClick={closeMobileMenu}>Classes</Link>
+                            <Link to="/Classes" className='nav__links' onClick={closeMobileMenu}>Classes<i className='fas fa-caret-down'/></Link>
+                                 {dropdown && <Dropdown/>}
                         </li>
                         <li className='nav__item'>
                             <Link to="/blog" className='nav__links' onClick={closeMobileMenu}>Blog</Link>
                         </li>
                         <li className='nav__item'>
-                            <Link to="/contact" className='nav__links' onClick={closeMobileMenu}>Contact</Link>
+                            <Link to="/contact" className='nav__links' onClick={closeMobileMenu}>Contact</Link> 
                         </li>
                     </ul>
 
-                        <div className='menu__icon' onClick={handleClick}>
-                            <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
-                        </div>
+                        {button && <Button buttonStyle= 'btn--primary'>Login</Button>}
 
-                        {button && <Button buttonStyle= 'btn--outline'>Login/Signup</Button>}
-                </div>
+                        {/* {button && <Button buttonStyle= 'btn--outline'>SignUp</Button>} */}
+                
             </div>
 
     

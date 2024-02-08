@@ -3,19 +3,19 @@
 }
 .btn {
     padding: 8px 20px;
-    border-radius: 2px;
+    border-radius: 5px;
     outline: none;
     border: none;
     cursor:pointer;
 }
 .btn--primary{
-    background-color: rgb(102, 190, 30);
+    background-color: linear-gradient(to top,rgb(233, 67, 166) 0%, rgb(231, 150, 83) 100%);;
     color: black;
     border: 1px solid rgb(66, 168, 168); 
 }
 .btn--outline {
     background-color: transparent;
-    color: rgb(110, 10, 56);
+    color: linear-gradient(to top,rgb(233, 67, 166) 0%, rgb(231, 150, 83) 100%);;
     padding: 8px 20px;
     border: 1px solid rgb(42, 44, 44);
     transition: all 0.3s ease-out;

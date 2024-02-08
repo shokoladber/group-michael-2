@@ -1,5 +1,4 @@
 import React from "react";
-// import logo from 'K9 4.jpg'
 //  import Navbar from "../navbar";
 import './Header.css';
 

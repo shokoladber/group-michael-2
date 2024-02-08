@@ -5,10 +5,11 @@ import Logo from '../Components/Assets/bg2.jpg';
 function Contact() {
   return (
     <div>
-        <h2>Contact Page</h2>
+        <h2 >Contact Page</h2>
         <img src={Logo} alt=''/> 
 
     </div>
+    
   )
 }
 export default Contact;
