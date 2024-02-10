@@ -4,9 +4,7 @@ import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-
 
 @Service
 public class UserService {
@@ -25,5 +23,12 @@ public class UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
-}
 
+    // Method to mark a user as verified
+    public void setVerifiedTrue(User user) {
+        if (user != null) {
+            user.setVerified(true); // Update the verified status to true
+            userRepository.save(user); // Save the updated user entity
+        }
+    }
+}

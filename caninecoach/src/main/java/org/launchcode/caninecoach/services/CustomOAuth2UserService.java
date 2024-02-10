@@ -34,7 +34,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2User oauthUser = super.loadUser(userRequest);
+        OAuth2User oauthUser;
+        try {
+            oauthUser = super.loadUser(userRequest);
+        } catch (OAuth2AuthenticationException e) {
+            log.error("Error loading user from OAuth2 provider: {}", e.getMessage());
+            // Optionally, rethrow the exception to stop the authentication process
+            throw e;
+            // Or, handle it gracefully (e.g., by redirecting the user to a custom error page)
+        }
+
         String email = oauthUser.getAttribute("email");
         String name = oauthUser.getAttribute("name");
 

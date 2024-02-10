@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.354s</div>
+<div class="counter">0.365s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.354s</td>
+<td class="success">0.365s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,8 +87,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>13:30:21.591 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.launchcode.caninecoach.CaninecoachApplicationTests]: CaninecoachApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-13:30:21.656 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.launchcode.caninecoach.CaninecoachApplication for test class org.launchcode.caninecoach.CaninecoachApplicationTests
+<pre>16:47:58.678 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.launchcode.caninecoach.CaninecoachApplicationTests]: CaninecoachApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:47:58.745 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.launchcode.caninecoach.CaninecoachApplication for test class org.launchcode.caninecoach.CaninecoachApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -98,25 +98,24 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::             (v3.3.0-M1)
 
-2024-02-10T13:30:21.894-06:00  INFO 40588 --- [    Test worker] o.l.c.CaninecoachApplicationTests        : Starting CaninecoachApplicationTests using Java 17.0.8 with PID 40588 (started by lucydames in /Users/lucydames/IdeaProjects/group-michael-2/caninecoach)
-2024-02-10T13:30:21.895-06:00  INFO 40588 --- [    Test worker] o.l.c.CaninecoachApplicationTests        : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-02-10T13:30:22.524-06:00  INFO 40588 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-10T13:30:22.563-06:00  INFO 40588 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 2 JPA repository interfaces.
-2024-02-10T13:30:22.880-06:00  INFO 40588 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-10T13:30:22.911-06:00  INFO 40588 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-02-10T13:30:22.930-06:00  INFO 40588 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-02-10T13:30:23.067-06:00  INFO 40588 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-10T13:30:23.085-06:00  INFO 40588 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-02-10T13:30:23.361-06:00  INFO 40588 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60a4e619
-2024-02-10T13:30:23.362-06:00  INFO 40588 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-02-10T13:30:23.409-06:00  WARN 40588 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-02-10T13:30:23.409-06:00  WARN 40588 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2024-02-10T13:30:23.952-06:00  INFO 40588 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: alter table users add column verified bit
-2024-02-10T13:30:24.068-06:00  INFO 40588 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-10T13:30:24.379-06:00  WARN 40588 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-02-10T13:30:24.585-06:00  INFO 40588 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4f09d998, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@cbd3871, org.springframework.security.web.context.SecurityContextHolderFilter@709c6768, org.springframework.security.web.header.HeaderWriterFilter@1ea78c72, org.springframework.web.filter.CorsFilter@66694050, org.springframework.security.web.authentication.logout.LogoutFilter@7828bc6b, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@375682a5, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@6441cff1, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6b3284, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@39303a6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@55b7f9f1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@403b7be3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2a5d9ede, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d7df55, org.springframework.security.web.session.SessionManagementFilter@42a198dd, org.springframework.security.web.access.ExceptionTranslationFilter@765e5a55, org.springframework.security.web.access.intercept.AuthorizationFilter@c680819]
-2024-02-10T13:30:24.832-06:00  INFO 40588 --- [    Test worker] o.l.c.CaninecoachApplicationTests        : Started CaninecoachApplicationTests in 3.082 seconds (process running for 3.854)
+2024-02-10T16:47:58.975-06:00  INFO 62527 --- [    Test worker] o.l.c.CaninecoachApplicationTests        : Starting CaninecoachApplicationTests using Java 17.0.8 with PID 62527 (started by lucydames in /Users/lucydames/IdeaProjects/group-michael-2/caninecoach)
+2024-02-10T16:47:58.976-06:00  INFO 62527 --- [    Test worker] o.l.c.CaninecoachApplicationTests        : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-02-10T16:47:59.450-06:00  INFO 62527 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-10T16:47:59.488-06:00  INFO 62527 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 2 JPA repository interfaces.
+2024-02-10T16:47:59.810-06:00  INFO 62527 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-10T16:47:59.843-06:00  INFO 62527 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-02-10T16:47:59.865-06:00  INFO 62527 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-10T16:48:00.029-06:00  INFO 62527 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-10T16:48:00.048-06:00  INFO 62527 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-10T16:48:00.335-06:00  INFO 62527 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@22899683
+2024-02-10T16:48:00.337-06:00  INFO 62527 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-10T16:48:00.384-06:00  WARN 62527 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-10T16:48:00.385-06:00  WARN 62527 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-02-10T16:48:00.933-06:00  INFO 62527 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-10T16:48:01.026-06:00  INFO 62527 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-10T16:48:01.348-06:00  WARN 62527 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-10T16:48:01.546-06:00  INFO 62527 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6c8f5262, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6bca6c4c, org.springframework.security.web.context.SecurityContextHolderFilter@6b3284, org.springframework.security.web.header.HeaderWriterFilter@2a5d9ede, org.springframework.web.filter.CorsFilter@7de2c19c, org.springframework.security.web.authentication.logout.LogoutFilter@6ba516ff, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@28be7db5, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@4b8ba6b7, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@3c00da24, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5dcec8e9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@51806858, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67e37d25, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78d49939, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4bc49d70, org.springframework.security.web.session.SessionManagementFilter@2c3f81ef, org.springframework.security.web.access.ExceptionTranslationFilter@3437fc4f, org.springframework.security.web.access.intercept.AuthorizationFilter@55b7f9f1]
+2024-02-10T16:48:01.795-06:00  INFO 62527 --- [    Test worker] o.l.c.CaninecoachApplicationTests        : Started CaninecoachApplicationTests in 2.959 seconds (process running for 3.748)
 </pre>
 </span>
 </div>
@@ -128,7 +127,7 @@ Hibernate: alter table users add column verified bit
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at Feb 10, 2024, 1:30:25 PM</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at Feb 10, 2024, 4:48:02 PM</p>
 </div>
 </div>
 </body>

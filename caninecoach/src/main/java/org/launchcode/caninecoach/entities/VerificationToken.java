@@ -9,10 +9,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
 public class VerificationToken {
+
+    private static final int EXPIRATION = 24 * 60;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +67,17 @@ public class VerificationToken {
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    private Date calculateExpiryDate(int expiryTimeInMinutes) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(cal.getTime().getTime());
+    }
+
+    public void setExpiryDateFromNow() {
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 }
 
