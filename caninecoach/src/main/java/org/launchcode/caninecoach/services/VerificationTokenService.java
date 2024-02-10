@@ -3,6 +3,8 @@ package org.launchcode.caninecoach.services;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.VerificationToken;
 import org.launchcode.caninecoach.repositories.VerificationTokenRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 @Service
 public class VerificationTokenService {
+
+    private static final Logger log = LoggerFactory.getLogger(VerificationTokenService.class);
 
     private final VerificationTokenRepository verificationTokenRepository;
 

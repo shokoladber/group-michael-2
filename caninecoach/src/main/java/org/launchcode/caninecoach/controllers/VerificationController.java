@@ -4,6 +4,8 @@ import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.VerificationToken;
 import org.launchcode.caninecoach.services.UserService;
 import org.launchcode.caninecoach.services.VerificationTokenService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import java.util.Optional;
 
 @RestController
 public class VerificationController {
+
+    private static final Logger log = LoggerFactory.getLogger(VerificationController.class);
 
     private final VerificationTokenService verificationTokenService;
     private final UserService userService;

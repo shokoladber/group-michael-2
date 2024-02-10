@@ -6,6 +6,8 @@ import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.ClassroomScopes;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
@@ -16,6 +18,8 @@ import java.util.Objects;
 
 @Service
 public class GoogleClassroomService {
+
+    private static final Logger log = LoggerFactory.getLogger(GoogleClassroomService.class);
 
     @Value("${google.service-account.filename}")
     private String credentialsFilePath;
