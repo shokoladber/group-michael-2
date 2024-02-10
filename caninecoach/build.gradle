@@ -39,6 +39,7 @@ dependencies {
 	implementation 'com.google.apis:google-api-services-serviceusage:v1-rev20231217-2.0.0'
 	implementation 'com.google.apis:google-api-services-classroom:v1-rev20231121-2.0.0'
 	implementation 'com.google.auth:google-auth-library-oauth2-http:1.22.0'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

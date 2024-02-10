@@ -1,6 +1,6 @@
 package org.launchcode.caninecoach.repositories;
 
-import org.launchcode.caninecoach.models.User;
+import org.launchcode.caninecoach.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
