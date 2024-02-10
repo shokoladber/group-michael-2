@@ -11,8 +11,8 @@ body {
   min-height: 100vh;
   /* background: url('./Components/Assets/bg1.jpg') no-repeat; */
   /* background:url(https://watch.wave.video/epeNPdqhN6b31dKm)loop; */
-  background-size: cover;
-  background-position: center;
+  /* background-size:auto ; */
+  /* background-position:fill; */
 }
 
 code {

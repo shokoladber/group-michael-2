@@ -17,17 +17,15 @@ function App() {
         <Navbar/>
         <Header/>
         <Routes>
-         
+      
           <Route index element= {<Home/>} />
           <Route path="/home" element={<Home/>}/>
           <Route path="/blog" element={<Blog/>}/>       
           <Route path="/contact" element={<Contact/>}/>       
           <Route path="/classes" element={<Classes/>}/>
           <Route path="/Login" element={<LoginSignup/>}/>  
-
-          <Route path="*" element={<NoPage/>}/>       
-        
-       
+          {/* <Route path="*" element={<NoPage/>}/>        */}
+          
         </Routes>
        
       </BrowserRouter>

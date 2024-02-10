@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Button from '../button';
 import { RiLockPasswordFill, GiSittingDog } from "react-icons/ri";
 import { LiaAccusoft } from "react-icons/lia";
-import Dropdown from '../dropdown';
+import Dropdown from '../dropdown/Dropdown';
 
 function Navbar (){
 
@@ -49,7 +49,7 @@ function Navbar (){
                         </li>
                         <li className='nav__item'>
                             <Link to="/Classes" className='nav__links' onClick={closeMobileMenu}>Classes<i className='fas fa-caret-down'/></Link>
-                                 {dropdown && <Dropdown/>}
+                             {dropdown && <Dropdown/>}
                         </li>
                         <li className='nav__item'>
                             <Link to="/blog" className='nav__links' onClick={closeMobileMenu}>Blog</Link>
@@ -57,9 +57,12 @@ function Navbar (){
                         <li className='nav__item'>
                             <Link to="/contact" className='nav__links' onClick={closeMobileMenu}>Contact</Link> 
                         </li>
+                        <li className='nav__item'>
+                            <Link to="/LoginSignup" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
+                        </li>
                     </ul>
 
-                        {button && <Button buttonStyle= 'btn--primary'>Login</Button>}
+                        {/* {button && <Button buttonStyle= 'btn--primary'>Login</Button>} */}
 
                         {/* {button && <Button buttonStyle= 'btn--outline'>SignUp</Button>} */}
                 

@@ -3,8 +3,22 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>
-           <h2>Home Page</h2>
+    <div className='home'>
+        <video src={vid1} autoPlay muted loop></video>
+          <div className='overlay'></div>
+          <div className='content'>
+            <h1> WELCOME TO CANINE COACH</h1>
+            <p>Here to guide your training needs</p>
+            <p>Your training needs in one place</p>
+            <button>Login</button>
+
+          </div>
+
+
+
+
+
+           {/* <h2>Home Page</h2>
          <div className='App>'>
             <video autoPlay loop muted
               style={{
@@ -23,7 +37,7 @@ function Home() {
             </video>
 
          </div>
-     
+      */}
     </div>
   )
 }
