@@ -6,14 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "users")
 public class User {
-
-    private static final Logger log = LoggerFactory.getLogger(User.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +21,13 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Column
+    private boolean verified = false;
+
+    @Column(name = "profile_created", nullable = false)
     private boolean profileCreated = false;
 
-
-    public User() {
-    }
+    // Constructors, Getters, and Setters
 
     public boolean isProfileCreated() {
         return profileCreated;
@@ -38,6 +36,12 @@ public class User {
     public void setProfileCreated(boolean profileCreated) {
         this.profileCreated = profileCreated;
     }
+
+    // Constructors, Getters, and Setters
+
+    public User() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -61,5 +65,12 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-}
 
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+}

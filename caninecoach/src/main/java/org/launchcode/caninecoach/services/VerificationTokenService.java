@@ -2,31 +2,51 @@ package org.launchcode.caninecoach.services;
 
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.VerificationToken;
+import org.launchcode.caninecoach.repositories.UserRepository;
 import org.launchcode.caninecoach.repositories.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class VerificationTokenService {
 
-    @Autowired
-    private VerificationTokenRepository verificationTokenRepository;
+    private final VerificationTokenRepository verificationTokenRepository;
+    private final UserRepository userRepository;
 
-    public VerificationToken createTokenForUser(User user) {
-        String token = UUID.randomUUID().toString();
+    @Autowired
+    public VerificationTokenService(VerificationTokenRepository verificationTokenRepository, UserRepository userRepository) {
+        this.verificationTokenRepository = verificationTokenRepository;
+        this.userRepository = userRepository;
+    }
+
+    public VerificationToken createTokenForUser(User user, String token) {
         VerificationToken verificationToken = new VerificationToken();
-        verificationToken.setToken(token);
         verificationToken.setUser(user);
-        // Optionally set the expiry date for the token
+        verificationToken.setToken(token);
+
+        // Set the expiry date for the token (e.g., 24 hours from now)
+        long EXPIRY_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        Date expiryDate = new Date(System.currentTimeMillis() + EXPIRY_TIME);
+        verificationToken.setExpiryDate(expiryDate);
+
         return verificationTokenRepository.save(verificationToken);
     }
 
-    public Optional<VerificationToken> getToken(String token) {
-        return verificationTokenRepository.findByToken(token);
-    }
+    public boolean validateVerificationToken(String token) {
+        Optional<VerificationToken> verificationTokenOpt = verificationTokenRepository.findByToken(token);
 
-    // Additional methods as needed...
+        if (verificationTokenOpt.isPresent()) {
+            VerificationToken verificationToken = verificationTokenOpt.get();
+            if (verificationToken.getExpiryDate().after(new Date())) {
+                User user = verificationToken.getUser();
+                user.setVerified(true);
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
 }
