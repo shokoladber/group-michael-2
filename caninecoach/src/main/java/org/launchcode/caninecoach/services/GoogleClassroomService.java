@@ -1,10 +1,10 @@
 package org.launchcode.caninecoach.services;
 
-// Import statements
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.ClassroomScopes;
 import com.google.api.services.classroom.model.Course;
 import com.google.api.services.classroom.model.ListCoursesResponse;
+import com.google.api.services.classroom.model.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +45,7 @@ public class GoogleClassroomService {
     }
 
     public List<Course> listCourses() throws IOException, GeneralSecurityException {
-        Classroom service = classroomService(); // Use the classroomService method to create a Classroom service object
+        Classroom service = classroomService();
         ListCoursesResponse response = service.courses().list()
                 .execute();
 
@@ -54,9 +54,19 @@ public class GoogleClassroomService {
             log.info("No courses found.");
             return Collections.emptyList();
         } else {
-            // Optionally log the courses for debugging
             courses.forEach(course -> log.info("Course ID: {}, Name: {}", course.getId(), course.getName()));
             return courses;
         }
     }
+    public Student addStudentToCourse(String courseId, String studentEmail) throws IOException, GeneralSecurityException {
+        Student student = new Student().setUserId(studentEmail);
+        Classroom service = classroomService();
+        try {
+            return service.courses().students().create(courseId, student).execute();
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+
 }
+

@@ -2,6 +2,7 @@ package org.launchcode.caninecoach.handlers;
 
 import jakarta.servlet.ServletException;
 import org.launchcode.caninecoach.entities.User;
+import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,14 +29,25 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException("User not found with email: " + email));
 
-        String targetUrl;
+        // Initial target URL is set to a generic homepage or dashboard
+        String targetUrl = "/home";
 
-        if (user.isProfileCreated()) {
-            targetUrl = "/home";
-        } else {
-            targetUrl = "/create-pet-profile";
+        // Redirect new users to a role selection page if their role is TEMPORARY or undefined
+        if (user.getRole() == null || user.getRole() == UserRole.TEMPORARY) {
+            targetUrl = "/select-role";
+        } else if (!user.isProfileCreated()) {
+            // For users who have a defined role but haven't completed their profile
+            switch (user.getRole()) {
+                case PET_GUARDIAN:
+                    targetUrl = "/create-pet-profile";
+                    break;
+                case PET_TRAINER:
+                    targetUrl = "/create-pet-trainer-profile";
+                    break;
+            }
         }
 
+        // Use the response to redirect the user to the determined target URL
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 }

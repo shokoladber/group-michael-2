@@ -1,11 +1,7 @@
 package org.launchcode.caninecoach.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "users")
@@ -27,21 +23,16 @@ public class User {
     @Column(name = "profile_created", nullable = false)
     private boolean profileCreated = false;
 
-    // Constructors, Getters, and Setters
+    // Add the role field to store user roles
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private UserRole role;
 
-    public boolean isProfileCreated() {
-        return profileCreated;
-    }
-
-    public void setProfileCreated(boolean profileCreated) {
-        this.profileCreated = profileCreated;
-    }
-
-    // Constructors, Getters, and Setters
-
+    // Default constructor
     public User() {
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -72,5 +63,21 @@ public class User {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public boolean isProfileCreated() {
+        return profileCreated;
+    }
+
+    public void setProfileCreated(boolean profileCreated) {
+        this.profileCreated = profileCreated;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
