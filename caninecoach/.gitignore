@@ -1,10 +1,18 @@
 HELP.md
 .gradle
+<<<<<<< HEAD
 .idea
+=======
+>>>>>>> main
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+<<<<<<< HEAD
+=======
+.DS_Store
+
+>>>>>>> main
 
 ### STS ###
 .apt_generated
@@ -19,7 +27,6 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
 *.iws
 *.iml
 *.ipr
@@ -36,3 +43,12 @@ out/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
+=======
+
+### Google Crendentials ###
+src/main/resources/application-secret.properties
+src/main/resources/google-classroom-api.json
+
+
+>>>>>>> main

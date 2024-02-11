@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-autoconfigure:3.3.0-M1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.boot" artifactId="spring-boot-autoconfigure" version="3.3.0-M1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/3.3.0-M1/7bfd30dc54cd79bf0159b652573126fc371c820c/spring-boot-autoconfigure-3.3.0-M1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/3.3.0-M1/8f8c4541316e88ed968f3b6293bc311626cd01a9/spring-boot-autoconfigure-3.3.0-M1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
