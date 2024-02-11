@@ -33,7 +33,7 @@ public class VerificationController {
         if (verificationTokenOpt.isPresent()) {
             VerificationToken verificationToken = verificationTokenOpt.get();
             User user = verificationToken.getUser();
-            userService.setVerifiedTrue(user); // Assuming UserService has this method to update the user as verified
+            userService.setVerifiedTrue(user);
             return ResponseEntity.ok("Account verified successfully.");
         } else {
             return ResponseEntity.badRequest().body("Invalid or expired verification token.");

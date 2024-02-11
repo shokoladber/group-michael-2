@@ -44,7 +44,6 @@ public class ClassroomController {
             return ResponseEntity.ok(student);
         } catch (Exception e) {
             log.error("Error enrolling student: {}", studentEmail, e);
-            // Customize the error response as needed
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error enrolling student");
         }
 

@@ -3,6 +3,8 @@ package org.launchcode.caninecoach.controllers;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -16,6 +18,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class UserRoleController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserRoleController.class);
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -25,7 +29,7 @@ public class UserRoleController {
 
     @GetMapping("/select-role")
     public String selectRole() {
-        return "select-role"; // Return the role selection view name
+        return "select-role";
     }
 
     @PostMapping("/update-role")
@@ -36,7 +40,6 @@ public class UserRoleController {
         user.setRole(UserRole.valueOf(role.toUpperCase()));
         userRepository.save(user);
 
-        // Redirect based on the new role
         return "redirect:" + (user.getRole() == UserRole.PET_GUARDIAN ? "/create-pet-profile" : "/create-pet-trainer-profile");
     }
 }

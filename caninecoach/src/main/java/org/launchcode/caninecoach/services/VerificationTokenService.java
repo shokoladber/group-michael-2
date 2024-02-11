@@ -28,7 +28,7 @@ public class VerificationTokenService {
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setUser(user);
         verificationToken.setToken(token);
-        verificationToken.setExpiryDate(calculateExpiryDate(24)); // Set the expiry date to 24 hours from now
+        verificationToken.setExpiryDate(calculateExpiryDate(24)); // 24 hours
         return verificationTokenRepository.save(verificationToken);
     }
 
@@ -46,7 +46,6 @@ public class VerificationTokenService {
 
     public void setVerifiedTrue(User user) {
         user.setVerified(true);
-        // Assuming UserRepository is available and autowired (or passed in some other way)
-        // userRepository.save(user);
+        //userRepository.save(user);
     }
 }

@@ -31,11 +31,10 @@ public class VerificationToken {
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiryDate;
 
-    // Default constructor
+
     public VerificationToken() {
     }
 
-    // Getters
     public Long getId() {
         return id;
     }
@@ -52,7 +51,6 @@ public class VerificationToken {
         return expiryDate;
     }
 
-    // Setters
     public void setId(Long id) {
         this.id = id;
     }

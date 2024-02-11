@@ -28,11 +28,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // Method to mark a user as verified
+    // Is user verified
     public void setVerifiedTrue(User user) {
         if (user != null) {
-            user.setVerified(true); // Update the verified status to true
-            userRepository.save(user); // Save the updated user entity
+            user.setVerified(true);
+            userRepository.save(user);
         }
     }
 }

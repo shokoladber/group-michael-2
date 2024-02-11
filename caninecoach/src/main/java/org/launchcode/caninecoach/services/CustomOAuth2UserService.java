@@ -43,9 +43,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             return userRepository.save(newUser);
         });
 
-        // Adjust here to add role-based authorities
+        // Adjust role authorities here?
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        // Ensure the user's role is not null before proceeding
+
         if (user.getRole() != null) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
 
