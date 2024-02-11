@@ -61,11 +61,8 @@ public class GoogleClassroomService {
     public Student addStudentToCourse(String courseId, String studentEmail) throws IOException, GeneralSecurityException {
         Student student = new Student().setUserId(studentEmail);
         Classroom service = classroomService();
-        try {
-            return service.courses().students().create(courseId, student).execute();
-        } catch (IOException e) {
-            throw e;
-        }
+
+        return service.courses().students().create(courseId, student).execute();
     }
 
 }
