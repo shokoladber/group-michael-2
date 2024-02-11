@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import './Dropdown.css';
 import {Link} from 'react-router-dom';
-import { ClassItems } from "./ClassItems";
+import { NavDropdownItems } from "./NavDropdownItems";
 
 function Dropdown() {
 
@@ -14,7 +14,7 @@ const handleClick= ()=> setClick(!click);
             onClick={handleClick}
             className={click ? 'dropdown-menu clicked': 'dropdown-menu'}
         >
-            {ClassItems.map((item, index) =>{
+            {NavDropdownItems.map((item, index) =>{
                 return(
                     <li key={index}>
                         <Link

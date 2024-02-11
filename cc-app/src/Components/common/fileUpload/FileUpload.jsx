@@ -6,8 +6,9 @@ const [selectedImage, setSelectedImage]= useState(null);
 
 
   return (
-    <div>
+    <div className='profile'>
         <h1> Create a Pet Profile</h1>
+        
         {selectedImage &&(
             <div>
                 <img
@@ -21,14 +22,15 @@ const [selectedImage, setSelectedImage]= useState(null);
         )}
         <br/>
         <br/>
-        <input  
-            type='file'
-            name='myImage'
-            onChange={(event)=> {
-                console.log(event.target.files[0]);
-                setSelectedImage(event.target.files[0]);
-            }}
-            />
+        
+            <input  
+                type='file'
+                name='myImage'
+                onChange={(event)=> {
+                    console.log(event.target.files[0]);
+                    setSelectedImage(event.target.files[0]);
+                }}
+                />
     </div>
   );
 };

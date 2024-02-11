@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 import {Link} from 'react-router-dom'
-import Button from '../button';
+import button from '../button';
 import { RiLockPasswordFill, GiSittingDog } from "react-icons/ri";
 import { LiaAccusoft } from "react-icons/lia";
 import Dropdown from '../dropdown/Dropdown';
@@ -29,26 +29,21 @@ function Navbar (){
     window.addEventListener('resize',showButton);
 
         return(
-            <div className='navbar'>
+            <nav className='navbar'>
                                 
                     <h2 className='navbar__logo'> <LiaAccusoft />  CC</h2>
                       
                             <div className='menu__icon'> 
                                 <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
                             </div>
-                            <div className='menu'>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-                            </div>
+            
                  
                     <ul className= {click?'nav__menu active':'nav__menu'}>
                         <li className='nav__item'>
                             <Link to="/" className='nav__links' onClick={closeMobileMenu}>Home</Link>
                         </li>
                         <li className='nav__item'>
-                            <Link to="/Classes" className='nav__links' onClick={closeMobileMenu}>Classes<i className='fas fa-caret-down'/></Link>
+                            <Link to="/Classes" className='nav__links' onClick={closeMobileMenu}>Classes<i className='fas fa-caret-down' /></Link>
                              {dropdown && <Dropdown/>}
                         </li>
                         <li className='nav__item'>
@@ -58,7 +53,7 @@ function Navbar (){
                             <Link to="/contact" className='nav__links' onClick={closeMobileMenu}>Contact</Link> 
                         </li>
                         <li className='nav__item'>
-                            <Link to="/LoginSignup" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
+                            <Link to="/Login" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
                         </li>
                     </ul>
 
@@ -66,7 +61,7 @@ function Navbar (){
 
                         {/* {button && <Button buttonStyle= 'btn--outline'>SignUp</Button>} */}
                 
-            </div>
+            </nav>
 
     
         // <section className="navbar">

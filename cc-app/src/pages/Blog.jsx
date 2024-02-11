@@ -1,10 +1,16 @@
 import React from 'react'
 import Logo from '../Components/Assets/cc1.jpg';
-import {fileUpload} from '../Components/common/fileUpload'
+import FileUpload from '../Components/common/fileUpload'
+import { Header } from '../Components/common';
 
 function Blog() {
   return (
     <div>
+        <div><Header /></div>
+          
+        <div >
+          <FileUpload/>
+        </div>
       
         <h2>Blog Page</h2>            
         <img src={Logo} alt=''/> 
@@ -14,11 +20,7 @@ function Blog() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, facere vel placeat quia ratione dolor pariatur qui? Sed maiores neque, deleniti aut magni doloremque natus expedita saepe minus dolore cumque?
       </div>
       
-        <div>
-          <fileUpload/>
-        </div>
-
-      <br/>
+            <br/>
       <div>
       <div>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro voluptate natus possimus nisi! Tempora voluptatibus expedita neque sed quos explicabo velit voluptatum repudiandae voluptatem. Reiciendis quaerat ducimus quis, error dolorem unde quos nemo! Quasi officiis esse placeat ratione, est reprehenderit ea cum! Consectetur illum cupiditate impedit, delectus ea, voluptatum veritatis molestias similique maxime, repudiandae iusto molestiae necessitatibus! Quod temporibus natus nostrum ex nisi accusantium amet cupiditate corporis, vitae animi? Consectetur nesciunt dolore tenetur voluptas incidunt. Pariatur eaque ea id. Fugiat nesciunt at vitae exercitationem excepturi ex, quaerat et voluptas, nihil porro blanditiis sunt quo modi numquam quam perferendis distinctio ea.

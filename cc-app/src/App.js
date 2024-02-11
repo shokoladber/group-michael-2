@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Classes from './pages/Classes';
 import NoPage from './pages/NoPage';
-import { Header, LoginSignup, Navbar  } from './Components/common';
+import {LoginSignup, Navbar  } from './Components/common';
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       
       <BrowserRouter>
         <Navbar/>
-        <Header/>
+        
         <Routes>
       
           <Route index element= {<Home/>} />
@@ -24,7 +24,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>       
           <Route path="/classes" element={<Classes/>}/>
           <Route path="/Login" element={<LoginSignup/>}/>  
-          {/* <Route path="*" element={<NoPage/>}/>        */}
+          <Route path="*" element={<NoPage/>}/>       
           
         </Routes>
        

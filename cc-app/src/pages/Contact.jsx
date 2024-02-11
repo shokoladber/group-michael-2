@@ -1,13 +1,18 @@
 import React from 'react'
 // import { Header, Navbar } from '../Components/common'
 import Logo from '../Components/Assets/bg2.jpg';
+import { Header } from '../Components/common';
+import ContactUs from '../Components/common/contact2';
+
 
 function Contact() {
   return (
     <div>
-        <h2 >Contact Page</h2>
-        <img src={Logo} alt=''/> 
+        <Header />
 
+        <h2 >Contact Page</h2>
+        {/* <img src={Logo} alt='' />  */}
+        <ContactUs />
     </div>
     
   )
