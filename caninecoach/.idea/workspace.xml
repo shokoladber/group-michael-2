@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0aae567a-ec78-4b37-b92c-02ac5c0b8736" name="Changes" comment="">
+    <list default="true" id="0aae567a-ec78-4b37-b92c-02ac5c0b8736" name="Changes" comment="git ignore amended">
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-secret.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,6 +156,19 @@
       <option name="presentableId" value="Default" />
       <updated>1707589414990</updated>
     </task>
+    <task id="LOCAL-00001" summary="git ignore amended">
+      <option name="closed" value="true" />
+      <created>1707777542637</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707777542637</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="git ignore amended" />
+    <option name="LAST_COMMIT_MESSAGE" value="git ignore amended" />
   </component>
 </project>
