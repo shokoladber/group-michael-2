@@ -1,18 +1,17 @@
 HELP.md
 .gradle
-<<<<<<< HEAD
+
 .idea
-=======
->>>>>>> main
+
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-<<<<<<< HEAD
-=======
+gradle/wrapper/gradle-wrapper.jar
+/src/main/**/build/
+/src/test/**/build/
+
+
 .DS_Store
 
->>>>>>> main
+
 
 ### STS ###
 .apt_generated
@@ -23,16 +22,16 @@ build/
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+/src/main/**/bin/
+/src/test/**/bin/
 
 ### IntelliJ IDEA ###
 *.iws
 *.iml
 *.ipr
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+/src/main/**/out/
+/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -43,12 +42,11 @@ out/
 
 ### VS Code ###
 .vscode/
-<<<<<<< HEAD
-=======
+
 
 ### Google Crendentials ###
 src/main/resources/application-secret.properties
 src/main/resources/google-classroom-api.json
 
 
->>>>>>> main
+
