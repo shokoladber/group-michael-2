@@ -10,7 +10,7 @@
     <content url="file://$MODULE_DIR$/../../caninecoach" />
     <content url="file://$MODULE_DIR$/../../caninecoach" />
     <content url="file://$MODULE_DIR$/../../caninecoach" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

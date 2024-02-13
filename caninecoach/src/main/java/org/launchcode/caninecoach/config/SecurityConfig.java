@@ -7,7 +7,6 @@ import org.launchcode.caninecoach.services.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -42,8 +41,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/home", "/login", "/oauth2/**").permitAll()
-                        .requestMatchers("/api/classroom/manage/**").hasAuthority("ROLE_PET_TRAINER")
-                        .requestMatchers("/api/classroom/enroll/**", "/api/classroom/view/**").hasAuthority("ROLE_PET_GUARDIAN")
+                        .requestMatchers("/api/googleclassroom/courses/manage/**").hasAuthority("ACCESS_MANAGE_COURSES")
+                        .requestMatchers("/api/googleclassroom/courses/enroll/**").hasAuthority("ACCESS_ENROLL_COURSES")
+                        .requestMatchers("/api/googleclassroom/courses/view/**").hasAuthority("ACCESS_VIEW_COURSES")
+                        .requestMatchers("/api/googleclassroom/courses/announcements/**").hasAuthority("ACCESS_MANAGE_ANNOUNCEMENTS")
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
@@ -59,6 +60,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Authentication manager may be unnecessary at this point?
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

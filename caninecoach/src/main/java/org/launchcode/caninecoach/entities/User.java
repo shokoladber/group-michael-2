@@ -23,16 +23,14 @@ public class User {
     @Column(name = "profile_created", nullable = false)
     private boolean profileCreated = false;
 
-    // Add the role field to store user roles
+    // Where we store user roles
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private UserRole role;
 
-    // Default constructor
     public User() {
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

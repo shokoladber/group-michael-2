@@ -26,10 +26,7 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../caninecoach/build/classes/java/main" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../caninecoach/src/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../caninecoach/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../caninecoach/src/main/resources" type="java-resource" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../caninecoach/src/main" />
     <content url="file://$MODULE_DIR$/../../caninecoach/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../caninecoach/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../caninecoach/src/main/resources" type="java-resource" />

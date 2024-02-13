@@ -33,7 +33,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException("User not found with email: " + email));
 
-        //targetURL is homepage
+        // targetURL is homepage
         String targetUrl = getTargetUrl(user);
 
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
@@ -42,7 +42,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     private static String getTargetUrl(User user) {
         String targetUrl = "/home";
 
-        // New users role is TEMPORARY until selecting guardian or trainer option
+        // New users role is default TEMPORARY until selecting guardian or trainer
         if (user.getRole() == null || user.getRole() == UserRole.TEMPORARY) {
             targetUrl = "/select-role";
         } else if (!user.isProfileCreated()) {

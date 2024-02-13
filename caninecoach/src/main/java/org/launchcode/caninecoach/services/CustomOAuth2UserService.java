@@ -37,35 +37,32 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         User user = userRepository.findByEmail(email).orElseGet(() -> {
             User newUser = new User();
             newUser.setEmail(email);
-            newUser.setRole(UserRole.TEMPORARY); // Set default role
+            newUser.setRole(UserRole.TEMPORARY);
             return userRepository.save(newUser);
         });
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())); // Ensure ROLE_ prefix
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         addRoleSpecificAuthorities(user.getRole(), authorities);
 
         return new DefaultOAuth2User(authorities, oauthUser.getAttributes(), "email");
     }
 
     private void addRoleSpecificAuthorities(UserRole role, Set<GrantedAuthority> authorities) {
-        switch (role) {
-            case PET_GUARDIAN:
-                // PET_GUARDIAN authorities
-                authorities.add(new SimpleGrantedAuthority("ACCESS_CLASS_VIEW"));
-                authorities.add(new SimpleGrantedAuthority("ACCESS_HOMEWORK_VIEW"));
-                authorities.add(new SimpleGrantedAuthority("ACCESS_ANNOUNCEMENTS_COMMENT"));
-                break;
-            case PET_TRAINER:
-                // PET_TRAINER authorities
-                authorities.add(new SimpleGrantedAuthority("ACCESS_CLASS_MANAGE"));
-                authorities.add(new SimpleGrantedAuthority("ACCESS_HOMEWORK_MANAGE"));
-                authorities.add(new SimpleGrantedAuthority("ACCESS_ANNOUNCEMENTS_POST"));
-                authorities.add(new SimpleGrantedAuthority("ACCESS_ROSTERS_MANAGE"));
-                break;
-            default:
-                log.info("Encountered an unhandled role: {}", role.name());
-                break;
+        // PET_GUARDIAN authorities: view courses and announcements
+        if (role == UserRole.PET_GUARDIAN) {
+            authorities.add(new SimpleGrantedAuthority("ACCESS_VIEW_COURSES"));
+            authorities.add(new SimpleGrantedAuthority("ACCESS_ENROLL_COURSES"));
+        }
+        // PET_TRAINER authorities: managing courses and announcements
+        if (role == UserRole.PET_TRAINER) {
+            authorities.addAll(Set.of(
+                    new SimpleGrantedAuthority("ACCESS_VIEW_COURSES"),
+                    new SimpleGrantedAuthority("ACCESS_MANAGE_COURSES"),
+                    new SimpleGrantedAuthority("ACCESS_MANAGE_ANNOUNCEMENTS"),
+                    new SimpleGrantedAuthority("ACCESS_ENROLL_COURSES"),
+                    new SimpleGrantedAuthority("ACCESS_VIEW_ROSTER")
+            ));
         }
     }
 }
