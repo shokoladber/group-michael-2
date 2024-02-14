@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="87e72c3c-b2e0-4b39-bf64-ef160cd374d1" name="caninecoach Mapping">
+      <data-sources db="9235bc35-e607-40c8-9538-113f225e7483" ddl="25043b35-ca6a-4c8d-851f-388222d9d3a5" />
+      <scope>
+        <node kind="database" negative="1" />
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="25043b35-ca6a-4c8d-851f-388222d9d3a5" />
+          <option name="name" value="caninecoach (DDL)" />
+          <option name="dbmsName" value="MYSQL" />
+          <option name="urls">
+            <array />
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
