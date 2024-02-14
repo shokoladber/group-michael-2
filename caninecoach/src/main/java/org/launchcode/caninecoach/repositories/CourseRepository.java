@@ -1,12 +1,15 @@
-package org.launchcode.caninecoach.data;
+package org.launchcode.caninecoach.repositories;
 
-import jakarta.transaction.Transactional;
-import org.launchcode.caninecoach.models.Course;
+import jakarta.persistence.Id;
+import org.launchcode.caninecoach.entities.Course;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends CrudRepository <Course, Integer> {
 
 
+    Optional<Course> findById(Id id);
 }

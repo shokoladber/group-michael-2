@@ -1,4 +1,4 @@
-package org.launchcode.caninecoach.models;
+package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

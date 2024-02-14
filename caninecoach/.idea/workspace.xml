@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aae567a-ec78-4b37-b92c-02ac5c0b8736" name="Changes" comment="git ignore amended">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/services/CourseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-secret.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/controllers/CourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/controllers/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/controllers/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/data/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/CourseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/data/CurriculumRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/CurriculumRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/data/DetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/DetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/data/TypeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/TypeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/models/AbstractEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/AbstractEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/models/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/models/Curriculum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Curriculum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/models/Details.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Details.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/models/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/VerificationTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/VerificationTokenRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +89,14 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -111,6 +132,12 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.launchcode.caninecoach.entities" />
+      <recent name="org.launchcode.caninecoach.repositories" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="caninecoach [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>

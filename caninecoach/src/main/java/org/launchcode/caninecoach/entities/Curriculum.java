@@ -1,13 +1,15 @@
-package org.launchcode.caninecoach.models;
+package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
+import org.launchcode.caninecoach.entities.AbstractEntity;
+import org.launchcode.caninecoach.entities.Course;
 
 
 @Entity
-public class Curriculum extends AbstractEntity{
+public class Curriculum extends AbstractEntity {
 
     private String week1;
 

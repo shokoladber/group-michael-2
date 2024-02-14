@@ -1,13 +1,12 @@
-package org.launchcode.caninecoach.models;
+package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Entity
-public class Course extends AbstractEntity{
+public class Course extends AbstractEntity {
 
     @ManyToMany
     @NotNull
