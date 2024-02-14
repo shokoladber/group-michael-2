@@ -7,13 +7,8 @@
     <list default="true" id="0aae567a-ec78-4b37-b92c-02ac5c0b8736" name="Changes" comment="git ignore amended">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Type.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/TypeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/TypeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/services/CourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/services/GoogleClassroomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/services/GoogleClassroomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add-course.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,28 +104,51 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.caninecoach [build].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;course-search&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/erins/Downloads/Java Classwork/group-michael-2/canine-coach&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.caninecoach [bootRun].executor": "Run",
+    "Gradle.caninecoach [build].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "course-search",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/erins/Downloads/Java Classwork/group-michael-2/canine-coach",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.launchcode.caninecoach.entities" />
       <recent name="org.launchcode.caninecoach.repositories" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.caninecoach [bootRun]">
+    <configuration name="caninecoach [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="caninecoach [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -155,6 +173,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.caninecoach [bootRun]" />
         <item itemvalue="Gradle.caninecoach [build]" />
       </list>
     </recent_temporary>

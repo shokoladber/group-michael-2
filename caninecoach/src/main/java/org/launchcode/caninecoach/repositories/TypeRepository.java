@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface TypeRepository extends CrudRepository<Type, Integer> {
 
-    Optional<Course> findByType(String type);
+
 }
