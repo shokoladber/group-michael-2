@@ -13,9 +13,9 @@
   color: rgb(247, 243, 243);
 }
 
-/* Add this to your App.css */
+
 .login-register-btn {
-  background-color: #4478e1; /* Match your theme */
+  background-color: #4478e1;
   color: white;
   border: none;
   border-radius: 5px;

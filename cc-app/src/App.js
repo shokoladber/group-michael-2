@@ -6,9 +6,9 @@ import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Services from './pages/Services';
 import NoPage from './pages/NoPage';
-import PrivatePage from './components/private/PrivatePage.jsx';
-import OAuth2RedirectHandler from './components/auth/OAuth2RedirectHandler.jsx';
-import UserRoleSelection from './components/auth/UserRoleSelection.jsx';
+import PrivatePage from './Components/private/PrivatePage';
+import OAuth2RedirectHandler from './Components/auth/OAuth2RedirectHandler';
+import UserRoleSelection from './Components/auth/UserRoleSelection';
 
 function App() {
     return (

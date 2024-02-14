@@ -4,10 +4,6 @@ import { Header, Navbar } from '../Components/common';
 import '../App.css';
 
 function Home() {
-    const handleLoginRegister = () => {
-        window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`; // Update with your actual login URL
-    };
-
     return (
         <div>
             <Navbar />
@@ -27,10 +23,9 @@ function Home() {
                 >
                     <source src={vid1} type='video/mp4' />
                 </video>
-                <button className="login-register-btn" onClick={handleLoginRegister}>Login/Register</button>
             </div>
-            <h2>Home Page</h2>
         </div>
     );
 }
+
 export default Home;
