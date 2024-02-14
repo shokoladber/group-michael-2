@@ -13,4 +13,19 @@
   color: rgb(247, 243, 243);
 }
 
+/* Add this to your App.css */
+.login-register-btn {
+  background-color: #4478e1; /* Match your theme */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-register-btn:hover {
+  background-color: #365cab;
+}
 

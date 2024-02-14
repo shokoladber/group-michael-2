@@ -3,11 +3,10 @@ package org.launchcode.caninecoach.handlers;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.launchcode.caninecoach.entities.User;
-import org.launchcode.caninecoach.entities.UserRole;
+import org.launchcode.caninecoach.entities.UserRole; // Ensure this is the correct import for UserRole
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -30,29 +29,27 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute("email");
 
-        User user = userRepository.findByEmail(email).orElseThrow(() ->
-                new UsernameNotFoundException("User not found with email: " + email));
+        User user = userRepository.findByEmail(email).orElseGet(() -> {
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setRole(UserRole.TEMPORARY);
+            return userRepository.save(newUser);
+        });
 
-        // targetURL is homepage
-        String targetUrl = getTargetUrl(user);
+        // Determine the redirect URL based on the user's role
+        String targetUrl = determineTargetUrlBasedOnRole(user.getRole());
 
+        // Redirect to the frontend route
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 
-    private static String getTargetUrl(User user) {
-        String targetUrl = "/home";
+    private String determineTargetUrlBasedOnRole(UserRole role) {
 
-        // New users role is default TEMPORARY until selecting guardian or trainer
-        if (user.getRole() == null || user.getRole() == UserRole.TEMPORARY) {
-            targetUrl = "/select-role";
-        } else if (!user.isProfileCreated()) {
-            // For users who have role but haven't completed their profile
-            targetUrl = switch (user.getRole()) {
-                case PET_GUARDIAN -> "/create-pet-profile";
-                case PET_TRAINER -> "/create-pet-trainer-profile";
-                default -> targetUrl;
-            };
+        if (role == UserRole.TEMPORARY) {
+            return "/select-role"; // role selection if new
+        } else {
+            // For other roles, redirect to the home page or a dashboard as appropriate
+            return "/home";
         }
-        return targetUrl;
     }
 }
