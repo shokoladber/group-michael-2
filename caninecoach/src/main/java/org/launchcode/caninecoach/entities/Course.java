@@ -22,7 +22,10 @@ public class Course extends AbstractEntity {
     @JoinColumn(name = "curriculum_id")
     private Curriculum curriculum;
 
-    public Course(ArrayList<Type> type, Details details, Curriculum curriculum) {
+    private String name;
+
+    public Course(String name, ArrayList<Type> type, Details details, Curriculum curriculum) {
+        this.name= name;
         this.type = type;
         this.details = details;
         this.curriculum = curriculum;
@@ -54,5 +57,9 @@ public class Course extends AbstractEntity {
 
     public void setCurriculum(Curriculum curriculum) {
         this.curriculum = curriculum;
+    }
+
+    public String getName() {
+        return name;
     }
 }

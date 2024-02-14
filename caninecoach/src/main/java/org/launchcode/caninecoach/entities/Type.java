@@ -9,6 +9,7 @@ import org.launchcode.caninecoach.entities.AbstractEntity;
 import org.launchcode.caninecoach.entities.Course;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Type extends AbstractEntity {
@@ -23,7 +24,7 @@ public class Type extends AbstractEntity {
     @ManyToMany
     @NotNull
     @JoinTable(name = "course_info", joinColumns = { @JoinColumn(name = "type_id")}, inverseJoinColumns = { @JoinColumn(name = "course_id")})
-    private final ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<Course> courses = new ArrayList<>();
 
     public Type() {
     }
@@ -38,5 +39,9 @@ public class Type extends AbstractEntity {
 
     public ArrayList<Course> getCourses() {
         return courses;
+    }
+
+    public void setCourses (ArrayList<Course> courses){
+        this.courses =courses;
     }
 }
