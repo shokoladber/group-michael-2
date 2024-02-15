@@ -33,7 +33,7 @@ public class CourseService {
         ArrayList<Course> results = new ArrayList<>();
 
 
-        if (value.toLowerCase().equals("all")){
+        if (value.equalsIgnoreCase("all")){
             return (ArrayList<Course>) allCourses;
         }
 
