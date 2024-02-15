@@ -48,7 +48,10 @@
     border-radius: 6px;
 }
 .input img{
-    margin: 0px 22px;
+    margin-top: 0;
+    margin-right: 22px;
+    margin-left: 22px;
+    margin-bottom: 0;
 }
 .input input{
     height: 5px;
