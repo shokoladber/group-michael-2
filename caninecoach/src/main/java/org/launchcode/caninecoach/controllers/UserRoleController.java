@@ -33,14 +33,14 @@ public class UserRoleController {
     }
 
     // Role selection page
-    @GetMapping("/select-role")
+    @GetMapping("/api/select-role")
     @PreAuthorize("isAuthenticated() && @userRepository.findByEmail(#principal.getAttribute('email')).orElse(new org.launchcode.caninecoach.entities.User()).getRole() == T(org.launchcode.caninecoach.entities.UserRole).TEMPORARY")
     public String selectRole() {
         return "select-role";
     }
 
     // Processing and registering role selected
-    @PostMapping("/update-role")
+    @PostMapping("/api/update-role")
     @PreAuthorize("isAuthenticated() && @userRepository.findByEmail(#principal.getAttribute('email')).orElse(new org.launchcode.caninecoach.entities.User()).getRole() == T(org.launchcode.caninecoach.entities.UserRole).TEMPORARY")
     public ResponseEntity<?> updateRole(@RequestParam String role, @AuthenticationPrincipal OAuth2User principal) {
         String email = principal.getAttribute("email");

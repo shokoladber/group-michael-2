@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole; // Ensure this is the correct import for UserRole
 import org.launchcode.caninecoach.repositories.UserRepository;
+import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,13 +15,13 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public OAuth2LoginSuccessHandler(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public OAuth2AuthSuccessHandler(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -29,26 +30,16 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute("email");
 
-        User user = userRepository.findByEmail(email).orElseGet(() -> {
-            User newUser = new User();
-            newUser.setEmail(email);
-            newUser.setRole(UserRole.TEMPORARY);
-            return userRepository.save(newUser);
-        });
+        User user = userService.processOAuth2User(email, UserRole.TEMPORARY);
 
-        // Determine the redirect URL based on the user's role
         String targetUrl = determineTargetUrlBasedOnRole(user.getRole());
-
-        // Redirect to the frontend route
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 
     private String determineTargetUrlBasedOnRole(UserRole role) {
-
         if (role == UserRole.TEMPORARY) {
-            return "/select-role"; // role selection if new
+            return "/select-role";
         } else {
-            // For other roles, redirect to the home page or a dashboard as appropriate
             return "/home";
         }
     }

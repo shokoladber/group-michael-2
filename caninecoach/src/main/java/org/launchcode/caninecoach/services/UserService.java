@@ -1,6 +1,7 @@
 package org.launchcode.caninecoach.services;
 
 import org.launchcode.caninecoach.entities.User;
+import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,5 +35,22 @@ public class UserService {
             user.setVerified(true);
             userRepository.save(user);
         }
+    }
+    public User processOAuth2User(String email, UserRole defaultRole) {
+        User user = userRepository.findByEmail(email)
+                .map(existingUser -> {
+                    // Update existing user properties if necessary
+                    return existingUser;
+                })
+                .orElseGet(() -> {
+                    // Create a new user for new OAuth2 login
+                    User newUser = new User();
+                    newUser.setEmail(email);
+                    newUser.setRole(defaultRole);
+                    // Set any default properties for new OAuth2 users here
+                    return saveUser(newUser);
+                });
+
+        return user;
     }
 }

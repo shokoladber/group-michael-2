@@ -8,8 +8,6 @@ import './LoginSignup.css';
 
 // Retrieve environment variables
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const oauth2RedirectUri = process.env.REACT_APP_OAUTH2_REDIRECT_URI;
-const oauth2Url = `${backendUrl}/oauth2/authorization/google`;
 
 const LoginSignup = () => {
     const [action, setAction] = useState("Login");
@@ -38,12 +36,10 @@ const LoginSignup = () => {
         }
     };
 
-    console.log("OAuth2 URL:", oauth2Url);
-
-
     const handleOAuth2Login = () => {
         window.location.href = `${backendUrl}/oauth2/authorization/google`;
     };
+
 
     return (
         <div className="container">
