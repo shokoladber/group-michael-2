@@ -2,6 +2,8 @@ import React from 'react'
 import Logo from '../Components/Assets/cc1.jpg';
 import FileUpload from '../Components/common/fileUpload'
 import { Header } from '../Components/common';
+import PetProfilePage from '../Components/common/petProfilePage/PetProfilePage';
+import BlogPost from '../Components/common/blogpost/BlogPost';
 
 function Blog() {
   return (
@@ -9,7 +11,11 @@ function Blog() {
         <div><Header /></div>
           
         <div >
-          <FileUpload/>
+          {/* *
+          
+        <BlogPost />
+          {/* <FileUpload/> */}
+          {/* <PetProfilePage /> */}
         </div>
       
         <h2>Blog Page</h2>            

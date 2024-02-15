@@ -10,7 +10,7 @@ function Header () {
             
             <section className="header-top">
             <section className="header-top__logo">
-                <a href="/" className="header-logo">Canine  Coach</a>
+                <a href="/" className="header-logo">Canine Coach</a>
             </section>
             <section className="header-top__navbar">
             {/* <img src= {logo} alt=""/> */}

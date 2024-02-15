@@ -14,6 +14,7 @@ function Navbar (){
 
     const handleClick = ()=> setClick(!click);
     const closeMobileMenu= ()=>setClick(false);
+
     const showButton = () => {
         if (window.innerWidth <= 960){
             setButton(false);
@@ -30,10 +31,11 @@ function Navbar (){
 
         return(
             <nav className='navbar'>
+                <div className='navbar-container'>
                                 
-                    <h2 className='navbar__logo'> <LiaAccusoft />  CC</h2>
+                    <Link to='/' className='navbar__logo' onClick={closeMobileMenu}> <LiaAccusoft />  CC</Link>
                       
-                            <div className='menu__icon'> 
+                            <div className='menu__icon' onClick={handleClick}> 
                                 <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
                             </div>
             
@@ -55,31 +57,18 @@ function Navbar (){
                         <li className='nav__item'>
                             <Link to="/Login" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
                         </li>
+                        {/* <li className='nav__item'>
+                            <Link to="/Sign Up" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
+                        </li> */}
                     </ul>
 
                         {/* {button && <Button buttonStyle= 'btn--primary'>Login</Button>} */}
 
                         {/* {button && <Button buttonStyle= 'btn--outline'>SignUp</Button>} */}
-                
+                </div>
             </nav>
 
     
-        // <section className="navbar">
-        //     <ul className='navbar-item'>
-        //         <li className='nav-item'>
-        //             <Link to="/" className='nav-links' onClick={closeMobileMenu}>Home</Link>
-        //         </li>
-        //         <li className='nav-item'>
-        //             <Link to="/services" className='nav-links' onClick={closeMobileMenu}>Services</Link>
-        //         </li>
-        //         <li className='nav-item'>
-        //             <Link to="/blog" className='nav-links' onClick={closeMobileMenu}>Blog</Link>
-        //         </li>
-        //         <li className='nav-item'>
-        //             <Link to="/contact" className='nav-links' onClick={closeMobileMenu}>Contact</Link>
-        //         </li>
-        //     </ul>
-        // </section>
 
          );
 

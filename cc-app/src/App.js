@@ -7,6 +7,9 @@ import Contact from './pages/Contact';
 import Classes from './pages/Classes';
 import NoPage from './pages/NoPage';
 import {LoginSignup, Navbar  } from './Components/common';
+// import BlogPost from './Components/common/blogpost/BlogPost';
+import Topbar from './Components/common/topbar/Topbar';
+// import PetProfilePage from './Components/common/petProfilePage';
 
 
 function App() {
@@ -14,7 +17,9 @@ function App() {
     <>
       
       <BrowserRouter>
+        {/* <Topbar /> */}
         <Navbar/>
+  {/* / <PetProfilePage /> */}
         
         <Routes>
       
@@ -24,6 +29,8 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>       
           <Route path="/classes" element={<Classes/>}/>
           <Route path="/Login" element={<LoginSignup/>}/>  
+          <Route path="/SIGN UP" element={<LoginSignup/>}/>  
+
           <Route path="*" element={<NoPage/>}/>       
           
         </Routes>
