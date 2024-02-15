@@ -6,7 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="entityManagerFactory" value="24da6054-1759-4a32-a6b1-c1cce395b746" />
+          <factory-entry name="entityManagerFactory" value="5928c03b-03f4-4c27-b683-43967a980e95" />
         </datasource-mapping>
         <naming-strategy-map>
           <unit-entry name="entityManagerFactory" value="org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy" />

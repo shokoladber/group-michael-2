@@ -2,7 +2,6 @@ package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -17,13 +16,18 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Column
+    private Boolean usingOAuth2 = false;
+
     @Column
     private boolean verified = false;
 
     @Column(name = "profile_created", nullable = false)
     private boolean profileCreated = false;
 
-    // Where we store user roles
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private UserRole role;
@@ -31,6 +35,7 @@ public class User {
     public User() {
     }
 
+    // Standard getters and setters
     public Long getId() {
         return id;
     }
@@ -53,6 +58,22 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getUsingOAuth2() {
+        return usingOAuth2;
+    }
+
+    public void setUsingOAuth2(Boolean usingOAuth2) {
+        this.usingOAuth2 = usingOAuth2;
     }
 
     public boolean isVerified() {

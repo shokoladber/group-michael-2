@@ -1,102 +1,56 @@
-import React from 'react'
-import Logo from '../Components/Assets/cc2.jpg';
-import { Header } from '../Components/common';
-import '../App.css'
-import '../index.css'
-
+// src/pages/CoursesPage.js
+import React, { useState, useEffect } from 'react';
+import CourseList from '../Components/Course/CourseList';
+import CourseForm from '../Components/Course/CourseForm';
+import { ClassroomService } from '../services/ClassroomService';
 
 function Classes() {
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchCourses = async () => {
+        setLoading(true);
+        try {
+            const response = await ClassroomService.listCourses();
+            setCourses(response.data);
+            setError(null);
+        } catch (err) {
+            setError('Failed to fetch courses');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Call fetchCourses when the component mounts
+    useEffect(() => {
+        fetchCourses();
+    }, []);
+
+    const handleCourseSubmit = async (courseData) => {
+        try {
+            const response = await ClassroomService.createCourse(courseData);
+            setCourses([...courses, response.data]);
+        } catch (err) {
+            setError('Failed to create course');
+            console.error(err);
+        }
+    };
+
     return (
         <div>
-            <Header />
-              <h2>Classes Page</h2>
-            <img src={Logo} alt=''/>  
-            <div>
-                <h3>Curriculum1</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum2</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum3</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum4</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum5</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum6</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa excepturi recusandae! Commodi facere quia voluptate quaerat? Dolores sed velit consequatur dolorum.
-                <br/>
-                <br/>
-                <h3>Curriculum</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti earum in eveniet harum iusto nisi cumque assumenda optio autem consectetur. Voluptatem maiores explicabo porro a impedit officiis animi officia incidunt deserunt doloribus deleniti debitis, voluptatum reiciendis iste hic unde odit iure eligendi ab non vitae dicta harum. Beatae esse sed, sit iure eveniet sequi. Fugiat quod saepe vel corporis minima labore nisi id cupiditate impedit, modi nostrum non praesentium quo harum voluptatum maxime, nesciunt esse enim sapiente commodi? Molestiae suscipit doloremque recusandae earum ducimus voluptate sunt eveniet qui iste facere iure modi eos rem atque quibusdam blanditiis, voluptatibus officiis a.
-
-            </div>    
-           
+            <h1>Courses</h1>
+            {error && <p className="error">{error}</p>}
+            {loading ? (
+                <p>Loading courses...</p>
+            ) : (
+                <CourseList courses={courses} />
+            )}
+            <h2>Add New Course</h2>
+            <CourseForm onSubmit={handleCourseSubmit} />
         </div>
-    )
+    );
 }
+
 export default Classes;

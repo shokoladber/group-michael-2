@@ -40,7 +40,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/home", "/login", "/oauth2/**").permitAll()
+                        .requestMatchers("/api/oauth2/code/google").permitAll()
+                        .requestMatchers("/", "/home", "/login", "/oauth2/**", "/register", "/logout-success").permitAll() // Include register and logout-success in the permitAll list
                         .requestMatchers("/api/googleclassroom/courses/manage/**").hasAuthority("ACCESS_MANAGE_COURSES")
                         .requestMatchers("/api/googleclassroom/courses/enroll/**").hasAuthority("ACCESS_ENROLL_COURSES")
                         .requestMatchers("/api/googleclassroom/courses/view/**").hasAuthority("ACCESS_VIEW_COURSES")
@@ -49,9 +50,26 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService)
+                                .userService(customOAuth2UserService) // Custom OAuth2 User Service
                         )
                         .successHandler(oAuth2LoginSuccessHandler)
+                        .redirectionEndpoint(redirection -> redirection
+                                .baseUri("/oauth2/redirect") // This should match your redirect URI
+                        )
+                        // Optional: If you want to customize the authorization request base URI
+                        .authorizationEndpoint(authorization -> authorization
+                                .baseUri("/oauth2/authorization")
+                        )
+                )
+
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/logout-success")
+                        .permitAll()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -60,7 +78,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Authentication manager may be unnecessary at this point?
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
