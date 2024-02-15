@@ -1,40 +1,102 @@
 .navbar{
+    background: rgba(194, 211, 232, 0.883);
+    height: 160px;
     display: flex;
-    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.menu__icon {
+    display: none;
+
+}
+.navbar__logo{
+    background-color: aqua;
+    background-image: linear-gradient(to top,rgb(233, 67, 166) 0%, rgb(231, 150, 83) 100%);
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 5rem;
+
 }
 
-.navbar-item {
+.nav__item {
     display: flex;
     flex-direction: row ;
     justify-content:space-evenly;
-    align-items: baseline;
+    align-items: center;
     margin-left: 50px;
     color: rgb(33, 12, 151);
     text-decoration: rgb(198, 23, 23);
     text-transform: uppercase;
     outline: none;
     height: 50px;
-    width: 200px;
-    font-weight: 800;
+    width: 100px;
+    font-weight: bold;
 
 }
-.nav-links {
+.nav__item:hover {
+    background-color: rgb(231, 245, 245);
+    padding: 0.15rem;
+    border-radius:0.5rem ;
+}
+.nav__item:hover ::after{
+    content: '';
+    width: 30%;
+    height: 2px;
+    background-color: rgb(231, 245, 245);
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+.nav__links {
     display: flex;
-    flex-direction: row ;
-    justify-content:space-evenly;
-    align-items: baseline;
-    margin-left: 50px;
+    justify-content:center;
+    align-items: center;
+    padding: 0.5rem;
     color: rgb(17, 4, 93);
-    text-decoration: rgb(198, 23, 23);
-    text-transform: uppercase;
-    outline: none;
-    height: 50px;
-    width: 200px;
-    font-weight: 600;
+    text-decoration:none;
+    height: 100%;
+    width: 125px;
+    margin:0 0.5rem ;
+    border-radius: 0.5rem;
 
 }
-.nav-menu{
-    display: flex;
-    flex-direction: row ;
+
+.nav__menu{
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 70vw;
+    justify-content: end;
+    margin-right: 2rem;
+
+
+
+}
+
+@media screen and (max-width: 960px){
+    .NavbarItems{
+        position: relative;
+    }
+    .nav__menu{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 90vh;
+        position: absolute;
+        top: 80px;
+        left: -100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
 
 }

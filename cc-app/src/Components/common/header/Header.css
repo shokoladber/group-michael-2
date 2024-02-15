@@ -1,5 +1,5 @@
-  .header{
-    margin-top: 20px;
+.header{
+    margin-top: 5px;
     display: flex ;
     flex: 1;
     flex-direction: row;
@@ -12,7 +12,7 @@
 }
 .header-top__logo {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     margin-right: 10px;
 }
@@ -21,26 +21,25 @@
     text-decoration: wavy;
     font-family: fantasy;
     font-size: 100px;
-    
+
 }
 .header-top__navbar{
     display: flex;
     flex: 1;
     flex-direction: row;
-} 
- .img {
+}
+.img {
     display: flex;
     height: 12px;
     width:25% ;
 
 }
 
- .header-top__navigation{
+.header-top__navigation{
     display: flex;
     flex: 1;
     flex-direction: row;
     justify-content: flex-end;
     margin-right: 55px;
-    
-}
 
+}
