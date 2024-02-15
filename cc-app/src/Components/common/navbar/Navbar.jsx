@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
-import { GiSittingDog } from "react-icons/gi";
+import {Link} from 'react-router-dom';
+import {GiSittingDog} from "react-icons/gi";
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -10,6 +10,7 @@ function Navbar() {
     const handleLoginSignup = () => {
         window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`;
     };
+
 
     const closeMobileMenu = () => setClick(false);
 
