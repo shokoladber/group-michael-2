@@ -52,17 +52,6 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    public void configure(WebSecurity web) {
-        web.ignoring().requestMatchers(
-                "/favicon.ico",
-                "/manifest.json",
-                "/logo192.png",
-                "/logo512.png",
-                "/static/**"
-        );
-    }
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http

@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class LoginRequest {
-    @NotBlank
-    @Size(max = 40)
-    @Email
+    @NotBlank(message = "Email cannot be blank")
+    @Size(max = 40, message = "Email must not exceed 40 characters")
+    @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank
-    @Size(min = 6, max = 20)
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     private String password;
 
     // Getters and setters

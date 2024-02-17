@@ -2,7 +2,7 @@ import React from 'react'
 import './Blog.css';
 // import Logo from '../Assets/cc1.jpg';
 // import FileUpload from '../../Components/common/fileUpload'
-import { Header } from '../../Components/common';
+import { Header } from '../../Components/common/commonIndex';
 import PetProfilePage from '../../Components/common/petProfilePage/PetProfilePage';
 import BlogPost from '../../Components/common/blogpost/BlogPost';
 

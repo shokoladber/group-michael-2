@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {Home, Blog, Classes, Login, NoPage} from './pages';
-import {Header, Navbar, LoginSignup, BlogPost, PetProfilePage, Button, Footer, FileUpload } from './Components/common';
+import {Header, Navbar, LoginSignup, BlogPost, PetProfilePage, Button, Footer, FileUpload } from './Components/common/commonIndex';
 import { Dropdown } from 'react-bootstrap';
 import Contact from './Components/common/contact2/ContactUs';
 

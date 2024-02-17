@@ -3,7 +3,7 @@ package org.launchcode.caninecoach.dtos;
 import jakarta.validation.constraints.NotBlank;
 
 public class RoleUpdateRequest {
-    @NotBlank
+    @NotBlank(message = "New role cannot be blank")
     private String newRole;
 
     // Getters and setters

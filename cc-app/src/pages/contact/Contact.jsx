@@ -1,7 +1,7 @@
 // Contact.js
 import React from 'react';
 import './Contact.css';
-import { Header } from '../../Components/common';
+import { Header } from '../../Components/common/commonIndex';
 // import ContactUs from '../../Components/common/contact2';
 
 function Contact() {
