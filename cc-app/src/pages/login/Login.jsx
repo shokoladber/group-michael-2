@@ -1,14 +1,15 @@
-import React from 'react'
+// src/pages/Login.jsx
+import React from 'react';
+import UserLogin from '../../Components/common/auth/UserLogin'; // Adjust the path as necessary
 import './Login.css';
-import { LoginSignup } from '../../Components/common'
 
 function Login() {
-  return (
-    <div>
-        <LoginSignup />
-
-    </div>
-  )
+    return (
+        <div>
+            <UserLogin/>
+        </div>
+    );
 }
 
-export default Login
+export default Login;
+
