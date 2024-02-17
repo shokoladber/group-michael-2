@@ -1,42 +1,80 @@
-
-.App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #4478e1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(30px + 2vmin);
-  color: rgb(247, 243, 243);
-}
-
-
-.login-register-btn {
-  background-color: #4478e1;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-register-btn:hover {
-  background-color: #365cab;
-}
-
-
 *{
+  box-sizing: border-box;
   margin:0;
   padding: 0;
+  scroll-behavior: smooth;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.home,
+body{
+  background: var(--color-bg)
+}
+
+a{
+  color: unset;
+  text-decoration: none;
+}
+.gradient__bg{
+  /* global 92%+ browsers support */
+  background: radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 99%);
+}
+.gradient__text{
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section__padding {
+  padding: 4rem 6rem;
+}
+.section__margin {
+  margin: 4rem 6rem;
+
+}
+.scale-up-center {
+	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+ @-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 700px){
+  .section__padding{
+    padding: 4rem;
+  }
+  .section__margin{
+    margin: 4rem;
+  }
+  
+}
+@media screen and (max-width: 550px) {
+  .section__padding{
+    padding: 4rem 2rem;
+  }
+  .section__margin{
+    margin: 4rem 2rem;
+  }
+}
+
+/* .home,
 .blog,
 .contact,
 .classes{
@@ -75,7 +113,7 @@ font-size: 3rem;
   font-weight: 500;
 }
 button{
-  padding: 20px 40px;
+  padding: 20px, 40px,20px,40px;
   font-size: 30px;
   border-radius: 5px;
   border: none;
@@ -89,12 +127,10 @@ button:hover{
   background-color: rgb(193, 33, 155);
 }
 .overlay{
-  position: absolute;
+  position:absolute;
   top: 0;
   left: 0;
   width: 80%;
   height: 100%;
-  background-color: transparent;
-}
-
-
+  background-color:none;
+} */
