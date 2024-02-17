@@ -6,8 +6,12 @@ import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Classes from './pages/Classes';
 import NoPage from './pages/NoPage';
-import { LoginSignup } from './Components/common/LoginSignup'; // Corrected to named export
+import Login from './pages/Login'; // Ensure this is the correct path to your Login component
+import Services from './pages/Services'; // Ensure this is the correct path to your Services component
 import OAuth2RedirectHandler from './Components/auth/OAuth2RedirectHandler';
+import UserLogin from './Components/auth/UserLogin'; // Example import, adjust as necessary
+import UserSignup from './Components/auth/UserSignup'; // Example import, adjust as necessary
+import InputField from './inputField';
 import Topbar from './Components/common/topbar/Topbar';
 import Navbar from './Components/common/navbar/Navbar';
 
@@ -17,13 +21,15 @@ function App() {
             <Topbar />
             <Navbar />
             <Routes>
-                <Route index element={<Home />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/classes" element={<Classes />} />
-                <Route path="/login" element={<LoginSignup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
+                <Route path="/user/login" element={<UserLogin />} /> // Example route for UserLogin
+                <Route path="/user/signup" element={<UserSignup />} /> // Example route for UserSignup
                 <Route path="*" element={<NoPage />} />
             </Routes>
         </BrowserRouter>

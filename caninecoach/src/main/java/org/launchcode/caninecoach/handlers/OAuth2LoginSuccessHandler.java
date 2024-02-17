@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole; // Ensure this is the correct import for UserRole
-import org.launchcode.caninecoach.repositories.UserRepository;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,12 +14,12 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final UserService userService;
 
     @Autowired
-    public OAuth2AuthSuccessHandler(UserService userService) {
+    public OAuth2LoginSuccessHandler(UserService userService) {
         this.userService = userService;
     }
 

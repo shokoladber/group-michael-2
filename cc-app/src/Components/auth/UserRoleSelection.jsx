@@ -3,11 +3,13 @@ import axios from 'axios';
 import './UserRoleSelection.css';
 import { useNavigate } from 'react-router-dom';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const UserRoleSelection = () => {
     const navigate = useNavigate();
 
     const handleRoleSelect = (role) => {
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/update-role`, { role })
+        axios.post(`${backendUrl}/api/update-role`, { role })
             .then(response => {
                 navigate(response.data.redirectUrl);
             })

@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Header, Navbar } from '../Components/common'
 import Logo from '../Components/Assets/bg2.jpg';
-import Topbar from '../Components/common/topbar';
+import Topbar from '../Components/common/topbar/topbarIndex';
 
 import ContactUs from '../Components/common/contact2';
 import Header from "../Components/common/header";
