@@ -5,8 +5,10 @@ import com.google.api.services.classroom.ClassroomScopes;
 import com.google.api.services.classroom.model.Course;
 import com.google.api.services.classroom.model.ListCoursesResponse;
 import com.google.api.services.classroom.model.Student;
+import org.launchcode.caninecoach.repositories.CourseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
@@ -24,10 +26,17 @@ import java.util.Objects;
 @Service
 public class GoogleClassroomService {
 
+
+   // private final CourseRepository courseRepository;
     private static final Logger log = LoggerFactory.getLogger(GoogleClassroomService.class);
 
     @Value("${google.service-account.filename}")
     private String credentialsFilePath;
+
+  /* @Autowired
+    public GoogleClassroomService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }*/
 
     @RequestScope
     public Classroom classroomService() throws IOException, GeneralSecurityException {
