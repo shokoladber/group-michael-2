@@ -1,0 +1,36 @@
+.purchase-container {
+    max-width: 600px;
+    margin-top:200px ;
+    padding: 20px;
+  }
+  
+  .purchase-form {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .purchase-form label {
+    margin-bottom: 10px;
+  }
+  
+  .purchase-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .purchase-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .purchase-form button:hover {
+    background-color: #0056b3;
+  }
+  

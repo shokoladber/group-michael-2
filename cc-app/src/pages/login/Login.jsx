@@ -1,17 +1,13 @@
 import React from 'react'
 import './Login.css';
-import { LoginSignup } from '../../Components/common/commonIndex'
-import PetProfilePage from '../../Components/common/petProfilePage/PetProfilePage'
+import { LoginSignup } from '../../Components/common'
 
 function Login() {
   return (
-        <div>
-          
-        </div>
-    // <div>
-    //     <LoginSignup />
+    <div>
+        <LoginSignup />
 
-    // </div>
+    </div>
   )
 }
 

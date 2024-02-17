@@ -14,11 +14,13 @@ function Navbar() {
 
   return (
     <nav className='navbar'>
+      
       <div className='navbar-container'>
         <Link to='/' className='navbar__logo'> <LiaAccusoft />  Canine Coach</Link>
         <div className='menu__icon' onClick={toggleDropdown}>
           <i className='fas fa-bars'></i>
         </div>
+
         <ul className={dropdownOpen ? 'nav__menu active' : 'nav__menu'}>
           <li className='nav__item'>
             <Link to="/" className='nav__links' onClick={() => setDropdownOpen(false)}>Home</Link>
