@@ -69,7 +69,7 @@ const BlogPost = ({ postId }) => {
       {post ? (
         <div>
           {isEditing ? (
-            <form onSubmit={handleEditSubmit}>
+            <form method='post' onSubmit={handleEditSubmit}>
               <input
                 type="text"
                 name="title"

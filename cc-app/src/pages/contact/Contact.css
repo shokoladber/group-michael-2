@@ -1,0 +1,20 @@
+/* Contact.css */
+
+.contact__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../../Components/Assets/px2.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .contact__container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
