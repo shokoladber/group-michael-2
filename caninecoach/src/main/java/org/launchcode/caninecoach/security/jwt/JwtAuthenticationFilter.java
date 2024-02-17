@@ -1,8 +1,6 @@
-package org.launchcode.caninecoach.security;
+package org.launchcode.caninecoach.security.jwt;
 
-import org.launchcode.caninecoach.entities.JwtTokenProvider;
 import org.launchcode.caninecoach.services.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;

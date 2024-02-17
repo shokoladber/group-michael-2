@@ -71,24 +71,6 @@
     font-size: 18px;
 }
 
-/* Forgot password styles */
-.forgot-password {
-    color: rgb(31, 30, 30);
-    font-size: 20px;
-    margin-top: 27px;
-    padding-left: 62px;
-}
-
-.forgot-password span {
-    color: rgb(52, 52, 166);
-    cursor: pointer;
-}
-
-.forgot-password span:hover {
-    color: rgb(208, 12, 107);
-    text-decoration: underline;
-}
-
 /* Submit button container styles */
 .submit-container {
     display: flex;
@@ -109,6 +91,50 @@
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
+}
+
+/* OAuth button styles (similar to submit button) */
+.oauth-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 59px;
+    color: #f5f5dc;
+    background: rgb(76, 48, 115);
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 10px auto;
+}
+
+/* Link container styles */
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.link-container button {
+    background: none;
+    border: none;
+    color: rgb(52, 52, 166);
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.link-container button:hover {
+    color: rgb(208, 12, 107);
+}
+
+/* Error message styles */
+.error-message {
+    color: red;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
 }
 
 /* Gray color variant */

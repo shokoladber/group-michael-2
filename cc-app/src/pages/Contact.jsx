@@ -4,7 +4,7 @@ import Logo from '../Components/Assets/bg2.jpg';
 import Topbar from '../Components/common/topbar/topbarIndex';
 
 import ContactUs from '../Components/common/contact2';
-import Header from "../Components/common/header";
+import Header from "../Components/common/header/headerIndex";
 
 
 function Contact() {

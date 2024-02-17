@@ -5,7 +5,7 @@ import './Header.css';
 function Header () {
 
     return(
-        <sectiion className="header">
+        <section className="header">
 
 
             <section className="header-top">
@@ -29,7 +29,7 @@ function Header () {
                     {/* caninecoach314@gmail.com */}
                 </section>
             </section>
-        </sectiion>
+        </section>
 
     )
 }

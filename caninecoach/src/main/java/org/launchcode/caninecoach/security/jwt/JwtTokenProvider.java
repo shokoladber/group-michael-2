@@ -1,4 +1,4 @@
-package org.launchcode.caninecoach.security;
+package org.launchcode.caninecoach.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;

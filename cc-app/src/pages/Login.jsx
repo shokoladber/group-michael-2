@@ -1,8 +1,11 @@
-// src/pages/Login.jsx
 import React from 'react';
-import UserLogin from '../components/auth/UserLogin'; // Adjust the import path as necessary
+import UserLogin from '../Components/auth/UserLogin';
+import { useNavigate } from 'react-router-dom';
+import '../Components/auth/LoginSignup.css';
 
 const Login = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="login-page">
             <h1>Login</h1>

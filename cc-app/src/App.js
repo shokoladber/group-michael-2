@@ -1,25 +1,26 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Classes from './pages/Classes';
 import NoPage from './pages/NoPage';
-import Login from './pages/Login'; // Ensure this is the correct path to your Login component
-import Services from './pages/Services'; // Ensure this is the correct path to your Services component
+import Login from './pages/Login';
+import Services from './pages/Services';
+import UserLogin from './Components/auth/UserLogin';
+import UserSignup from './Components/auth/UserSignup';
+import UserRoleSelection from './Components/auth/UserRoleSelection';
 import OAuth2RedirectHandler from './Components/auth/OAuth2RedirectHandler';
-import UserLogin from './Components/auth/UserLogin'; // Example import, adjust as necessary
-import UserSignup from './Components/auth/UserSignup'; // Example import, adjust as necessary
-import InputField from './inputField';
 import Topbar from './Components/common/topbar/Topbar';
 import Navbar from './Components/common/navbar/Navbar';
+import Header from './Components/common/header/Header';
 
 function App() {
     return (
         <BrowserRouter>
             <Topbar />
             <Navbar />
+            <Header /> {/* Make sure Header is rendered if needed */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
@@ -28,8 +29,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
-                <Route path="/user/login" element={<UserLogin />} /> // Example route for UserLogin
-                <Route path="/user/signup" element={<UserSignup />} /> // Example route for UserSignup
+                <Route path="/signup" element={<UserSignup />} />
+                <Route path="/select-role" element={<UserRoleSelection />} />
                 <Route path="*" element={<NoPage />} />
             </Routes>
         </BrowserRouter>

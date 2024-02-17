@@ -1,4 +1,4 @@
-package org.launchcode.caninecoach.security;
+package org.launchcode.caninecoach.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper; import org.springframework.security.core.AuthenticationException; import org.springframework.security.web.AuthenticationEntryPoint; import org.springframework.stereotype.Component;
 

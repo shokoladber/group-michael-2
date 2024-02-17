@@ -4,7 +4,7 @@ import FileUpload from '../Components/common/fileUpload'
 import Topbar from '../Components/common/topbar/topbarIndex';
 import PetProfilePage from '../Components/common/petProfilePage/PetProfilePage';
 import BlogPost from '../Components/common/blogpost/BlogPost';
-import Header from "../Components/common/header";
+import Header from "../Components/common/header/headerIndex";
 
 function Blog() {
     return (
