@@ -1,0 +1,43 @@
+.blog-post {
+  margin: 100px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.blog-post form {
+  margin-bottom: 20px;
+}
+
+.blog-post input,
+.blog-post textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.blog-post button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.blog-post button:hover {
+  background-color: #0056b3;
+}
+
+.blog-post .buttons {
+  margin-top: 10px;
+}
+
+.blog-post p {
+  margin-bottom: 20px;
+}
+
+  
