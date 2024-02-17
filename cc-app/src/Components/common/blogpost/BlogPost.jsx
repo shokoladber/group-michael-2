@@ -1,7 +1,7 @@
 // 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './BlogPost.css'; // Import CSS file
+import './BlogPost.css'; 
 
 const BlogPost = ({ postId }) => {
   const [post, setPost] = useState(null);

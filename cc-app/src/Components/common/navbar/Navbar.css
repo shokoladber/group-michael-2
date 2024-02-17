@@ -1,15 +1,16 @@
-/* Navbar.css */
-
-/* Navbar container */
 .navbar {
     background-color: #333;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
   }
   
-  /* Navbar content container */
+  
   .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -19,14 +20,14 @@
     padding: 0 20px;
   }
   
-  /* Navbar logo */
+  
   .navbar__logo {
     color: #fff;
     font-size: 1.5rem;
     text-decoration: none;
   }
   
-  /* Menu icon */
+  
   .menu__icon {
     display: none;
     cursor: pointer;
@@ -85,15 +86,15 @@
   
   /* Show dropdown on hover */
   .nav__item:hover .dropdown {
-    display: block;
+    display: flex;
   }
   
-  /* Hover effect for navigation links */
+  
   .nav__links:hover {
     color: #ffcc00;
   }
   
-  /* Media query for mobile responsiveness */
+  
   @media screen and (max-width: 768px) {
     .menu__icon {
       display: block;
