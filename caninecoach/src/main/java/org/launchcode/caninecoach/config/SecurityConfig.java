@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,25 +23,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Apply custom configuration for CORS
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                // Disable CSRF protection for simplicity in this example
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 // Configure authorization requests
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/register").permitAll()
-                        .requestMatchers("/users").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/auth/signup").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/oauth2/**").permitAll()
                         .anyRequest().authenticated()
-                )
-                // Configure form login
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                // Configure HTTP Basic authentication
-                .httpBasic(httpBasic -> httpBasic
-                        .disable() // Disabled for this example, but customize as needed
                 );
+        http
+                // Add OAuth2 login configuration
+                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/api/auth/login"))
+                // Add OAuth2 login success handler and failure handler to the OAuth2LoginConfigurer
+                // Disable form login as we are using OAuth2 / JWT
+                .formLogin(AbstractHttpConfigurer::disable)
+                // Disable HTTP Basic authentication
+                .httpBasic(AbstractHttpConfigurer::disable);
 
         return http.build();
     }

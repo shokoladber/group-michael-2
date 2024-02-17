@@ -1,16 +1,18 @@
-.container{
+/* General container styles */
+.container {
     display: flex;
     flex-direction: column;
     margin: 90px auto auto;
     width: 500px;
     background: transparent;
-    border:2px solid rgb(188, 142, 142) ;
+    border: 2px solid rgb(188, 142, 142);
     backdrop-filter: blur(30px);
     box-shadow: 0 0 10px black;
     padding-bottom: 30px;
     border-radius: 60px;
 }
 
+/* Header styles */
 .header {
     display: flex;
     flex-direction: column;
@@ -19,68 +21,83 @@
     width: 100%;
     margin-top: 10px;
 }
+
+/* Text styles */
 .text {
     color: rgb(98, 77, 203);
     font-size: 50px;
     font-weight: 700;
 }
-.underline{
+
+/* Underline styles */
+.underline {
     width: 200px;
     height: 6px;
     background: rgb(98, 77, 203);
     border-radius: 9px;
-
 }
-.inputs{
-    margin-top: 55px;
+
+/* Input container styles */
+.inputs {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    margin-top: 55px;
 }
-.input{
+
+/* Individual input styles */
+.input {
     display: flex;
     align-items: center;
-    margin: auto;
     width: 480px;
     height: 80px;
+    margin: auto;
     background: rgba(40, 37, 36, 0.13);
     border-radius: 6px;
 }
-.input img{
+
+.input img {
     margin: 0 22px;
 }
-.input input{
-    height: 5px;
+
+.input input {
     width: 400px;
+    height: 5px;
+    padding: 20px;
     background: transparent;
     border: none;
     outline: none;
     color: rgba(9, 10, 0, 0.772);
     font-size: 18px;
-    padding: 20px 20px 20px;
 }
 
-.forgot-password{
-    padding-left: 62px;
-    margin-top: 27px;
+/* Forgot password styles */
+.forgot-password {
     color: rgb(31, 30, 30);
     font-size: 20px;
+    margin-top: 27px;
+    padding-left: 62px;
 }
-.forgot-password span{
+
+.forgot-password span {
     color: rgb(52, 52, 166);
     cursor: pointer;
 }
-.forgot-password span:hover{
+
+.forgot-password span:hover {
     color: rgb(208, 12, 107);
-    cursor: pointer;
-    text-decoration: underline ;
+    text-decoration: underline;
 }
-.submit-container{
+
+/* Submit button container styles */
+.submit-container {
     display: flex;
     gap: 30px;
     margin: 60px auto;
 }
-.submit{
+
+/* Submit button styles */
+.submit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,12 +110,14 @@
     font-weight: 700;
     cursor: pointer;
 }
-.gray{
+
+/* Gray color variant */
+.gray {
     background: cornsilk;
     color: rgb(200, 216, 216);
 }
-/* Mobile Version (Responsiveness)*/
 
+/* Mobile Version (Responsiveness) */
 @media only screen and (max-width: 600px) {
-
+    /* Add responsive styles here */
 }

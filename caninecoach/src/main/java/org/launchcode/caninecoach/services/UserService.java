@@ -39,7 +39,6 @@ public class UserService {
     public User processOAuth2User(String email, UserRole defaultRole) {
         User user = userRepository.findByEmail(email)
                 .map(existingUser -> {
-                    // Update existing user properties if necessary
                     return existingUser;
                 })
                 .orElseGet(() -> {
@@ -47,7 +46,7 @@ public class UserService {
                     User newUser = new User();
                     newUser.setEmail(email);
                     newUser.setRole(defaultRole);
-                    // Set any default properties for new OAuth2 users here
+                    // default properties for new OAUTH2 user
                     return saveUser(newUser);
                 });
 

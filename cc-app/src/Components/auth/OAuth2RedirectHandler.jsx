@@ -7,14 +7,13 @@ const OAuth2RedirectHandler = () => {
     const location = useLocation();
 
     useEffect(() => {
-        // Extract the code from URL query parameters
+
         const urlParams = new URLSearchParams(location.search);
         const code = urlParams.get('code');
-        const state = urlParams.get('state'); // State parameter can be used for additional validation if passed
+        const state = urlParams.get('state');
 
-        // If there's a code, exchange it for a token
         if (code) {
-            axios.post('/api/oauth2/code/google', { code, state }) // Endpoint to exchange code for token
+            axios.post('/api/oauth2/code/google', { code, state })
                 .then(response => {
                     // Assuming backend returns a flag indicating if the user is new
                     const isNewUser = response.data.isNewUser;
@@ -27,10 +26,10 @@ const OAuth2RedirectHandler = () => {
                 })
                 .catch(error => {
                     console.error("Error exchanging code for token:", error);
-                    navigate('/login'); // Redirect to login on error
+                    navigate('/login');
                 });
         } else {
-            // No code in URL, navigate to login
+
             navigate('/login');
         }
     }, [navigate, location]);

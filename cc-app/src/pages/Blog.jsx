@@ -1,9 +1,10 @@
 import React from 'react';
 import Logo from '../Components/Assets/cc1.jpg';
 import FileUpload from '../Components/common/fileUpload'
-import { Header } from '../Components/common';
+import Topbar from '../Components/common/topbar';
 import PetProfilePage from '../Components/common/petProfilePage/PetProfilePage';
 import BlogPost from '../Components/common/blogpost/BlogPost';
+import Header from "../Components/common/header";
 
 function Blog() {
     return (

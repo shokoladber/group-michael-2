@@ -51,7 +51,7 @@ public class UserRoleController {
             user.setRole(selectedRole);
             userRepository.save(user);
 
-            // Instead of redirect, return a response indicating success
+            // return a response indicating success
             return ResponseEntity.ok().body(Collections.singletonMap("message", "Role updated successfully"));
         } catch (IllegalArgumentException e) {
             log.error("Invalid role selection: {}", role, e);
@@ -60,3 +60,4 @@ public class UserRoleController {
     }
 
 }
+

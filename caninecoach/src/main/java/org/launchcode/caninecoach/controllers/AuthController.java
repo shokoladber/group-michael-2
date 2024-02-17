@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -28,23 +30,26 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email is already in use.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setUsingOAuth2(false); // Assume you have this field to distinguish between OAuth2 users and others
+        user.setUsingOAuth2(false);
         userService.saveUser(user);
         return ResponseEntity.ok("User registered successfully!");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
-        // This endpoint might not be needed if you're using Spring Security's built-in mechanisms.
-        // Consider removing if not used.
+    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+        // Authentication logic here
+        // This should check the user's email and password and return a token if successful
         return ResponseEntity.ok().build();
     }
 
-    // Removed /oauth2/login
-
-    @GetMapping("/oauth2/callback")
-    public ResponseEntity<?> oauth2Callback(HttpServletRequest request, HttpServletResponse response) {
-        // Handle logic after successful OAuth2 authentication, such as redirection based on roles or setting up first-time login information.
-        return ResponseEntity.ok().build();
+    // OAuth2 callback endpoint
+    @GetMapping("/oauth2/callback/{registrationId}")
+    public ResponseEntity<?> oauth2Callback(@PathVariable String registrationId, HttpServletRequest request, HttpServletResponse response) {
+        // The actual redirection to the OAuth2 provider should be handled by Spring Security's OAuth2LoginConfigurer
+        // This method can be used to handle additional logic once the user is redirected back to your app after OAuth2 login
+        // You might need to extract authentication details and create/update a User instance in your database here
+        return ResponseEntity.ok("OAuth2 Callback Success");
     }
 }

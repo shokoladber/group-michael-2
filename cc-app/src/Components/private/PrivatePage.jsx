@@ -33,14 +33,13 @@ const PrivatePage = () => {
     }, [navigate]);
 
     if (isLoading) {
-        return <div>Loading...</div>; // loading spinner
+        return <div>Loading...</div>;
     }
 
     if (authError) {
-        return <div>{authError}</div>; // Show authentication error message
+        return <div>{authError}</div>;
     }
 
-    // if not loading and no auth error
     return (
         <div>
             <h1>Private Page</h1>

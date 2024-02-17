@@ -1,19 +1,20 @@
-// import React from 'react'
-// import './Topbar.css'
+import React from 'react';
+import './Topbar.css';
 
-// function Topbar() {
-//   return (
-//     <div className='top'>
-//         <div className='topLeft'></div>
-//         <i class="fa-solid fa-users"></i>
-//         <div className='topCenter'>
-//             <ul className="topList"></ul>
+function Topbar() {
+    return (
+        <div className='top'>
+            <div className='topLeft'></div>
+            <div className='topCenter'>
+                <ul className="topList">
+                    {/* Add list items here if needed */}
+                </ul>
+            </div>
+            <div className='topRight'>
+                {/* You can add content to the right side here */}
+            </div>
+        </div>
+    );
+}
 
-//         </div>
-//         <div className='topRight'></div>
-    
-//     </div>
-//   )
-// }
-
-// export default Topbar
+export default Topbar;
