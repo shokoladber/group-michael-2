@@ -2,7 +2,6 @@ package org.launchcode.caninecoach.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.launchcode.caninecoach.dtos.SignUpRequest;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.security.jwt.JwtUtils;
 import org.launchcode.caninecoach.services.UserService;
