@@ -3,7 +3,8 @@ package org.launchcode.caninecoach.handlers;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.launchcode.caninecoach.entities.User;
-import org.launchcode.caninecoach.entities.UserRole; // Ensure this is the correct import for UserRole
+import org.launchcode.caninecoach.entities.UserRole;
+import org.launchcode.caninecoach.security.jwt.JwtTokenProvider;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,12 +17,11 @@ import java.io.IOException;
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final UserService userService;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public OAuth2LoginSuccessHandler(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -30,17 +30,26 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         String email = oAuth2User.getAttribute("email");
 
         User user = userService.processOAuth2User(email, UserRole.TEMPORARY);
+        boolean isNewUser = userService.isNewUser(user);
 
-        String redirectUri = "http://localhost:3000/oauth2/redirect?token=" + token + "&isNewUser=" + isNewUser;
-        response.sendRedirect(redirectUri);
+        // Generate the JWT token
+        String token = jwtTokenProvider.generateToken(authentication);
 
+        // Adjusted to pass isNewUser as a second argument to determineTargetUrlBasedOnRole
+        String redirectUrl = determineTargetUrlBasedOnRole(user.getRole(), isNewUser) + "?token=" + token;
+
+        // Redirect the user
+        response.sendRedirect(redirectUrl);
     }
 
-    private String determineTargetUrlBasedOnRole(UserRole role) {
-        if (role == UserRole.TEMPORARY) {
+    private String determineTargetUrlBasedOnRole(UserRole role, boolean isNewUser) {
+        if (isNewUser && role == UserRole.TEMPORARY) {
             return "/select-role";
-        } else {
-            return "/home";
         }
+        return switch (role) {
+            case PET_GUARDIAN -> "/profile/pet-guardian";
+            case PET_TRAINER -> "/profile/pet-trainer";
+            default -> "/home";
+        };
     }
 }

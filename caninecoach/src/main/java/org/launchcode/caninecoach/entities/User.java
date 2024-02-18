@@ -2,7 +2,9 @@ package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
 
-@Entity @Table(name = "users") public class User {
+@Entity
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +32,14 @@ import jakarta.persistence.*;
     @Column(length = 20)
     private UserRole role;
 
+    // Constructors, getters, and setters
+
     public User() {
+        // Default constructor
     }
 
-    // Standard getters and setters
+    // Getters and setters for all the fields
+
     public Long getId() {
         return id;
     }
@@ -99,4 +105,3 @@ import jakarta.persistence.*;
     }
 
 }
-
