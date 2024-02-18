@@ -53,3 +53,4 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         };
     }
 }
+

@@ -20,17 +20,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // Find a user by their email
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    // Save or update a user in the database
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    // Mark a user's account as verified
     public void setVerifiedTrue(User user) {
         if (user != null) {
             user.setVerified(true);
@@ -38,32 +35,43 @@ public class UserService {
         }
     }
 
-    // Process a user after OAuth2 login/sign-up
     public User processOAuth2User(String email, UserRole defaultRole) {
-        // This could be a place to update existing user details if necessary
         return userRepository.findByEmail(email)
                 .orElseGet(() -> createNewUser(email, defaultRole));
     }
 
-    // Determine if the user is considered "new" based on whether their profile has been created
     public boolean isNewUser(User user) {
         return !user.isProfileCreated();
     }
 
-    // Complete a user's profile setup
     public void completeUserProfile(User user) {
         user.setProfileCreated(true);
         userRepository.save(user);
     }
 
-    // Helper method to create a new User entity
     private User createNewUser(String email, UserRole defaultRole) {
         User newUser = new User();
         newUser.setEmail(email);
         newUser.setRole(defaultRole);
         newUser.setUsingOAuth2(true);
-        newUser.setVerified(true); // Assuming OAuth2 users are automatically verified
-        // Here, profileCreated is false by default, indicating the user needs to complete their profile
+        newUser.setVerified(true);
         return saveUser(newUser);
+    }
+
+    // Convert a role string to UserRole enum
+    public UserRole convertStringToUserRole(String roleStr) {
+        try {
+            return UserRole.valueOf(roleStr.toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            log.error("Invalid role string: {}", roleStr, e);
+            throw new IllegalArgumentException("Invalid role provided: " + roleStr);
+        }
+    }
+
+    // Update a user's role
+    public void updateUserRole(User user, String roleStr) {
+        UserRole role = convertStringToUserRole(roleStr);
+        user.setRole(role);
+        userRepository.save(user);
     }
 }

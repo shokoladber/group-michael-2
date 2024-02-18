@@ -32,3 +32,5 @@ const OAuth2RedirectHandler = () => {
     // Render a loading indicator until redirect is complete
     return <div>Loading...</div>;
 };
+
+export default OAuth2RedirectHandler;
