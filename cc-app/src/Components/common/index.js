@@ -7,7 +7,7 @@ export { default as FileUpload} from './fileUpload/FileUpload';
 export { default as ContactUs} from './contact2/ContactUs';
 export { default as Button} from './button/Button';
 export { default as Dropdown} from './dropdown/Dropdown';
-export { default as BuyClasses} from './buy/BuyClasses';
+export { default as BuyCourses} from './buy/BuyCourses';
 export { default as Search} from './search/Search';
 export { default as Footer} from './footer/Footer';
 

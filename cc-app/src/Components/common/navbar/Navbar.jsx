@@ -27,7 +27,7 @@ function Navbar() {
           </li>
 
           <li className='nav__item'>
-            <Link to="/classes" className='nav__links' onClick={() => setDropdownOpen(false)}>Classes <i className='fas fa-caret-down' /></Link>
+            <Link to="/courses" className='nav__links' onClick={() => setDropdownOpen(false)}>Courses <i className='fas fa-caret-down' /></Link>
             <Dropdown />
           </li>
 

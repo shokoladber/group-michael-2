@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './BuyClasses.css'
+import './BuyCourses.css'
 
 
 function Purchase() {
-  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handlePurchase = () => {
@@ -20,18 +20,18 @@ function Purchase() {
       {paymentSuccess ? (
         <div className="purchase-success">
           <h2>Payment Successful!</h2>
-          <p>Thank you for purchasing {selectedClass} class.</p>
+          <p>Thank you for purchasing {selectedCourse} course.</p>
         </div>
       ) : (
         <div className="purchase-form">
-          <h2>Purchase Classes for Dog Training</h2>
-          <label>Select Class:</label>
+          <h2>Purchase Courses for Dog Training</h2>
+          <label>Select Course:</label>
           <select
             className="class-select"
-            value={selectedClass}
-            onChange={(e) => setSelectedClass(e.target.value)}
+            value={selectedCourse}
+            onChange={(e) => setSelectedCourse(e.target.value)}
           >
-            <option value="">Select a class...</option>
+            <option value="">Select a course...</option>
             <option value="Beginner Obedience">Beginner Obedience</option>
             <option value="Advanced Agility">Advanced Agility</option>
             <option value="Puppy Socialization">Puppy Socialization</option>
