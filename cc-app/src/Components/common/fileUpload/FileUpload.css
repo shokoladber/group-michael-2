@@ -1,4 +1,4 @@
-.profile{
+/* .profile{
     display: flex;
     flex-direction: row ;
     justify-content:center;
@@ -6,7 +6,7 @@
 
     color: rgb(201, 87, 6);
     
-}
+} */
 
 /* .button1{
     padding: 20px, 40px,20px,40px;
@@ -22,3 +22,48 @@
   .button1:hover{
     background-color: rgb(193, 33, 155);
   } */
+  .dog-upload {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .dog-upload h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .dog-upload form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dog-upload label {
+    margin-bottom: 5px;
+  }
+  
+  .dog-upload input[type="text"],
+  .dog-upload input[type="file"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .dog-upload button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .dog-upload button:hover {
+    background-color: #0056b3;
+  }
+  

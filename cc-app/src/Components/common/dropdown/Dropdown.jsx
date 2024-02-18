@@ -1,9 +1,6 @@
-// Dropdown.js
-
 import React from 'react';
 import {Link} from 'react-router-dom';
-
-import './Dropdown.css'; // Import CSS file for styling
+import './Dropdown.css'; 
 
 function Dropdown() {
   return (

@@ -1,6 +1,5 @@
 import React from 'react'
 import './Home.css';
-import vid1 from '../../Components/Assets/vid1.mp4';
 import { Link } from 'react-router-dom';
 import { Header } from '../../Components/common';
 

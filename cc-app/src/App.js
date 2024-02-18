@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home, Blog, Classes, Login, NoPage} from './pages';
 import { Header, Navbar, LoginSignup, BlogPost, PetProfilePage, Button, Footer, FileUpload, ContactUs } from './Components/common';
-import { Dropdown } from 'react-bootstrap';
 import Contact from './Components/common/contact2/ContactUs';
 import BuyClasses from './Components/common/buy/BuyClasses'
 
@@ -12,11 +11,6 @@ function App() {
     <Router>
       <>
         <Navbar />
-               
-        {/* <FileUpload /> */}
-        {/* <Header /> */}
-        {/* <Dropdown /> */}
-        {/* <PetProfilePage /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

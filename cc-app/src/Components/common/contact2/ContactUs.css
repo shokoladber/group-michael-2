@@ -1,13 +1,10 @@
-/* Contact.css */
 /* body {
-    background-color: rgb(140, 81, 195);
-    color: aliceblue;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 60px;
-} */
+    padding-top: 160px;
+} 
 
 .contact_form .form-control {
-    padding: 1.375rem .75rem;
+    padding: 2.375rem .75rem;
     line-height: 1.5;
     color: #ffff;
     background-color: black;
@@ -21,10 +18,10 @@
 }
 
 .btn {
-    color: rgb(180, 10, 10);
+    color: rgb(27, 25, 25);
     border: 2px solid rgb(135, 4, 4);
 }
 
 .btn:hover {
-    color: white;
-}
+    color: rgb(226, 108, 25);
+} */

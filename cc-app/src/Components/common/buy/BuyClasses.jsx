@@ -7,9 +7,9 @@ function Purchase() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handlePurchase = () => {
-    // Logic to process payment and mark purchase as successful
-    // This can be an API call or any other method to handle payment processing
-    // For demonstration purposes, let's simulate a successful payment after 2 seconds
+    // Put some logic to process payment and mark purchase as successful
+    // It can be an API call or any other method to handle payment processing
+    // For demo purp- simulate a successful payment after 2 seconds
     setTimeout(() => {
       setPaymentSuccess(true);
     }, 2000);

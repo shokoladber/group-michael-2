@@ -1,4 +1,3 @@
-import { RiLockPasswordFill, GiSittingDog , RiMenu3Line, RiCloseLine} from "react-icons/ri";
 import { LiaAccusoft } from "react-icons/lia";
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ function Navbar() {
 
   return (
     <nav className='navbar'>
-      
+
       <div className='navbar-container'>
         <Link to='/' className='navbar__logo'> <LiaAccusoft />  Canine Coach</Link>
         <div className='menu__icon' onClick={toggleDropdown}>
@@ -22,25 +21,32 @@ function Navbar() {
         </div>
 
         <ul className={dropdownOpen ? 'nav__menu active' : 'nav__menu'}>
+
           <li className='nav__item'>
             <Link to="/" className='nav__links' onClick={() => setDropdownOpen(false)}>Home</Link>
           </li>
+
           <li className='nav__item'>
             <Link to="/classes" className='nav__links' onClick={() => setDropdownOpen(false)}>Classes <i className='fas fa-caret-down' /></Link>
-            {dropdownOpen && <Dropdown />} {/* Render the dropdown if dropdownOpen is true */}
+            <Dropdown />
           </li>
+
           <li className='nav__item'>
             <Link to="/blog" className='nav__links' onClick={() => setDropdownOpen(false)}>Blog</Link>
           </li>
+
           <li className='nav__item'>
             <Link to="/contact" className='nav__links' onClick={() => setDropdownOpen(false)}>Contact</Link>
           </li>
+
           <li className='nav__item'>
             <Link to="/purchase" className='nav__links' onClick={() => setDropdownOpen(false)}>Purchase</Link>
           </li>
+
           <li className='nav__item'>
             <Link to="/login" className='nav__links' onClick={() => setDropdownOpen(false)}>Login</Link>
           </li>
+
         </ul>
       </div>
     </nav>
@@ -50,8 +56,14 @@ function Navbar() {
 export default Navbar;
 
 
-
-
+  // <div className="dropdown">
+  //   <button className="dropbtn">Dropdown</button>
+  //      <div className="dropdown-content">
+  //           <Link to="/blog/post1">Post 1</Link>
+  //           <Link to="/blog/post2">Post 2</Link>
+  //               {/* Add more links as needed */}
+  //     </div>
+  // </div>
 
 
 
