@@ -1097,7 +1097,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="292" parent="1" name="caninecoach">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-02-18.14:23:43</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-02-18.18:14:15</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="293" parent="1" name="caninecoach">
@@ -1474,7 +1474,7 @@ type_id</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="376" parent="309" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>3</AutoIncrement>
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
