@@ -10,9 +10,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("blog")
+@RestController
+@RequestMapping("/api/blog")
 public class BlogController {
 
     @Autowired
@@ -29,19 +30,25 @@ public class BlogController {
     return "blog";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/formdata")
     public String displayCreateBlogForm(){
-        //template here?
-        return "blog/create";
+        return "/formdata";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/post")
     public String createBlog (@Valid Blog newBlog, Errors errors) {
         if (errors.hasErrors()){
-            return "blog/create";
+            return "/post";
         }
         blogRepository.save(newBlog);
         return "redirect:";
     }
+
+    @GetMapping("/api/blog/editing")
+    public String deleteBlog(Blog blog) {
+        return "/editing";
+    }
+
+
 
 }
