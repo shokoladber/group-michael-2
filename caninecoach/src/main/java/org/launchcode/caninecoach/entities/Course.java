@@ -35,6 +35,7 @@ public class Course extends AbstractEntity {
 
     }
 
+
     public ArrayList<Type> getType() {
         return type;
     }

@@ -1,5 +1,6 @@
 package org.launchcode.caninecoach.repositories;
 
+
 import jakarta.persistence.Id;
 import org.launchcode.caninecoach.entities.Course;
 import org.springframework.data.repository.CrudRepository;
