@@ -26,8 +26,7 @@ public class BlogController {
 
     @RequestMapping("/")
     public String displayBlog (){
-        //template here?
-    return "blog";
+    return "/";
     }
 
     @GetMapping("/formdata")
