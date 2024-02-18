@@ -5,7 +5,7 @@ import './LoginSignup.css';
 
 const UserLogin = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
-    const [error, setError] = useState(''); // Added error state
+    const [error, setError] = useState(null); // Initialize error state as null
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
@@ -18,19 +18,18 @@ const UserLogin = () => {
         try {
             const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`;
             const response = await axios.post(apiUrl, credentials);
-            localStorage.setItem('authToken', response.data.token)
+            localStorage.setItem('authToken', response.data.token);
             navigate('/home');
         } catch (error) {
-            console.error("Login error:", error.response ? error.response.data : error.message);
-            setError(error.response ? error.response.data : 'An error occurred during login.');
+            // Assuming error response from your backend is in the format { message: string }
+            // Adjust this based on the actual error format you expect from your backend
+            setError(error.response.data.message || 'An unknown error occurred');
         }
     };
-
 
     const handleGoogleLogin = () => {
         window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`;
     };
-
 
     return (
         <div className="container">

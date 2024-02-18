@@ -1,6 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
 import org.launchcode.caninecoach.entities.User;
+import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.entities.VerificationToken;
 import org.launchcode.caninecoach.security.jwt.JwtUtils;
 import org.launchcode.caninecoach.services.EmailService;
@@ -9,7 +10,6 @@ import org.launchcode.caninecoach.services.VerificationTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,11 +18,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.util.Optional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,14 +38,13 @@ public class AuthController {
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final VerificationTokenService verificationTokenService;
+
     private final EmailService emailService;
 
-    @Value("${app.baseUrl}")
-    private String baseUrl;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public AuthController(UserService userService, PasswordEncoder passwordEncoder,
@@ -52,6 +57,37 @@ public class AuthController {
         this.verificationTokenService = verificationTokenService;
         this.emailService = emailService;
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody Map<String, Object> registrationData) {
+        String name = (String) registrationData.get("name");
+        String email = (String) registrationData.get("email");
+        String password = (String) registrationData.get("password");
+
+        if (email == null || password == null || userService.findUserByEmail(email).isPresent()) {
+            return ResponseEntity.badRequest().body("Invalid email or password, or email already in use.");
+        }
+
+        User newUser = new User();
+        newUser.setName(name);
+        newUser.setEmail(email);
+        newUser.setPassword(passwordEncoder.encode(password));
+        newUser.setRole(UserRole.TEMPORARY);
+        newUser = userService.saveUser(newUser);
+
+        String token = verificationTokenService.createTokenForUser(newUser);
+
+        // Send verification email (customize this URL to match your front-end route)
+        String verificationUrl = "http://localhost:3000/verify-account?token=" + token;
+        try {
+            emailService.sendTemplateVerificationEmail(newUser.getEmail(), "Verify Your Canine Coach Account", verificationUrl);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Failed to send verification email.");
+        }
+
+        return ResponseEntity.ok("User registered successfully. Please check your email to verify your account.");
+    }
+
 
 
     @PostMapping("/login")
@@ -77,30 +113,21 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestParam String email, @RequestParam String password) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        List<String> roles = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        // Returned to the response entity
-        return ResponseEntity.ok(String.format("JWT Token: %s, Email: %s, Roles: %s", jwt, email, String.join(", ", roles)));
-    }
-
     @GetMapping("/verify-account")
-    public ResponseEntity<String> verifyAccount(@RequestParam("token") String token) {
+    public void verifyAccount(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
         Optional<VerificationToken> verificationTokenOpt = verificationTokenService.validateVerificationToken(token);
         if (verificationTokenOpt.isPresent()) {
             VerificationToken verificationToken = verificationTokenOpt.get();
             User user = verificationToken.getUser();
             userService.setVerifiedTrue(user);
-            return ResponseEntity.ok("Account verified successfully.");
+
+            // Redirect to the frontend role selection page
+            response.sendRedirect("http://localhost:3000/select-role");
         } else {
-            return ResponseEntity.badRequest().body("Invalid or expired verification token.");
+            // Redirect to an error page
+            response.sendError(HttpStatus.BAD_REQUEST.value(), "Invalid or expired verification token.");
         }
     }
+
 }
+
