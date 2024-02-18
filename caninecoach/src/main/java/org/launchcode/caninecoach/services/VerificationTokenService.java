@@ -24,19 +24,19 @@ public class VerificationTokenService {
         this.verificationTokenRepository = verificationTokenRepository;
     }
 
-    // Revised to generate the token inside the method
+    // Generates verification token for the user
     public String createTokenForUser(User user) {
-        String token = UUID.randomUUID().toString(); // Generate the token
+        String token = UUID.randomUUID().toString(); // Generates token?
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setUser(user);
         verificationToken.setToken(token);
-        verificationToken.setExpiryDateFromNow(); // Sets the expiry date to 24 hours from now
+        verificationToken.setExpiryDateFromNow();
         verificationTokenRepository.save(verificationToken);
-        return token; // Return the generated token
+        return token;
     }
 
 
-    // Method to validate the verification token
+    // Validates the verification token
     public Optional<VerificationToken> validateVerificationToken(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         return verificationToken.filter(vToken -> vToken.getExpiryDate().after(new Date()));

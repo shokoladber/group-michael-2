@@ -19,7 +19,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -52,25 +54,27 @@ public class AuthController {
     }
 
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody User newUser) {
-        if (userService.findUserByEmail(newUser.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest().body("Email is already in use.");
-        }
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        User savedUser = userService.saveUser(newUser);
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
 
-        String token = verificationTokenService.createTokenForUser(savedUser);
-        String verificationUrl = baseUrl + "/verify-account?token=" + token;
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
-        try {
-            emailService.sendTemplateVerificationEmail(savedUser.getEmail(), "Verify Your Email", verificationUrl);
-        } catch (Exception e) {
-            log.error("Error sending verification email", e);
-            // Consider whether you want to inform the user of the email failure
-        }
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
 
-        return ResponseEntity.ok("User registered successfully! Please check your email to verify your account.");
+        // Create a JSON response object
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", jwt);
+        response.put("email", email);
+        response.put("roles", roles);
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
@@ -83,7 +87,7 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        // Use 'email' directly
+        // Returned to the response entity
         return ResponseEntity.ok(String.format("JWT Token: %s, Email: %s, Roles: %s", jwt, email, String.join(", ", roles)));
     }
 

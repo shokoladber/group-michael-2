@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class User {
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private VerificationToken verificationToken;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,6 +35,7 @@ public class User {
 
 
     public User() {
+
     }
 
 

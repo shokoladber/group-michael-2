@@ -1,4 +1,3 @@
-// Assuming you're using React Router
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,8 +6,6 @@ const OAuth2RedirectHandler = () => {
 
     useEffect(() => {
         // Extract the token from the URL fragment or query parameters
-        // Authentication logic here: set up session, redirect, etc.
-
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('token');
         const isNewUser = urlParams.get('isNewUser') === 'true';
@@ -19,12 +16,15 @@ const OAuth2RedirectHandler = () => {
 
             // Redirect based on whether the user is new or returning
             if (isNewUser) {
-                navigate('/role-selection');
+                // Update to match your React route for role selection
+                navigate('/select-role');
             } else {
+                // Update to match your React route for home
                 navigate('/home');
             }
         } else {
             // Handle error or missing token
+            // Update to match your React route for login
             navigate('/login');
         }
     }, [navigate]);

@@ -1,11 +1,22 @@
 package org.launchcode.caninecoach.security.jwt;
 
-import com.fasterxml.jackson.databind.ObjectMapper; import org.springframework.security.core.AuthenticationException; import org.springframework.security.web.AuthenticationEntryPoint; import org.springframework.stereotype.Component;
-
-import jakarta.servlet.http.HttpServletRequest; import jakarta.servlet.http.HttpServletResponse; import java.io.IOException; import java.io.Serial; import java.io.Serializable; import java.util.HashMap; import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
     @Serial
     private static final long serialVersionUID = -7858869558953243875L;
 
@@ -23,7 +34,7 @@ import jakarta.servlet.http.HttpServletRequest; import jakarta.servlet.http.Http
         data.put("message", "Access Denied");
         data.put("path", request.getRequestURI());
 
-        // Write the response as a JSON string
+        // Response as a JSON string
         ObjectMapper mapper = new ObjectMapper();
         response.getOutputStream().println(mapper.writeValueAsString(data));
     }

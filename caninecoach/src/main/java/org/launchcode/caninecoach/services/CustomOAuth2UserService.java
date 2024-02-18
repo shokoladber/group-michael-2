@@ -48,12 +48,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private void addRoleSpecificAuthorities(UserRole role, Set<GrantedAuthority> authorities) {
-        // PET_GUARDIAN authorities: view courses and announcements
+        // PET_GUARDIAN authorities
         if (role == UserRole.PET_GUARDIAN) {
             authorities.add(new SimpleGrantedAuthority("ACCESS_VIEW_COURSES"));
             authorities.add(new SimpleGrantedAuthority("ACCESS_ENROLL_COURSES"));
         }
-        // PET_TRAINER authorities: managing courses and announcements
+        // PET_TRAINER authorities
         if (role == UserRole.PET_TRAINER) {
             authorities.addAll(Set.of(
                     new SimpleGrantedAuthority("ACCESS_VIEW_COURSES"),

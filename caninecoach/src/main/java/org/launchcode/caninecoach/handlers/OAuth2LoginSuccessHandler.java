@@ -18,7 +18,7 @@ import java.io.IOException;
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Autowired
-    private JwtUtils jwtUtils; // Use JwtUtils here instead of JwtTokenProvider
+    private JwtUtils jwtUtils;
 
     @Autowired
     private UserService userService;
@@ -32,13 +32,15 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         User user = userService.processOAuth2User(email, UserRole.TEMPORARY);
         boolean isNewUser = userService.isNewUser(user);
 
-        // Generate the JWT token using JwtUtils
+
         String token = jwtUtils.generateJwtToken(authentication);
 
-        // Adjusted to pass isNewUser as a second argument to determineTargetUrlBasedOnRole
-        String redirectUrl = determineTargetUrlBasedOnRole(user.getRole(), isNewUser) + "?token=" + token;
+        // Determines the redirect URL for user's role
+        String redirectUrl = determineTargetUrlBasedOnRole(user.getRole(), isNewUser) +
+                "?token=" + token +
+                "&isNewUser=" + isNewUser;
 
-        // Redirect the user
+        // Redirect user
         response.sendRedirect(redirectUrl);
     }
 

@@ -25,13 +25,13 @@ public class JwtUtils {
     }
 
     public String generateJwtToken(Authentication authentication) {
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal(); // Assuming authentication.getPrincipal() correctly returns UserPrincipal
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
 
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername())) // Use username here, which is email in your case
+                .setSubject((userPrincipal.getUsername())) // Username is email
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(getSigningKey(), SignatureAlgorithm.HS512)

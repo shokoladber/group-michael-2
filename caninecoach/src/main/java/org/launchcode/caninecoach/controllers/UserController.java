@@ -8,6 +8,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Endpoint to check if the user is new and needs to complete their profile
+    // Endpoint to check if a user is new
     @GetMapping("/check-new-user")
     public ResponseEntity<?> checkNewUser(@AuthenticationPrincipal OAuth2User principal) {
         if (principal != null) {
@@ -33,10 +35,11 @@ public class UserController {
     }
 
     // Endpoint to update the role of a new user
-    @PostMapping("/select-role")
-    public ResponseEntity<?> selectRole(@AuthenticationPrincipal OAuth2User principal, @RequestParam String role) {
+    @PostMapping("/update-role")
+    public ResponseEntity<?> updateRole(@AuthenticationPrincipal OAuth2User principal, @RequestBody Map<String, String> request) {
         String email = principal.getAttribute("email");
         User user = userService.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        String role = request.get("role");
         userService.updateUserRole(user, role);
         return ResponseEntity.ok("Role updated successfully.");
     }

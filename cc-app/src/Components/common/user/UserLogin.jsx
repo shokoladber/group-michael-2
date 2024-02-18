@@ -1,11 +1,11 @@
-// UserLogin.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import './LoginSignup.css'; // Corrected path (assuming it is in the same directory)
+import './LoginSignup.css';
 
 const UserLogin = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [error, setError] = useState(''); // Added error state
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
@@ -17,16 +17,16 @@ const UserLogin = () => {
         event.preventDefault();
         try {
             const response = await axios.post('/api/auth/login', credentials);
-            localStorage.setItem('authToken', response.data.token); // Assuming JWT token is returned
+            localStorage.setItem('authToken', response.data.token);
             navigate('/home');
         } catch (error) {
             console.error("Login error:", error.response.data);
-            // Handle login error here
+            setError(error.response.data || 'An error occurred during login.');
         }
     };
 
     const handleGoogleLogin = () => {
-        window.location.href = '/oauth2/authorization/google'; // Your Spring Boot redirect URI for Google OAuth
+        window.location.href = '/oauth2/authorization/google';
     };
 
     return (
@@ -35,6 +35,7 @@ const UserLogin = () => {
                 <div className="text">Login</div>
                 <div className="underline"></div>
             </div>
+            {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleFormSubmit}>
                 <div className="inputs">
                     <div className="input">

@@ -22,6 +22,8 @@ function App() {
             <Route path="/login" element={<UserLogin />} />
             <Route path="/signup" element={<UserSignup />} />
             <Route path="/select-role" element={<UserRoleSelection />} />
+            <Route path="/profile/pet-guardian" element={<PetGuardianProfile />} />
+            <Route path="/profile/pet-trainer" element={<PetTrainerProfile />} />
             <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
