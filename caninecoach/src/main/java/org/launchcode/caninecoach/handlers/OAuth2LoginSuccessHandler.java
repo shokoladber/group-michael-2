@@ -31,8 +31,9 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
         User user = userService.processOAuth2User(email, UserRole.TEMPORARY);
 
-        String targetUrl = determineTargetUrlBasedOnRole(user.getRole());
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+        String redirectUri = "http://localhost:3000/oauth2/redirect?token=" + token + "&isNewUser=" + isNewUser;
+        response.sendRedirect(redirectUri);
+
     }
 
     private String determineTargetUrlBasedOnRole(UserRole role) {

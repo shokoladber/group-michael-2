@@ -1,12 +1,9 @@
 package org.launchcode.caninecoach.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.security.jwt.JwtUtils;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +14,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,32 +76,4 @@ public class AuthController {
     }
 
 
-    @GetMapping("/oauth2/redirect")
-    public ResponseEntity<Void> oauth2Redirect(HttpServletRequest request, HttpServletResponse response) {
-        // Assume we have a method `getCurrentUser` which retrieves the current authenticated User
-        User currentUser = getCurrentUser(request);
-
-        // Redirect new users to the user role selection page
-        if (!currentUser.isProfileCreated()) {
-            String roleSelectionUrl = "/role-selection";
-            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(roleSelectionUrl)).build();
-        } else {
-            // Redirect returning users to the home page
-            String homeUrl = "/";
-            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(homeUrl)).build();
-        }
-    }
-
-    @GetMapping("/oauth2/callback")
-    public ResponseEntity<Void> oauth2Callback(HttpServletRequest request, HttpServletResponse response) {
-        // Handle the OAuth2 provider's response and perform authentication
-        // Assume we have a method `processOAuth2Callback` which handles the OAuth2 provider's callback
-        processOAuth2Callback(request);
-
-        // Redirect to the OAuth2 redirect endpoint which will handle further redirection logic
-        String redirectUrl = "/oauth2/redirect";
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(redirectUrl)).build();
-    }
-
-    // Helper methods (stubs for illustration purposes)
 }
