@@ -7,6 +7,9 @@ import { UserLogin, UserSignup, UserRoleSelection, OAuth2RedirectHandler } from 
 import Contact from './Components/common/contact2/ContactUs';
 import BuyClasses from './Components/common/buy/BuyClasses';
 import { Dropdown } from 'react-bootstrap';
+//import PetGuardianProfile from './Components/common/profile/pet-guardian/PetGuardianProfile';
+//import PetTrainerProfile from './Components/common/profile/pet-trainer/PetTrainerProfile';
+
 
 function App() {
   return (
@@ -22,8 +25,6 @@ function App() {
             <Route path="/login" element={<UserLogin />} />
             <Route path="/signup" element={<UserSignup />} />
             <Route path="/select-role" element={<UserRoleSelection />} />
-            <Route path="/profile/pet-guardian" element={<PetGuardianProfile />} />
-            <Route path="/profile/pet-trainer" element={<PetTrainerProfile />} />
             <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
             <Route path="*" element={<NoPage />} />
           </Routes>

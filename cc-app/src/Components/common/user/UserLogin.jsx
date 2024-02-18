@@ -16,18 +16,21 @@ const UserLogin = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/api/auth/login', credentials);
-            localStorage.setItem('authToken', response.data.token);
+            const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`;
+            const response = await axios.post(apiUrl, credentials);
+            localStorage.setItem('authToken', response.data.token)
             navigate('/home');
         } catch (error) {
-            console.error("Login error:", error.response.data);
-            setError(error.response.data || 'An error occurred during login.');
+            console.error("Login error:", error.response ? error.response.data : error.message);
+            setError(error.response ? error.response.data : 'An error occurred during login.');
         }
     };
 
+
     const handleGoogleLogin = () => {
-        window.location.href = '/oauth2/authorization/google';
+        window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`;
     };
+
 
     return (
         <div className="container">

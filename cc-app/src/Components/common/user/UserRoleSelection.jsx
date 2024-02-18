@@ -14,17 +14,17 @@ const UserRoleSelection = () => {
                     Authorization: `Bearer ${localStorage.getItem('authToken')}`
                 }
             };
+            const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/user/update-role`;
 
-            await axios.post('/api/update-role', { role }, config);
+            await axios.post(apiUrl, { role }, config);
             if (role === 'PET_GUARDIAN') {
                 navigate('/profile/pet-guardian');
             } else if (role === 'PET_TRAINER') {
                 navigate('/profile/pet-trainer');
             }
         } catch (error) {
-            console.error("Role selection error:", error.response.data);
-            setError(error.response.data || 'An error occurred during role selection.');
-            navigate('/home');
+            console.error("Role selection error:", error.response ? error.response.data : "An error occurred during role selection.");
+            setError(error.response ? error.response.data : "An error occurred during role selection.");
         }
     };
 

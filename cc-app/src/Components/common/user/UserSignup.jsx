@@ -20,17 +20,17 @@ const UserSignup = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('/api/auth/signup', userDetails);
-            navigate('/login'); // Redirect to login after successful signup
+            const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`;
+            await axios.post(apiUrl, userDetails);
+            navigate('/select-role');
         } catch (error) {
-            console.error("Signup error:", error.response.data);
-            // Handle signup error here
+            console.error("Signup error:", error.response ? error.response.data : error.message);
         }
     };
 
+
     const handleGoogleSignUp = () => {
-        window.location.href = '/oauth2/authorization/google'; // Your Spring Boot redirect URI for Google OAuth
-    };
+        window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`;    };
 
     return (
         <div className="container">
