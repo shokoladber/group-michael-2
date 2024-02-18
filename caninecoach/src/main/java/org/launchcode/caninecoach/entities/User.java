@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class User {
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private VerificationToken verificationToken;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,13 +35,11 @@ public class User {
     @Column(length = 20)
     private UserRole role;
 
-    // Constructors, getters, and setters
+
 
     public User() {
-        // Default constructor
     }
 
-    // Getters and setters for all the fields
 
     public Long getId() {
         return id;

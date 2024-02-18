@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class VerificationTokenService {
@@ -24,28 +24,23 @@ public class VerificationTokenService {
         this.verificationTokenRepository = verificationTokenRepository;
     }
 
-    public VerificationToken createTokenForUser(User user, String token) {
+    // Revised to generate the token inside the method
+    public String createTokenForUser(User user) {
+        String token = UUID.randomUUID().toString(); // Generate the token
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setUser(user);
         verificationToken.setToken(token);
-        verificationToken.setExpiryDate(calculateExpiryDate(24)); // 24 hours
-        return verificationTokenRepository.save(verificationToken);
+        verificationToken.setExpiryDateFromNow(); // Sets the expiry date to 24 hours from now
+        verificationTokenRepository.save(verificationToken);
+        return token; // Return the generated token
     }
 
-    private Date calculateExpiryDate(int expiryTimeInHours) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.HOUR, expiryTimeInHours);
-        return new Date(cal.getTimeInMillis());
-    }
 
+    // Method to validate the verification token
     public Optional<VerificationToken> validateVerificationToken(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         return verificationToken.filter(vToken -> vToken.getExpiryDate().after(new Date()));
     }
 
-    public void setVerifiedTrue(User user) {
-        user.setVerified(true);
-        //userRepository.save(user);
-    }
+
 }

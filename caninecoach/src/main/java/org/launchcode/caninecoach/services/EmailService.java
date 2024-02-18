@@ -29,15 +29,6 @@ public class EmailService {
         this.freemarkerConfigurer = freemarkerConfigurer;
     }
 
-    public void sendSimpleVerificationEmail(String to, String subject, String content) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("caninecochapp@gmail.com");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(content);
-        mailSender.send(message);
-    }
-
     public void sendTemplateVerificationEmail(String to, String subject, String verificationLink) throws IOException, TemplateException {
         Template template = freemarkerConfigurer.getConfiguration().getTemplate("verificationEmailTemplate.ftl");
 

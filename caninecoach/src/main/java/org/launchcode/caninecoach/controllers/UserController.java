@@ -3,62 +3,50 @@ package org.launchcode.caninecoach.controllers;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // Display the registration or profile completion page for new users
-    @GetMapping("/new-user")
-    public String newUser(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    // Endpoint to check if the user is new and needs to complete their profile
+    @GetMapping("/check-new-user")
+    public ResponseEntity<?> checkNewUser(@AuthenticationPrincipal OAuth2User principal) {
         if (principal != null) {
             String email = principal.getAttribute("email");
             User user = userService.findUserByEmail(email).orElse(null);
-            if (user != null) {
-                model.addAttribute("user", user);
-                // Check if the user is new and needs to select a role or complete their profile
-                if (userService.isNewUser(user)) {
-                    return "user/new-user"; // Return the view for new user onboarding
-                }
+            if (user != null && userService.isNewUser(user)) {
+                return ResponseEntity.ok(user);
             }
         }
-        return "redirect:/home"; // Redirect to the home page if the user is not new or not logged in
+        return ResponseEntity.ok("User is not new or not logged in.");
     }
 
-    // Handle role selection for new users
+    // Endpoint to update the role of a new user
     @PostMapping("/select-role")
-    public String selectRole(User user, String role) {
-        userService.updateUserRole(user, role); // Implement this method in UserService to update the user's role
-        return "redirect:/profile-completion"; // Redirect to the profile completion page
-    }
-
-    // Display profile completion page
-    @GetMapping("/profile-completion")
-    public String profileCompletion(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    public ResponseEntity<?> selectRole(@AuthenticationPrincipal OAuth2User principal, @RequestParam String role) {
         String email = principal.getAttribute("email");
-        User user = userService.findUserByEmail(email).orElse(null);
-        if (user != null) {
-            model.addAttribute("user", user);
-            return "user/profile-completion"; // Return the view for completing the profile
-        }
-        return "redirect:/home"; // Redirect to the home page if the user is not found
+        User user = userService.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        userService.updateUserRole(user, role);
+        return ResponseEntity.ok("Role updated successfully.");
     }
 
-    // Handle profile completion form submission
+    // Endpoint to mark profile completion
     @PostMapping("/complete-profile")
-    public String completeProfile(User user) {
-        userService.completeUserProfile(user); // Implement this method in UserService to mark the profile as completed
-        return "redirect:/home"; // Redirect to the home page after profile completion
+    public ResponseEntity<?> completeProfile(@AuthenticationPrincipal OAuth2User principal) {
+        String email = principal.getAttribute("email");
+        User user = userService.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        userService.completeUserProfile(user);
+        return ResponseEntity.ok("Profile completed successfully.");
     }
 }

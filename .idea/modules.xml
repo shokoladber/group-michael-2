@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/caninecoach.iml" filepath="$PROJECT_DIR$/.idea/modules/caninecoach.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/caninecoach.main.iml" filepath="$PROJECT_DIR$/.idea/modules/caninecoach.main.iml" />
     </modules>
   </component>

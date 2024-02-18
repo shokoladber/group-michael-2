@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
-import org.launchcode.caninecoach.security.jwt.JwtTokenProvider;
+import org.launchcode.caninecoach.security.jwt.JwtUtils;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtUtils jwtUtils; // Use JwtUtils here instead of JwtTokenProvider
 
     @Autowired
     private UserService userService;
@@ -32,8 +32,8 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         User user = userService.processOAuth2User(email, UserRole.TEMPORARY);
         boolean isNewUser = userService.isNewUser(user);
 
-        // Generate the JWT token
-        String token = jwtTokenProvider.generateToken(authentication);
+        // Generate the JWT token using JwtUtils
+        String token = jwtUtils.generateJwtToken(authentication);
 
         // Adjusted to pass isNewUser as a second argument to determineTargetUrlBasedOnRole
         String redirectUrl = determineTargetUrlBasedOnRole(user.getRole(), isNewUser) + "?token=" + token;
@@ -53,4 +53,3 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         };
     }
 }
-
