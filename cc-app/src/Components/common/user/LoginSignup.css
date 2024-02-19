@@ -96,8 +96,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 10px; /* Reduced gap between buttons */
-    margin: 30px auto; /* Reduced margin above buttons */
+    gap: 10px;
+    margin: 30px auto;
 }
 
 .submit, .gray {
