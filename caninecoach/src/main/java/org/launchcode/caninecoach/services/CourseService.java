@@ -21,12 +21,15 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public Optional<Course> findCourseById(Id id){
+    public Optional<Course> findCourseById(int id){
         return courseRepository.findById(id);
     }
 
     public Course saveCourse (Course course){
         return courseRepository.save(course);
+    }
+    public List<Course> search(String query) {
+        return courseRepository.findByKeywordContaining(query);
     }
 
     }
