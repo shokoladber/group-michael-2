@@ -5,7 +5,7 @@ import './LoginSignup.css';
 
 const UserLogin = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
-    const [error, setError] = useState(null); // Initialize error state as null
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
@@ -15,15 +15,14 @@ const UserLogin = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        setError(null);
         try {
             const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`;
             const response = await axios.post(apiUrl, credentials);
             localStorage.setItem('authToken', response.data.token);
             navigate('/home');
         } catch (error) {
-            // Assuming error response from your backend is in the format { message: string }
-            // Adjust this based on the actual error format you expect from your backend
-            setError(error.response.data.message || 'An unknown error occurred');
+            setError(error.response?.data || 'Login failed');
         }
     };
 
@@ -41,10 +40,22 @@ const UserLogin = () => {
             <form onSubmit={handleFormSubmit}>
                 <div className="inputs">
                     <div className="input">
-                        <input type="email" name="email" placeholder="Email Address" onChange={handleInputChange} />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            onChange={handleInputChange}
+                            value={credentials.email}
+                        />
                     </div>
                     <div className="input">
-                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            onChange={handleInputChange}
+                            value={credentials.password}
+                        />
                     </div>
                 </div>
                 <div className="submit-container">

@@ -1,20 +1,22 @@
-// UserSignup.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import './LoginSignup.css'; // Corrected path (assuming it is in the same directory)
+import './LoginSignup.css';
 
 const UserSignup = () => {
     const [userDetails, setUserDetails] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     });
+    const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUserDetails({ ...userDetails, [name]: value });
+        setErrorMessage(null);
     };
 
     const handleFormSubmit = async (event) => {
@@ -24,13 +26,15 @@ const UserSignup = () => {
             await axios.post(apiUrl, userDetails);
             navigate('/select-role');
         } catch (error) {
-            console.error("Signup error:", error.response ? error.response.data : error.message);
+            // Set the error message from the response body
+            setErrorMessage(error.response ? error.response.data : error.message);
+            console.error("Signup error:", errorMessage);
         }
     };
 
-
     const handleGoogleSignUp = () => {
-        window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`;    };
+        window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/google`;
+    };
 
     return (
         <div className="container">
@@ -38,16 +42,21 @@ const UserSignup = () => {
                 <div className="text">Sign Up</div>
                 <div className="underline"></div>
             </div>
+            {/* Display error message if it exists */}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
             <form onSubmit={handleFormSubmit}>
                 <div className="inputs">
                     <div className="input">
-                        <input type="text" name="name" placeholder="Full Name" onChange={handleInputChange} />
+                        <input type="text" name="name" placeholder="Full Name" onChange={handleInputChange} value={userDetails.name} />
                     </div>
                     <div className="input">
-                        <input type="email" name="email" placeholder="Email Address" onChange={handleInputChange} />
+                        <input type="email" name="email" placeholder="Email Address" onChange={handleInputChange} value={userDetails.email} />
                     </div>
                     <div className="input">
-                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} />
+                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={userDetails.password} />
+                    </div>
+                    <div className="input">
+                        <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleInputChange} value={userDetails.confirmPassword} />
                     </div>
                 </div>
                 <div className="submit-container">
