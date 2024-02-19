@@ -44,8 +44,8 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: rgba(24, 22, 22, 0.13);
-    border-radius: 6px;
+    background: rgba(135, 20, 20, 0.13);
+    border-radius: 16px;
 }
 .input img{
     margin: 0px 22px;

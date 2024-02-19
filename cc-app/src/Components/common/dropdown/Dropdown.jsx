@@ -7,13 +7,22 @@ function Dropdown() {
     <div className='dropdown'>
       <ul className='dropdown-menu'>
         <li className='dropdown-item'>
-          <Link to='/class-curricula' className='dropdown-link'>Class Curricula</Link>
+          <Link to='/class-curricula' className='dropdown-link'>Week 1</Link>
         </li>
         <li className='dropdown-item'>
-          <Link to='/class-homework' className='dropdown-link'>Class Homework</Link>
+          <Link to='/class-homework' className='dropdown-link'>Week 2</Link>
         </li>
         <li className='dropdown-item'>
-          <Link to='/checkout' className='dropdown-link'>Check Out</Link>
+          <Link to='/checkout' className='dropdown-link'>Week 3</Link>
+        </li>
+        <li className='dropdown-item'>
+          <Link to='/class-curricula' className='dropdown-link'>Week 4</Link>
+        </li>
+        <li className='dropdown-item'>
+          <Link to='/class-homework' className='dropdown-link'>Week 5</Link>
+        </li>
+        <li className='dropdown-item'>
+          <Link to='/checkout' className='dropdown-link'>Week 6</Link>
         </li>
       </ul>
     </div>

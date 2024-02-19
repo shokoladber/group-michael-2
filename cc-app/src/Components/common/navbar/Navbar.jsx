@@ -28,11 +28,15 @@ function Navbar() {
 
           <li className='nav__item'>
             <Link to="/courses" className='nav__links' onClick={() => setDropdownOpen(false)}>Courses <i className='fas fa-caret-down' /></Link>
-            <Dropdown />
+            {/* <Dropdown /> */}
           </li>
 
           <li className='nav__item'>
             <Link to="/blog" className='nav__links' onClick={() => setDropdownOpen(false)}>Blog</Link>
+          </li>
+
+          <li className='nav__item'>
+            <Link to="/petProfile" className='nav__links' onClick={() => setDropdownOpen(false)}>Pet Profile</Link>
           </li>
 
           <li className='nav__item'>
@@ -56,85 +60,4 @@ function Navbar() {
 export default Navbar;
 
 
-  // <div className="dropdown">
-  //   <button className="dropbtn">Dropdown</button>
-  //      <div className="dropdown-content">
-  //           <Link to="/blog/post1">Post 1</Link>
-  //           <Link to="/blog/post2">Post 2</Link>
-  //               {/* Add more links as needed */}
-  //     </div>
-  // </div>
-
-
-
-
-
-
-// function Navbar (){
-
-//     const [click, setClick]= useState(false);
-//     const [button, setButton]= useState(false);
-//     const [dropdown, setDropdown] = useState(false);
-
-//     const handleClick = ()=> setClick(!click);
-//     const closeMobileMenu= ()=>setClick(false);
-
-//     const showButton = () => {
-//         if (window.innerWidth <= 960){
-//             setButton(false);
-//         }else{
-//             setButton(true);
-//         }
-
-//     };
-//     useEffect(() =>{
-//         showButton();
-//     }, []);
-    
-//     window.addEventListener('resize',showButton);
-//     return(
-    
-//             <nav className='navbar'>
-//                 <div className='navbar-container'>
-                                
-//                     <Link to='/' className='navbar__logo' onClick={closeMobileMenu}> <LiaAccusoft />  CC</Link>
-                      
-//                             <div className='menu__icon' onClick={handleClick}> 
-//                                 <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
-//                             </div>
-                             
-//                     <ul className= {click?'nav__menu active':'nav__menu'}>
-//                         <li className='nav__item'>
-//                             <Link to="/" className='nav__links' onClick={closeMobileMenu}>Home</Link>
-//                         </li>
-//                         <li className='nav__item'>
-//                             <Link to="/Classes" className='nav__links' onClick={closeMobileMenu}>Classes<i className='fas fa-caret-down' /></Link>
-//                              {dropdown && <Dropdown/>}
-//                         </li>
-//                         <li className='nav__item'>
-//                             <Link to="/blog" className='nav__links' onClick={closeMobileMenu}>Blog</Link>
-//                         </li>
-//                         <li className='nav__item'>
-//                             <Link to="/contact" className='nav__links' onClick={closeMobileMenu}>Contact</Link> 
-//                         </li>
-//                         <li className='nav__item'>
-//                             <Link to="/Login" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
-//                         </li>
-//                         {/* <li className='nav__item'>
-//                             <Link to="/Sign Up" className='nav__links' onClick={closeMobileMenu}>Login</Link> 
-//                         </li> */}
-//                     </ul>
-
-//                         {/* {button && <Button buttonStyle= 'btn--primary'>Login</Button>} */}
-
-//                         {/* {button && <Button buttonStyle= 'btn--outline'>SignUp</Button>} */}
-//                 </div>
-//             </nav>
-
-    
-
-//     );
-
-
-// }
-// export default Navbar;
+  

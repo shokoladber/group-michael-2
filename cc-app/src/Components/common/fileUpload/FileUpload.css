@@ -1,45 +1,42 @@
-  .dog-upload {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .dog-upload h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .dog-upload form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .dog-upload label {
-    margin-bottom: 5px;
-  }
-  
-  .dog-upload input[type="text"],
-  .dog-upload input[type="file"] {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .dog-upload button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .dog-upload button:hover {
-    background-color: #0056b3;
-  }
-  
+.file-upload-container {
+  margin: 40px auto;
+  top: 80px;
+  padding: 20px;
+  width: 50%;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+input[type="text"],
+input[type="file"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fa4118;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #dbd761;
+}

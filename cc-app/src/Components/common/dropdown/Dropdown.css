@@ -1,70 +1,37 @@
-/* .dropdown-menu{
-    background: green;
-    width: 200px;
-    position: absolute;
-    top: 80px;
-    list-style: none;
-    text-align: start;
-}
-.dropdown-menu li{
-    background: red;
-    cursor: pointer;
-}
-
-.dropdown-menu li:hover{
-    background: rgb(109, 5, 75);
-    cursor: pointer;
-}
-.dropdown-menu li.clicked {
-    display: none;
-}
-.dropdown-link{
-    display: block;
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    color: aqua;
-}
-@media screen and (max-width: 960px) {
-    .fa-caret-down{
-        display: none;
-    }
-    
-} */
 .dropdown-menu {
-    background: green; /* Background color of the dropdown menu */
-    width: 200px; /* Width of the dropdown menu */
-    position: absolute; /* Positioning the dropdown absolutely */
-    top: 80px; /* Distance from the top of the page */
-    list-style: none; /* Removing default list styling */
-    text-align: end; /* Aligning text to the start (left) */
+    background: green; 
+    width: 200px; 
+    position: absolute; 
+    top: 80px; 
+    list-style: none; 
+    text-align: end; 
 }
 
 .dropdown-menu li {
-    background: red; /* Background color of dropdown items */
-    cursor: pointer; /* Changing cursor on hover */
+    background: red; 
+    cursor: pointer; 
 }
 
 .dropdown-menu li:hover {
-    background: rgb(109, 5, 75); /* Background color on hover */
-    cursor: pointer; /* Changing cursor on hover */
+    background: rgb(109, 5, 75); 
+    cursor: pointer; 
 }
 
 .dropdown-menu li.clicked {
-    display: none; /* Hiding clicked items */
+    display: none; 
 }
 
 .dropdown-link {
-    display: block; /* Displaying as block for full width */
-    height: 100%; /* Taking full height */
-    width: 100%; /* Taking full width */
-    text-decoration: none; /* Removing default underline */
-    color: aqua; /* Text color */
+    display: block; 
+    height: 100%; 
+    width: 100%; 
+    text-decoration: none; 
+    color: aqua; 
 }
 
 @media screen and (max-width: 960px) {
     .fa-caret-down {
-        display: none; /* Hiding the caret-down icon on small screens */
+        display: none; 
     }
 }
 

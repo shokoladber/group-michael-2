@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FileUpload.css';
 
 function FileUpload() {
   const [dogInfo, setDogInfo] = useState({
@@ -31,22 +32,22 @@ function FileUpload() {
   };
 
   return (
-    <div>
-      <h2>Upload Dog Information</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="file-upload-container">
+      <h2>Upload Pet Profile</h2>
+      <form onSubmit={handleSubmit} className="upload-form">
+        <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input type="text" id="name" name="name" value={dogInfo.name} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="breed">Breed:</label>
           <input type="text" id="breed" name="breed" value={dogInfo.breed} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="age">Age:</label>
           <input type="text" id="age" name="age" value={dogInfo.age} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="photo">Photo:</label>
           <input type="file" id="photo" name="photo" accept="image/*" onChange={handlePhotoChange} />
         </div>

@@ -24,7 +24,7 @@ function Purchase() {
         </div>
       ) : (
         <div className="purchase-form">
-          <h2>Purchase Courses for Dog Training</h2>
+          <h2>Purchase Course for Dog Training</h2>
           <label>Select Course:</label>
           <select
             className="class-select"
@@ -32,9 +32,17 @@ function Purchase() {
             onChange={(e) => setSelectedCourse(e.target.value)}
           >
             <option value="">Select a course...</option>
-            <option value="Beginner Obedience">Beginner Obedience</option>
-            <option value="Advanced Agility">Advanced Agility</option>
-            <option value="Puppy Socialization">Puppy Socialization</option>
+            <option value="Puppy">Puppy</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Reavtive">Reactive</option>
+            <option value="Beginner Agility">Beginner Agility</option>
+            <option value="Open Agility">Open Agility</option>
+            <option value="In-Home">In-Home</option>
+            <option value="At Facility">At Facility</option>
+            <option value="Puppy Play">Puppy Play</option>
+            <option value="Teen Play">Teen Play</option>
+            <option value="Adult Play">Adult Play</option>
           </select>
           <button className="purchase-button" onClick={handlePurchase}>
             Purchase
