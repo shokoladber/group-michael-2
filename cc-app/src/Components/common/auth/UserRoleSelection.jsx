@@ -10,7 +10,7 @@ const UserRoleSelection = () => {
 
     const handleRoleSelection = async (role) => {
         try {
-            const apiUrl = `/api/user/update-role`;
+            const apiUrl = `/api/user/select-role`;
             await apiClient.post(apiUrl, { role });
             if (role === 'PET_GUARDIAN') {
                 navigate('/profile/pet-guardian');

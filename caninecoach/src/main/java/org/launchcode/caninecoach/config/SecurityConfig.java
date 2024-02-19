@@ -59,9 +59,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
 
-                        //.requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/auth/signup").permitAll()
-                        //.requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
-
+                        .requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/auth/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
@@ -81,7 +80,7 @@ public class SecurityConfig {
                                 .userService(customOAuth2UserService)
                         )
                         .successHandler(oAuth2LoginSuccessHandler)
-                        .loginPage("/oauth2/authorization/caninecoach-client")
+                        .loginPage("/api/auth/login")
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

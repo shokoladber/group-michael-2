@@ -58,3 +58,4 @@ tasks.named('test') {
 tasks.withType(JavaCompile).configureEach {
 	options.compilerArgs << "-Xlint:deprecation"
 }
+
