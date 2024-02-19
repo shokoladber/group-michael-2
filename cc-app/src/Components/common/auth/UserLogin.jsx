@@ -1,11 +1,12 @@
+// UserLogin.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import apiClient from '../../../services/apiClient';
 import './LoginSignup.css';
 
 const UserLogin = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
-    const [error, setError] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
@@ -15,14 +16,15 @@ const UserLogin = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        setError(null);
+        setErrorMessage('');
         try {
             const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`;
-            const response = await axios.post(apiUrl, credentials);
-            localStorage.setItem('authToken', response.data.token);
+            const response = await apiClient.post(apiUrl, credentials);
+            localStorage.setItem('authToken', response.data.token); // Store the token for traditional login
             navigate('/home');
         } catch (error) {
-            setError(error.response?.data || 'Login failed');
+            const defaultErrorMessage = 'Login failed. Please check your credentials and try again.';
+            setErrorMessage(error.response?.data?.message || defaultErrorMessage);
         }
     };
 
@@ -36,35 +38,22 @@ const UserLogin = () => {
                 <div className="text">Login</div>
                 <div className="underline"></div>
             </div>
-            {error && <div className="error-message">{error}</div>}
+
             <form onSubmit={handleFormSubmit}>
                 <div className="inputs">
                     <div className="input">
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email Address"
-                            onChange={handleInputChange}
-                            value={credentials.email}
-                        />
+                        <input type="email" name="email" placeholder="Email Address" onChange={handleInputChange} value={credentials.email} required />
                     </div>
                     <div className="input">
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            onChange={handleInputChange}
-                            value={credentials.password}
-                        />
+                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={credentials.password} required />
                     </div>
                 </div>
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <div className="submit-container">
                     <button type="submit" className="submit">Login</button>
+                    <button type="button" onClick={handleGoogleLogin} className="submit gray">Login with Google</button>
                 </div>
             </form>
-            <div className="submit-container">
-                <button onClick={handleGoogleLogin} className="submit gray">Login with Google</button>
-            </div>
             <div className="footer">
                 Not a member? <Link to="/signup">Sign up here!</Link>
             </div>

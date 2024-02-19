@@ -1,0 +1,71 @@
+.verify-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 90px;
+    width: 500px;
+    background: rgba(255, 255, 0, 0.2); /* Semi-transparent yellow background */
+    border: 2px solid rgba(255, 255, 0, 0.6); /* Yellow border with some transparency */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(255, 223, 0, 0.5); /* Soft yellow glow */
+    padding-bottom: 30px;
+    border-radius: 60px;
+}
+
+.verify-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.verify-text {
+    color: #007bff; /* Blue color for text */
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.verify-underline {
+    width: 200px;
+    height: 6px;
+    background: #007bff; /* Blue color for underline */
+    border-radius: 9px;
+}
+
+.verify-status {
+    margin-top: 55px;
+    text-align: center;
+    color: #007bff; /* Blue color for status text */
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.verify-footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #007bff; /* Blue color for footer text */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.verify-footer a {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.verify-footer a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker blue for hover effect */
+}
+
+/* Mobile Version (Responsiveness) */
+@media only screen and (max-width: 600px) {
+    .verify-container {
+        width: 90%;
+        margin-top: 30px;
+    }
+}

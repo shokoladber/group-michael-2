@@ -33,14 +33,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2User oauthUser = super.loadUser(userRequest);
 
         String email = oauthUser.getAttribute("email");
-        String name = oauthUser.getAttribute("name"); // This assumes the OAuth2 provider gives you a "name" attribute
+        String name = oauthUser.getAttribute("name");
 
         User user = userRepository.findByEmail(email).orElseGet(() -> {
             User newUser = new User();
             newUser.setEmail(email);
             newUser.setName(name != null ? name : "Default Name"); // Set the name or provide a default
             newUser.setRole(UserRole.TEMPORARY);
-            // Set other necessary default values here
             return userRepository.save(newUser);
         });
 

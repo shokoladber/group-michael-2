@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home, Blog, Classes, NoPage } from './pages';
 import { Header, Navbar, BlogPost, PetProfilePage, Button, Footer, FileUpload, ContactUs } from './Components/common';
-import { UserLogin, UserSignup, UserRoleSelection, OAuth2RedirectHandler } from './Components/common/user/userIndex';
+import { UserLogin, UserSignup, UserRoleSelection, OAuth2RedirectHandler } from './Components/common/auth/authIndex';
 import Contact from './Components/common/contact2/ContactUs';
 import BuyClasses from './Components/common/buy/BuyClasses';
 import { Dropdown } from 'react-bootstrap';

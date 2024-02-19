@@ -1,5 +1,5 @@
 import React from 'react';
-import UserLogin from '../../Components/common/user/UserLogin';
+import UserLogin from '../../Components/common/auth/UserLogin';
 import './Login.css';
 
 function Login() {

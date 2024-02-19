@@ -1,6 +1,6 @@
 export { default as Header} from './header/Header';
 export { default as Navbar} from './navbar/Navbar';
-export { default as UserLogin} from './user/UserLogin';
+export { default as UserLogin} from './auth/UserLogin';
 export { default as BlogPost} from './blogpost/BlogPost';
 export { default as PetProfilePage} from './profile/PetProfilePage';
 export { default as FileUpload} from './fileUpload/FileUpload';
