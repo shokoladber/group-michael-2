@@ -1,0 +1,51 @@
+/* Contact.css
+
+.contact__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../../Components/Assets/px2.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .contact__container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+   */
+   /* Contact.css */
+/* body {
+  background-color: rgb(204, 191, 217);
+  color: aliceblue;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 60px;
+} */
+
+/* .contact_form .form-control {
+  padding: 1.375rem .75rem;
+  line-height: 1.5;
+  color: #ffff;
+  background-color: rgb(35, 33, 33);
+  border-radius: 0 !important;
+  border: 1px solid #fff;
+}
+
+.contact_form input .form-control {
+  margin-bottom: 2em;
+  height: calc(2.5em + .75rem + 2px);
+}
+
+.btn {
+  color: rgb(8, 8, 8);
+  border: 2px solid white;
+}
+
+.btn:hover {
+  color: white;
+}
+ */
