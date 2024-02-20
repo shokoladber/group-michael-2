@@ -1,6 +1,5 @@
 package org.launchcode.caninecoach.controllers;
 
-import org.launchcode.caninecoach.entities.Course;
 import org.launchcode.caninecoach.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,8 +21,8 @@ public class SearchController {
     }
 
     @GetMapping("/")
-    public List<Course> search(@RequestParam("query") String query) {
-        return courseRepository.search(query);
+    public List<Object[]> search(@RequestParam("query") String keyword) {
+        return courseRepository.searchCoursesWithKeyword(keyword);
     }
 
 }
