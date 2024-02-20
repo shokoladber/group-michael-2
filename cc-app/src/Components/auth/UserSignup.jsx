@@ -53,9 +53,6 @@ const UserSignup = () => {
                     <div className="input">
                         <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={userDetails.password} required />
                     </div>
-                    <div className="input">
-                        <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleInputChange} value={userDetails.confirmPassword} required />
-                    </div>
                 </div>
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <div className="submit-container">

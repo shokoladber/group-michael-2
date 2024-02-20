@@ -37,9 +37,11 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
         String token = jwtTokenService.createToken(userDto);
 
-        // Redirecting all users to the homepage, with a special case for new users to select their role
-        String redirectUrl = isNewUser ? "/select-role" : "/home";
+        // Store the token in the session instead of sending it in the URL
+        request.getSession().setAttribute("authToken", token);
 
-        response.sendRedirect(redirectUrl + "?token=" + token);
+        // Redirecting to an intermediate page that will handle token retrieval
+        String redirectUrl = "/oauth2/redirect";
+        response.sendRedirect(redirectUrl);
     }
 }

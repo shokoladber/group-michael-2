@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
-import apiClient from '../../../services/apiClient';
 
 const UserRoleSelection = () => {
     const navigate = useNavigate();
@@ -11,7 +10,8 @@ const UserRoleSelection = () => {
     const handleRoleSelection = async (role) => {
         try {
             const apiUrl = `/api/user/select-role`;
-            await apiClient.post(apiUrl, { role });
+            const response = await axios.post(apiUrl, { role });
+
             if (role === 'PET_GUARDIAN') {
                 navigate('/profile/pet-guardian');
             } else if (role === 'PET_TRAINER') {
