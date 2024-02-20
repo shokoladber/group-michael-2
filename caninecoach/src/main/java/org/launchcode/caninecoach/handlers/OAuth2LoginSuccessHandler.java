@@ -2,9 +2,7 @@ package org.launchcode.caninecoach.handlers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.UserRole;
-import org.launchcode.caninecoach.services.JwtTokenService;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -17,12 +15,10 @@ import java.io.IOException;
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final JwtTokenService jwtTokenService;
     private final UserService userService;
 
     @Autowired
-    public OAuth2LoginSuccessHandler(JwtTokenService jwtTokenService, @Lazy UserService userService) {
-        this.jwtTokenService = jwtTokenService;
+    public OAuth2LoginSuccessHandler(@Lazy UserService userService) {
         this.userService = userService;
     }
 
@@ -32,17 +28,27 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute("email");
 
-        UserDto userDto = userService.processOAuth2User(email, UserRole.TEMPORARY);
+        UserRole defaultRole = UserRole.TEMPORARY;
+        // Process the OAuth2 user, no need to assign the result to userDto since it's not used
+        userService.processOAuth2User(email, defaultRole);
+
+        // Check if the user's profile is complete using the email
+        boolean isProfileComplete = userService.isProfileComplete(email);
+
+        // Determine if they are new, and if not, whether their profile is complete
         boolean isNewUser = userService.isNewUser(email);
 
-        String token = jwtTokenService.createToken(userDto);
+        String baseUrl = "http://localhost:3000"; // The URL of your React front-end application
+        String redirectUrl;
 
-        // Store the token in the session instead of sending it in the URL
-        request.getSession().setAttribute("authToken", token);
+        if (isNewUser) {
+            redirectUrl = baseUrl + "/select-role";
+        } else if (!isProfileComplete) {
+            redirectUrl = baseUrl + "/create-profile";
+        } else {
+            redirectUrl = baseUrl + "/home";
+        }
 
-        // Redirecting to an intermediate page that will handle token retrieval
-        String redirectUrl = "/oauth2/redirect";
         response.sendRedirect(redirectUrl);
     }
 }
-

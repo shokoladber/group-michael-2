@@ -58,17 +58,18 @@ public class UserService {
         user.setEmail(signupDto.getEmail());
         user.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         user.setRole(UserRole.TEMPORARY);
+        user.setVerified(false);
         User savedUser = userRepository.save(user);
 
-        // Generate and save verification token
+        // Generate and save the verification token
         String token = UUID.randomUUID().toString();
         VerificationToken verificationToken = new VerificationToken(token, savedUser);
         verificationTokenRepository.save(verificationToken);
 
         // Send verification email
-        String verificationLink = "http://localhost:3000/verify?token=" + token; // Adjust the link as per your frontend route
+        String verificationLink = "http://localhost:3000/verify-email?token=" + token;
         try {
-            emailService.sendTemplateVerificationEmail(user.getEmail(), "Verify your email", verificationLink);
+            emailService.sendTemplateVerificationEmail(savedUser.getEmail(), "Verify Your Email", verificationLink);
         } catch (Exception e) {
             Log.error("Error sending verification email", e);
             // Optionally handle this more gracefully
@@ -76,6 +77,7 @@ public class UserService {
 
         return toUserDto(savedUser);
     }
+
 
     public UserDto save(User user) {
         User savedUser = userRepository.save(user);
@@ -113,7 +115,12 @@ public class UserService {
                 .map(User::isProfileCreated)
                 .orElse(true);
     }
-
+    public boolean isProfileComplete(String email) {
+        // Assuming 'isProfileCreated' is a boolean field in your User entity that checks for profile completeness
+        return userRepository.findByEmail(email)
+                .map(User::isProfileCreated)
+                .orElse(false); // If user is not found, we consider the profile incomplete
+    }
     public void updateUserRole(Long userId, UserRole newRole) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new AppException("User not found with ID: " + userId, HttpStatus.NOT_FOUND));
@@ -122,13 +129,14 @@ public class UserService {
     }
 
     private UserDto toUserDto(User user) {
-        return new UserDto(
-                user.getId(),
-                user.getName(),
-                user.getEmail(),
-                user.getRole(),
-                user.getPassword(),
-                null // Token is managed elsewhere
-        );
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setRole(user.getRole());
+        // Password should not be sent to the client
+        // Token is managed elsewhere if needed
+        return userDto;
     }
 }
+

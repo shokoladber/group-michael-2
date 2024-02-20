@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// Replace direct axios import with custom Axios instance
 import api from '../../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
@@ -9,7 +8,7 @@ const UserSignup = () => {
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '', // Added state for confirmPassword
     });
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
@@ -21,6 +20,7 @@ const UserSignup = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        // Check if passwords match
         if (userDetails.password !== userDetails.confirmPassword) {
             setErrorMessage('Passwords do not match.');
             return;
@@ -30,7 +30,7 @@ const UserSignup = () => {
             await api.post('/api/auth/signup', {
                 name: userDetails.name,
                 email: userDetails.email,
-                password: userDetails.password
+                password: userDetails.password,
             });
             alert('Signup successful! Please check your email to verify your account.');
             navigate('/login');
@@ -54,16 +54,44 @@ const UserSignup = () => {
             <form onSubmit={handleFormSubmit}>
                 <div className="inputs">
                     <div className="input">
-                        <input type="text" name="name" placeholder="Full Name" onChange={handleInputChange} value={userDetails.name} required />
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Full Name"
+                            onChange={handleInputChange}
+                            value={userDetails.name}
+                            required
+                        />
                     </div>
                     <div className="input">
-                        <input type="email" name="email" placeholder="Email Address" onChange={handleInputChange} value={userDetails.email} required />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            onChange={handleInputChange}
+                            value={userDetails.email}
+                            required
+                        />
                     </div>
                     <div className="input">
-                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={userDetails.password} required />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            onChange={handleInputChange}
+                            value={userDetails.password}
+                            required
+                        />
                     </div>
                     <div className="input">
-                        <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleInputChange} value={userDetails.confirmPassword} required />
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            onChange={handleInputChange}
+                            value={userDetails.confirmPassword}
+                            required
+                        />
                     </div>
                 </div>
                 {errorMessage && <div className="error-message">{errorMessage}</div>}

@@ -1,33 +1,22 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const OAuth2RedirectHandler = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        const getAndStoreToken = async () => {
-            try {
-                // Make an API call to get the token from the session
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/auth/retrieve-token`);
+        // Parse the query string for 'newUser'
+        const searchParams = new URLSearchParams(location.search);
+        const isNewUser = searchParams.get('newUser') === 'true';
 
-                const { token, isNewUser } = response.data;
-                localStorage.setItem('authToken', token); // Store the token
-
-                // Navigate based on the user being new or existing.
-                if (isNewUser) {
-                    navigate('/select-role');
-                } else {
-                    navigate('/home');
-                }
-            } catch (error) {
-                console.error('Error during token retrieval:', error);
-                navigate('/login'); // Redirect to login on failure
-            }
-        };
-
-        getAndStoreToken();
-    }, [navigate]);
+        // Navigate based on the user being new or existing
+        if (isNewUser) {
+            navigate('/select-role');
+        } else {
+            navigate('/home');
+        }
+    }, [navigate, location]);
 
     // Render a loading spinner or a blank page while processing
     return <div>Loading...</div>;

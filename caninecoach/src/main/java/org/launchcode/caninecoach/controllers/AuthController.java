@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import java.net.URI;
@@ -35,11 +36,16 @@ public class AuthController {
         return ResponseEntity.ok(userDto);
     }
 
+    // Inside your controller class
+
     @PostMapping("/signup")
-    public ResponseEntity<UserDto> register(@RequestBody @Valid SignupDto user) {
-        UserDto createdUser = userService.register(user);
-        createdUser.setToken(jwtTokenService.createToken(createdUser));
-        return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
+    public ResponseEntity<UserDto> register(@RequestBody @Valid SignupDto signupDto) {
+        UserDto createdUser = userService.register(signupDto);
+        // Do not set the JWT token here, as you're currently handling email verification
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/users/{id}")
+                .buildAndExpand(createdUser.getId()).toUri();
+        return ResponseEntity.created(location).body(createdUser);
     }
 
 }

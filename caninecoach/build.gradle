@@ -53,7 +53,7 @@ dependencies {
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 
 	// Mail
-	implementation 'org.freemarker:freemarker:2.3.32'
+	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'jakarta.mail:jakarta.mail-api:2.1.2'
 	implementation 'com.sun.mail:jakarta.mail:2.0.1'
 
