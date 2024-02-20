@@ -8,15 +8,11 @@ import java.util.ArrayList;
 @Entity
 public class Course extends AbstractEntity {
 
-    @ManyToMany
-    @NotNull
-    @JoinTable(name = "course_info", joinColumns = { @JoinColumn(name = "course_id")}, inverseJoinColumns = { @JoinColumn(name = "type_id")})
-    private ArrayList<Type> type = new ArrayList<>();
 
-    @OneToOne
-    @NotNull
-    @JoinColumn(name = "details_id")
-    private Details details;
+
+    @OneToOne(mappedBy = "course")
+    private CourseInfo courseInfo;
+
 
     @OneToOne
     @JoinColumn(name = "curriculum_id")
@@ -24,31 +20,22 @@ public class Course extends AbstractEntity {
 
     private String name;
 
-    public Course(String name, ArrayList<Type> type, Details details, Curriculum curriculum) {
-        this.name= name;
-        this.type = type;
-        this.details = details;
+    public Course(CourseInfo courseInfo, Curriculum curriculum, String name) {
+        this.courseInfo = courseInfo;
         this.curriculum = curriculum;
+        this.name = name;
     }
 
     public Course() {
 
     }
 
-    public ArrayList<Type> getType() {
-        return type;
+    public CourseInfo getCourseInfo() {
+        return courseInfo;
     }
 
-    public void setType(ArrayList<Type> type) {
-        this.type = type;
-    }
-
-    public Details getDetails() {
-        return details;
-    }
-
-    public void setDetails(Details details) {
-        this.details = details;
+    public void setCourseInfo(CourseInfo courseInfo) {
+        this.courseInfo = courseInfo;
     }
 
     public Curriculum getCurriculum() {
