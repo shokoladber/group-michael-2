@@ -5,7 +5,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,6 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
 
-@RequiredArgsConstructor
 @Component
 public class UserAuthenticationProvider {
 
@@ -25,6 +23,10 @@ public class UserAuthenticationProvider {
     private String secretKey;
 
     private final UserService userService;
+
+    public UserAuthenticationProvider(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostConstruct
     protected void init() {
@@ -53,10 +55,9 @@ public class UserAuthenticationProvider {
 
         DecodedJWT decoded = verifier.verify(token);
 
-        UserDto user = UserDto.builder()
-                .email(decoded.getSubject())
-                .name(decoded.getClaim("name").asString())
-                .build();
+        UserDto user = new UserDto(); // Replace with manual instantiation without builder
+        user.setEmail(decoded.getSubject());
+        user.setName(decoded.getClaim("name").asString());
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
@@ -75,4 +76,3 @@ public class UserAuthenticationProvider {
     }
 
 }
-

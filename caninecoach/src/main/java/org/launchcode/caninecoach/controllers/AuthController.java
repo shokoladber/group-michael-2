@@ -6,7 +6,6 @@ import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.services.UserService;
 import org.launchcode.caninecoach.config.UserAuthenticationProvider;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
     private final UserService userService;
     private final UserAuthenticationProvider userAuthenticationProvider;
+
+    public AuthController(UserService userService, UserAuthenticationProvider userAuthenticationProvider) {
+        this.userService = userService;
+        this.userAuthenticationProvider = userAuthenticationProvider;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody @Valid LoginDto loginDto) {

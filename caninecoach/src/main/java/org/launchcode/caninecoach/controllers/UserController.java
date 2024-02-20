@@ -1,6 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
-import org.launchcode.caninecoach.entities.User;
+import org.launchcode.caninecoach.dtos.UserDto;
+import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,30 +27,36 @@ public class UserController {
     public ResponseEntity<?> checkNewUser(@AuthenticationPrincipal OAuth2User principal) {
         if (principal != null) {
             String email = principal.getAttribute("email");
-            User user = userService.findUserByEmail(email).orElse(null);
-            if (user != null && userService.isNewUser(user)) {
-                return ResponseEntity.ok(user);
+            UserDto userDto = userService.findByEmail(email);
+            if (userDto != null && UserRole.TEMPORARY.equals(userDto.getRole())) {
+                return ResponseEntity.ok(userDto);
+            } else {
+                return ResponseEntity.ok(Map.of("message", "User is not new or the role is not TEMPORARY."));
             }
         }
-        return ResponseEntity.ok("User is not new or not logged in.");
+        return ResponseEntity.ok(Map.of("message", "No principal information available."));
     }
 
     // Endpoint to update the role of a new user
-    @PostMapping("/update-role")
+    @PostMapping("/select-role")
     public ResponseEntity<?> updateRole(@AuthenticationPrincipal OAuth2User principal, @RequestBody Map<String, String> request) {
-        String email = principal.getAttribute("email");
-        User user = userService.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
-        String role = request.get("role");
-        userService.updateUserRole(user, role);
-        return ResponseEntity.ok("Role updated successfully.");
-    }
+        if (principal == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "No OAuth2 principal information available."));
+        }
 
-    // Endpoint to mark profile completion
-    @PostMapping("/complete-profile")
-    public ResponseEntity<?> completeProfile(@AuthenticationPrincipal OAuth2User principal) {
         String email = principal.getAttribute("email");
-        User user = userService.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
-        userService.completeUserProfile(user);
-        return ResponseEntity.ok("Profile completed successfully.");
+        UserDto userDto = userService.findByEmail(email);
+        if (userDto == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "User not found."));
+        }
+
+        String roleName = request.get("role");
+        try {
+            UserRole role = UserRole.valueOf(roleName);
+            userService.updateUserRole(userDto.getId(), role);
+            return ResponseEntity.ok(Map.of("message", "Role updated successfully."));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Invalid role specified."));
+        }
     }
 }

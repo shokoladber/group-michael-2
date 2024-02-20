@@ -2,8 +2,6 @@ package org.launchcode.caninecoach.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-import lombok.Getter;
-
 public class AppException extends RuntimeException {
 
     private final HttpStatus status;
@@ -17,4 +15,3 @@ public class AppException extends RuntimeException {
         return status;
     }
 }
-
