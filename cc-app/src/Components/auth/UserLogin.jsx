@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
+// Replace direct axios import with custom instance
+import api from '../../utils/api'; // Update the path according to where you place your api.js file
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignup.css';
 
@@ -17,9 +18,9 @@ const UserLogin = () => {
         event.preventDefault();
         setErrorMessage('');
         try {
-            const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`;
-            const response = await axios.post(apiUrl, credentials); // Use axios
-            localStorage.setItem('authToken', response.data.token);
+            // Use the custom Axios instance for API calls
+            const response = await api.post('/api/auth/login', credentials);
+            localStorage.setItem('auth_token', response.data.token); // Ensure you use the same key as in api.js
             navigate('/home');
         } catch (error) {
             const defaultErrorMessage = 'Login failed. Please check your credentials and try again.';

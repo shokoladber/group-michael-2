@@ -45,3 +45,4 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         response.sendRedirect(redirectUrl);
     }
 }
+

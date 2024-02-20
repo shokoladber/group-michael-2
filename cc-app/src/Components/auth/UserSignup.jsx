@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
+// Replace direct axios import with custom Axios instance
+import api from '../../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
 
@@ -20,14 +21,22 @@ const UserSignup = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        if (userDetails.password !== userDetails.confirmPassword) {
+            setErrorMessage('Passwords do not match.');
+            return;
+        }
         try {
-            const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`;
-            await axios.post(apiUrl, userDetails); // Use axios
+            // Use the Axios instance for the API request
+            await api.post('/api/auth/signup', {
+                name: userDetails.name,
+                email: userDetails.email,
+                password: userDetails.password
+            });
             alert('Signup successful! Please check your email to verify your account.');
             navigate('/login');
         } catch (error) {
             const defaultErrorMessage = 'There was a problem with the signup process. Please try again later.';
-            setErrorMessage(error.response?.data.message || defaultErrorMessage);
+            setErrorMessage(error.response?.data?.message || defaultErrorMessage);
         }
     };
 
@@ -52,6 +61,9 @@ const UserSignup = () => {
                     </div>
                     <div className="input">
                         <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={userDetails.password} required />
+                    </div>
+                    <div className="input">
+                        <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleInputChange} value={userDetails.confirmPassword} required />
                     </div>
                 </div>
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
