@@ -1,77 +1,59 @@
 package org.launchcode.caninecoach.services;
 
+import org.launchcode.caninecoach.dtos.LoginDto;
+import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
-import org.launchcode.caninecoach.entities.UserRole;
+import org.launchcode.caninecoach.exceptions.AppException;
+import org.launchcode.caninecoach.mappers.UserMapper;
 import org.launchcode.caninecoach.repositories.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.launchcode.caninecoach.dtos.SignupDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.nio.CharBuffer;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final PasswordEncoder passwordEncoder;
 
-    public Optional<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    private final UserMapper userMapper;
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
+    public UserDto login(LoginDto loginDto) {
+        User user = userRepository.findByEmail(loginDto.email())
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
-    public void setVerifiedTrue(User user) {
-        if (user != null) {
-            user.setVerified(true);
-            userRepository.save(user);
+        if (passwordEncoder.matches(CharBuffer.wrap(loginDto.password()), user.getPassword())) {
+            return userMapper.toUserDto(user);
         }
+        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
-    public User processOAuth2User(String email, UserRole defaultRole) {
-        return userRepository.findByEmail(email)
-                .orElseGet(() -> createNewUser(email, defaultRole));
-    }
+    public UserDto register(SignupDto userDto) {
+        Optional<User> optionalUser = userRepository.findByEmail(userDto.email());
 
-    public boolean isNewUser(User user) {
-        return !user.isProfileCreated();
-    }
-
-    public void completeUserProfile(User user) {
-        user.setProfileCreated(true);
-        userRepository.save(user);
-    }
-
-    private User createNewUser(String email, UserRole defaultRole) {
-        User newUser = new User();
-        newUser.setEmail(email);
-        newUser.setRole(defaultRole);
-        newUser.setUsingOAuth2(true);
-        newUser.setVerified(true);
-        return saveUser(newUser);
-    }
-
-    // Convert a role string to UserRole enum
-    public UserRole convertStringToUserRole(String roleStr) {
-        try {
-            return UserRole.valueOf(roleStr.toUpperCase());
-        } catch (IllegalArgumentException | NullPointerException e) {
-            log.error("Invalid role string: {}", roleStr, e);
-            throw new IllegalArgumentException("Invalid role provided: " + roleStr);
+        if (optionalUser.isPresent()) {
+            throw new AppException("Email already exists", HttpStatus.BAD_REQUEST);
         }
+
+        User user = userMapper.signUpToUser(userDto);
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.password())));
+
+        User savedUser = userRepository.save(user);
+
+        return userMapper.toUserDto(savedUser);
     }
 
-    // Update a user's role
-    public void updateUserRole(User user, String roleStr) {
-        UserRole role = convertStringToUserRole(roleStr);
-        user.setRole(role);
-        userRepository.save(user);
+    public UserDto findByEmail(String login) {
+        User user = userRepository.findByEmail(login)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        return userMapper.toUserDto(user);
     }
+
 }
