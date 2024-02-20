@@ -24,11 +24,13 @@ public class Course extends AbstractEntity {
         this.courseInfo = courseInfo;
         this.curriculum = curriculum;
         this.name = name;
+
     }
 
     public Course() {
 
     }
+
 
     public CourseInfo getCourseInfo() {
         return courseInfo;
