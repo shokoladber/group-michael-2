@@ -34,17 +34,23 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
         String email = oauthUser.getAttribute("email");
         String name = oauthUser.getAttribute("name");
 
-        User user = userRepository.findByEmail(email).orElseGet(() -> {
+        User user = userRepository.findByEmail(email).map(existingUser -> {
+            // For existing users, consider not changing the role or dynamically deciding based on certain conditions
+            log.info("Existing user {} logged in via OAuth2", existingUser.getEmail());
+            return existingUser;
+        }).orElseGet(() -> {
+            // Only new users are assigned TEMPORARY role
+            log.info("Registering new user via OAuth2 with email {}", email);
             User newUser = new User();
             newUser.setEmail(email);
             newUser.setName(name != null ? name : "Default Name");
-            newUser.setRole(UserRole.TEMPORARY); // Adjust as necessary, possibly based on OAuth2 provider
+            newUser.setRole(UserRole.TEMPORARY);
             return userRepository.save(newUser);
         });
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        // Add default role authority; you might want to add more based on your application's needs
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        // Optionally, add role-specific authorities here
 
         return new DefaultOAuth2User(authorities, oauthUser.getAttributes(), "email");
     }

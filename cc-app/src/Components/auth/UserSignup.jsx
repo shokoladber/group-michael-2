@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Import axios
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
-import apiClient from '../../../services/apiClient';
 
 const UserSignup = () => {
     const [userDetails, setUserDetails] = useState({
@@ -23,7 +22,7 @@ const UserSignup = () => {
         event.preventDefault();
         try {
             const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`;
-            await apiClient.post(apiUrl, userDetails);
+            await axios.post(apiUrl, userDetails); // Use axios
             alert('Signup successful! Please check your email to verify your account.');
             navigate('/login');
         } catch (error) {

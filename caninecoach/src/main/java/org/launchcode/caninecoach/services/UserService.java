@@ -5,26 +5,35 @@ import org.launchcode.caninecoach.dtos.SignupDto;
 import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
+import org.launchcode.caninecoach.entities.VerificationToken;
 import org.launchcode.caninecoach.exceptions.AppException;
 import org.launchcode.caninecoach.repositories.UserRepository;
+import org.launchcode.caninecoach.repositories.VerificationTokenRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.UUID;
 
 @Service
 public class UserService {
 
     private static final Logger Log = LoggerFactory.getLogger(UserService.class);
-
     private final UserRepository userRepository;
+    private final VerificationTokenRepository verificationTokenRepository;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository,
+                       VerificationTokenRepository verificationTokenRepository,
+                       EmailService emailService,
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.verificationTokenRepository = verificationTokenRepository;
+        this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -49,15 +58,40 @@ public class UserService {
         user.setEmail(signupDto.getEmail());
         user.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         user.setRole(UserRole.TEMPORARY);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        return toUserDto(user);
+        // Generate and save verification token
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken(token, savedUser);
+        verificationTokenRepository.save(verificationToken);
+
+        // Send verification email
+        String verificationLink = "http://localhost:3000/verify?token=" + token; // Adjust the link as per your frontend route
+        try {
+            emailService.sendTemplateVerificationEmail(user.getEmail(), "Verify your email", verificationLink);
+        } catch (Exception e) {
+            Log.error("Error sending verification email", e);
+            // Optionally handle this more gracefully
+        }
+
+        return toUserDto(savedUser);
     }
+
+    public UserDto save(User user) {
+        User savedUser = userRepository.save(user);
+        return toUserDto(savedUser);
+    }
+
 
     public UserDto findByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
         return toUserDto(user);
+    }
+
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
     }
 
     public UserDto processOAuth2User(String email, UserRole defaultRole) {
@@ -67,9 +101,8 @@ public class UserService {
                     newUser.setEmail(email);
                     newUser.setRole(defaultRole);
                     newUser.setUsingOAuth2(true);
-                    newUser.setVerified(true);
-                    userRepository.save(newUser);
-                    return newUser;
+                    newUser.setVerified(true); // Automatically verify OAuth2 users
+                    return userRepository.save(newUser);
                 });
 
         return toUserDto(user);
@@ -94,7 +127,7 @@ public class UserService {
                 user.getName(),
                 user.getEmail(),
                 user.getRole(),
-                user.getPassword(), // Ensure this is handled securely
+                user.getPassword(),
                 null // Token is managed elsewhere
         );
     }

@@ -1,7 +1,6 @@
-// UserLogin.js
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios
 import { useNavigate, Link } from 'react-router-dom';
-import apiClient from '../../../services/apiClient';
 import './LoginSignup.css';
 
 const UserLogin = () => {
@@ -19,8 +18,8 @@ const UserLogin = () => {
         setErrorMessage('');
         try {
             const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`;
-            const response = await apiClient.post(apiUrl, credentials);
-            localStorage.setItem('authToken', response.data.token); // Store the token for traditional login
+            const response = await axios.post(apiUrl, credentials); // Use axios
+            localStorage.setItem('authToken', response.data.token);
             navigate('/home');
         } catch (error) {
             const defaultErrorMessage = 'Login failed. Please check your credentials and try again.';

@@ -2,6 +2,8 @@ package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,11 +34,10 @@ public class User {
     @Column(name = "role", nullable = false)
     private UserRole role;
 
-    // No-args constructor
+    // Constructors
     public User() {
     }
 
-    // All-args constructor
     public User(Long id, String email, String name, String password, Boolean usingOAuth2, boolean verified, boolean profileCreated, UserRole role) {
         this.id = id;
         this.email = email;
@@ -113,14 +114,14 @@ public class User {
         this.role = role;
     }
 
-    // toString method
+    // toString, equals, and hashCode methods
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + "[PROTECTED]" + '\'' +
                 ", usingOAuth2=" + usingOAuth2 +
                 ", verified=" + verified +
                 ", profileCreated=" + profileCreated +
@@ -128,34 +129,23 @@ public class User {
                 '}';
     }
 
-    // Equals and hashCode methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof User)) return false;
         User user = (User) o;
-
-        if (verified != user.verified) return false;
-        if (profileCreated != user.profileCreated) return false;
-        if (!id.equals(user.id)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!name.equals(user.name)) return false;
-        if (!password.equals(user.password)) return false;
-        if (!usingOAuth2.equals(user.usingOAuth2)) return false;
-        return role == user.role;
+        return verified == user.verified &&
+                profileCreated == user.profileCreated &&
+                id.equals(user.id) &&
+                email.equals(user.email) &&
+                name.equals(user.name) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(usingOAuth2, user.usingOAuth2) &&
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + usingOAuth2.hashCode();
-        result = 31 * result + (verified ? 1 : 0);
-        result = 31 * result + (profileCreated ? 1 : 0);
-        result = 31 * result + role.hashCode();
-        return result;
+        return Objects.hash(id, email, name, password, usingOAuth2, verified, profileCreated, role);
     }
 }

@@ -1,7 +1,7 @@
 import UserLogin from "./UserLogin";
 import UserSignup from "./UserSignup";
-import VerifyAccount from "./VerifyAccount";
+import VerifyEmail from "./VerifyEmail";
 import UserRoleSelection from "./UserRoleSelection";
 import OAuth2RedirectHandler from "./OAuth2RedirectHandler";
 
-export { UserLogin, UserSignup, VerifyAccount, UserRoleSelection, OAuth2RedirectHandler }
+export { UserLogin, UserSignup, VerifyEmail, UserRoleSelection, OAuth2RedirectHandler }

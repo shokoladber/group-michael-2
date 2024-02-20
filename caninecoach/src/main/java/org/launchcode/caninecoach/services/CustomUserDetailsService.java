@@ -1,14 +1,16 @@
 package org.launchcode.caninecoach.services;
 
-import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
+import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Collections;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -24,9 +26,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email : " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
 
-        return toUserDto(user);
+        // Assign TEMPORARY role if the user has no role
+        if (user.getRole() == null) {
+            user.setRole(UserRole.TEMPORARY);
+            userRepository.save(user);
+        }
+
+        return createSpringSecurityUser(user);
     }
 
     @Transactional
@@ -35,17 +43,14 @@ public class CustomUserDetailsService implements UserDetailsService {
                 () -> new UsernameNotFoundException("User not found with id : " + id)
         );
 
-        return toUserDto(user);
+        return createSpringSecurityUser(user);
     }
 
-    private UserDto toUserDto(User user) {
-        UserDto userDto = new UserDto();
-        // Populate userDto from user
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-        userDto.setRole(user.getRole());
-        userDto.setPassword(user.getPassword());
-        return userDto;
+    private org.springframework.security.core.userdetails.User createSpringSecurityUser(User user) {
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
+        );
     }
 }

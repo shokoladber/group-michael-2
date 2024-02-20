@@ -1,7 +1,6 @@
-// OAuth2RedirectHandler.js
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import apiClient from '../../../services/apiClient';
+import axios from "axios";
 
 const OAuth2RedirectHandler = () => {
     const navigate = useNavigate();
@@ -14,7 +13,12 @@ const OAuth2RedirectHandler = () => {
                 localStorage.setItem('authToken', token);  // Store the token for OAuth2
 
                 try {
-                    const response = await apiClient.get('/api/user/check-new-user');
+                    // Use axios directly
+                    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/check-new-user`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
                     if (response.data.isNewUser) {
                         navigate('/select-role');
                     } else {

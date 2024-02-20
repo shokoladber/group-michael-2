@@ -1,39 +1,46 @@
 package org.launchcode.caninecoach.config;
 
-import org.launchcode.caninecoach.services.TokenService;
+import org.launchcode.caninecoach.services.JwtTokenService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
+import org.springframework.lang.NonNull;
 import java.io.IOException;
 
 @Component
 public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
-    private final TokenService tokenService;
+    private final JwtTokenService jwtTokenService;
 
-    // Constructor injection is recommended for required dependencies
-    public JwtAuthTokenFilter(TokenService tokenService) {
-        this.tokenService = tokenService;
+    @Autowired // Use constructor injection
+    public JwtAuthTokenFilter(JwtTokenService jwtTokenService) {
+        this.jwtTokenService = jwtTokenService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request,
+                                    @NonNull HttpServletResponse response,
+                                    @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        String token = request.getHeader("Authorization");
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            if (tokenService.validateToken(token)) {
-                String email = tokenService.getEmailFromToken(token);
-                // Authorities could be set based on role or other claims. Consider fetching UserDetails to set authorities correctly.
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, null, null);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
+        String token = getTokenFromRequest(request);
+        if (token != null && jwtTokenService.validateToken(token)) {
+            Authentication authentication = jwtTokenService.getAuthentication(token, request);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
+    }
+
+    private String getTokenFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }

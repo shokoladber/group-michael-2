@@ -1,11 +1,7 @@
 package org.launchcode.caninecoach.config;
 
-import org.launchcode.caninecoach.config.UserAuthenticationEntryPoint;
-import org.launchcode.caninecoach.handlers.OAuth2LoginSuccessHandler;
-import org.launchcode.caninecoach.services.CustomOAuth2UserDetailsService;
-import org.launchcode.caninecoach.services.TokenService;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +11,16 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+
+import org.launchcode.caninecoach.handlers.OAuth2LoginSuccessHandler;
+import org.launchcode.caninecoach.services.CustomOAuth2UserDetailsService;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,13 +31,14 @@ public class SecurityConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
-    private TokenService tokenService;
     private final CustomOAuth2UserDetailsService customOAuth2UserDetailsService;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final AuthenticationConfiguration authenticationConfiguration;
 
     @Autowired
-    public SecurityConfig(CustomOAuth2UserDetailsService customOAuth2UserService, OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler, AuthenticationConfiguration authenticationConfiguration) {
+    public SecurityConfig(CustomOAuth2UserDetailsService customOAuth2UserService,
+                          OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler,
+                          AuthenticationConfiguration authenticationConfiguration) {
         this.customOAuth2UserDetailsService = customOAuth2UserService;
         this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
         this.authenticationConfiguration = authenticationConfiguration;
@@ -56,20 +56,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/auth/signup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
+                        .requestMatchers("/verify-email").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint(new UserAuthenticationEntryPoint())
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/api/auth/login")
                         .defaultSuccessUrl("/home")
                         .permitAll()
                 )
@@ -82,7 +81,6 @@ public class SecurityConfig {
                                 .userService(customOAuth2UserDetailsService)
                         )
                         .successHandler(oAuth2LoginSuccessHandler)
-                        .loginPage("/api/auth/login")
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

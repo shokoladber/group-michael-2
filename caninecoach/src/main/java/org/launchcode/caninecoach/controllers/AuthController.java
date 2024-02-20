@@ -3,8 +3,8 @@ package org.launchcode.caninecoach.controllers;
 import org.launchcode.caninecoach.dtos.LoginDto;
 import org.launchcode.caninecoach.dtos.SignupDto;
 import org.launchcode.caninecoach.dtos.UserDto;
+import org.launchcode.caninecoach.services.JwtTokenService;
 import org.launchcode.caninecoach.services.UserService;
-import org.launchcode.caninecoach.config.UserAuthenticationProvider;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,24 +19,24 @@ import java.net.URI;
 public class AuthController {
 
     private final UserService userService;
-    private final UserAuthenticationProvider userAuthenticationProvider;
+    private final JwtTokenService jwtTokenService;
 
-    public AuthController(UserService userService, UserAuthenticationProvider userAuthenticationProvider) {
+    public AuthController(UserService userService, JwtTokenService jwtTokenService) {
         this.userService = userService;
-        this.userAuthenticationProvider = userAuthenticationProvider;
+        this.jwtTokenService = jwtTokenService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody @Valid LoginDto loginDto) {
         UserDto userDto = userService.login(loginDto);
-        userDto.setToken(userAuthenticationProvider.createToken(userDto));
+        userDto.setToken(jwtTokenService.createToken(userDto));
         return ResponseEntity.ok(userDto);
     }
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto> register(@RequestBody @Valid SignupDto user) {
         UserDto createdUser = userService.register(user);
-        createdUser.setToken(userAuthenticationProvider.createToken(createdUser));
+        createdUser.setToken(jwtTokenService.createToken(createdUser));
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }
 
