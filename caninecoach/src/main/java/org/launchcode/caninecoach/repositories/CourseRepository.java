@@ -31,4 +31,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
             "ORDER BY t.name ASC")
     List<Object[]> findAllCoursesWithDetails();
 
+    List<Course> findAll(Course courses);
+
+    List<com.google.api.services.classroom.model.Course> listCourses();
 }

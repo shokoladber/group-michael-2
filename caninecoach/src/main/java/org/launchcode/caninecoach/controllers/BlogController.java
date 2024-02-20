@@ -35,7 +35,7 @@ public class BlogController {
     }
 
     @PostMapping("/post")
-    public String createBlog (@Valid Blog newBlog, @org.jetbrains.annotations.NotNull Errors errors) {
+    public String createBlog (@Valid Blog newBlog, Errors errors) {
         if (errors.hasErrors()){
             return "/post";
         }

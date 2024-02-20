@@ -1,12 +1,6 @@
 package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import org.launchcode.caninecoach.entities.AbstractEntity;
-import org.launchcode.caninecoach.entities.Course;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity

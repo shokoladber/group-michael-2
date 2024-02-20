@@ -1,13 +1,9 @@
 package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.launchcode.caninecoach.entities.AbstractEntity;
-import org.launchcode.caninecoach.entities.Course;
-
 @Entity
 public class Details extends AbstractEntity {
     @NotBlank

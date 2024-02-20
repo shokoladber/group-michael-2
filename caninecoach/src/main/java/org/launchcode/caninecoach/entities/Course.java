@@ -1,9 +1,7 @@
 package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 
 @Entity
 public class Course extends AbstractEntity {
