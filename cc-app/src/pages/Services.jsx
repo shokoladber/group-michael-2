@@ -7,7 +7,9 @@ function Services() {
         <div>
             <Navbar/>
             <Header/>
-            <h2>Services Page</h2>
+            <h2>Courses</h2>
+
+
         </div>
     )
 }
