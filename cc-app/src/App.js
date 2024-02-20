@@ -1,39 +1,38 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom'
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import Contact from './pages/Contact';
-import Services from './pages/Services';
-import NoPage from './pages/NoPage';
-import { LoginSignup, Navbar } from './Components/common';
-
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Home, Blog, Classes, Login, NoPage} from './pages';
+import { Header, Navbar, LoginSignup, BlogPost, PetProfilePage, Button, Footer, FileUpload, ContactUs } from './Components/common';
+import { Dropdown } from 'react-bootstrap';
+import Contact from './Components/common/contact2/ContactUs';
+import BuyClasses from './Components/common/buy/BuyClasses'
 
 function App() {
   return (
-    <>
-      
-      <BrowserRouter>
+    <Router>
+      <>
+        <Navbar />
+               
+        {/* <FileUpload /> */}
+        {/* <Header /> */}
+        {/* <Dropdown /> */}
+        {/* <PetProfilePage /> */}
         <Routes>
-         
-          <Route index element= {<Home/>} />
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/blog" element={<Blog/>}/>       
-          <Route path="/contact" element={<Contact/>}/>       
-          <Route path="/services" element={<Services/>}/>
-          <Route path="/LoginSignup" element={<LoginSignup/>}/>  
-
-          <Route path="*" element={<NoPage/>}/>       
-        
-       
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/petprofile" element={<PetProfilePage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/classes" element={<Classes />} />
+          <Route path="/purchase" element={<BuyClasses />} />
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/SIGN UP" element={<LoginSignup />} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
-        {/* <LoginSignup/> */}
-      </BrowserRouter>
-
-
-    </>
+      </>
+    </Router>
   );
 }
 
 export default App;
+
