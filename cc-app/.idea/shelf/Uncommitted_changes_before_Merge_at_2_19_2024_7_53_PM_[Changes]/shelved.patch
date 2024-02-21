@@ -1,0 +1,71 @@
+Index: package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/package-lock.json b/package-lock.json
+--- a/package-lock.json	(revision 5953a28e8f28d033314d68af0a02d26a1cc3f546)
++++ b/package-lock.json	(date 1708394022670)
+@@ -17011,16 +17011,16 @@
+       }
+     },
+     "node_modules/typescript": {
+-      "version": "5.3.3",
+-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.3.3.tgz",
+-      "integrity": "sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==",
++      "version": "4.9.5",
++      "resolved": "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz",
++      "integrity": "sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==",
+       "peer": true,
+       "bin": {
+         "tsc": "bin/tsc",
+         "tsserver": "bin/tsserver"
+       },
+       "engines": {
+-        "node": ">=14.17"
++        "node": ">=4.2.0"
+       }
+     },
+     "node_modules/unbox-primitive": {
+Index: ../caninecoach/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.launchcode.caninecoach;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n\r\n@SpringBootApplication\r\npublic class CanineCoachApplication {\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tSpringApplication.run(CanineCoachApplication.class, args);\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../caninecoach/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java b/../caninecoach/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java
+--- a/../caninecoach/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java	(revision 5953a28e8f28d033314d68af0a02d26a1cc3f546)
++++ b/../caninecoach/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java	(date 1708394022664)
+@@ -4,10 +4,10 @@
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 
+ @SpringBootApplication
+-public class CanineCoachApplication {
++public class CaninecoachApplication {
+ 
+ 	public static void main(String[] args) {
+-		SpringApplication.run(CanineCoachApplication.class, args);
++		SpringApplication.run(CaninecoachApplication.class, args);
+ 	}
+ 
+ }
+Index: ../caninecoach/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.launchcode.caninecoach;\r\n\r\nimport org.junit.jupiter.api.Test;\r\nimport org.springframework.boot.test.context.SpringBootTest;\r\n\r\n@SpringBootTest\r\nclass CanineCoachApplicationTests {\r\n\r\n\t@Test\r\n\tvoid contextLoads() {\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../caninecoach/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java b/../caninecoach/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java
+--- a/../caninecoach/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java	(revision 5953a28e8f28d033314d68af0a02d26a1cc3f546)
++++ b/../caninecoach/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java	(date 1708394022666)
+@@ -4,7 +4,7 @@
+ import org.springframework.boot.test.context.SpringBootTest;
+ 
+ @SpringBootTest
+-class CanineCoachApplicationTests {
++class CaninecoachApplicationTests {
+ 
+ 	@Test
+ 	void contextLoads() {
