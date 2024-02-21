@@ -45,21 +45,17 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     private String determineRedirectUrl(User user) {
         String baseUrl = "http://localhost:3000";
 
-        boolean isNewUser = userService.isNewUser(user.getEmail());
-        boolean isProfileComplete = user.isProfileCreated();
-        UserRole userRole = user.getRole();
 
-        if (isNewUser) {
-            return baseUrl + "/select-role";
-        } else if (userRole == UserRole.TEMPORARY) {
-            // User is not new but has the TEMPORARY role
-            return baseUrl + "/select-role";
-        } else if (!isProfileComplete) {
-            // User is not new, has a role other than TEMPORARY, but profile is not complete
-            return baseUrl + "/create-profile";
+        if (userService.isNewUser(user.getEmail()) || user.getRole() == UserRole.TEMPORARY) {
+            return baseUrl + "/api/select-role";
         } else {
-            // User is not new, has a role other than TEMPORARY, and profile is complete
-            return baseUrl + "/home";
+
+            return switch (user.getRole()) {
+                case PET_GUARDIAN -> baseUrl + "/pet-profiles";
+                case PET_TRAINER -> baseUrl + "/trainer-profiles";
+                default -> baseUrl + "/home";
+            };
         }
     }
+
 }

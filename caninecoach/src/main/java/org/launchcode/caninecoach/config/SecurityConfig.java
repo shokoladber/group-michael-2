@@ -62,7 +62,9 @@ public class SecurityConfig {
                         .requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/auth/signup", "/api/auth/login", "/api/user/select-role").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup, /api/auth/login").permitAll()
                         .requestMatchers("/api/user/verify-email").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/pet-profiles").hasAuthority("ROLE_PET_GUARDIAN")
+                        .requestMatchers("/api/trainer-profiles").hasAuthority("ROLE_PET_TRAINER")
+                                .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint(new UserAuthenticationEntryPoint())

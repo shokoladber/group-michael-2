@@ -2,7 +2,7 @@ package org.launchcode.caninecoach.config;
 
 
 import org.launchcode.caninecoach.dtos.ErrorResponseDto;
-import org.launchcode.caninecoach.exceptions.AppException;
+import org.launchcode.caninecoach.handlers.AppException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -3,7 +3,7 @@ package org.launchcode.caninecoach.controllers;
 import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
-import org.launchcode.caninecoach.exceptions.AppException;
+import org.launchcode.caninecoach.handlers.AppException;
 import org.launchcode.caninecoach.services.UserService;
 import org.launchcode.caninecoach.services.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;

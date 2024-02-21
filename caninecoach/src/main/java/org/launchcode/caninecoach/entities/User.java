@@ -1,7 +1,6 @@
 package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity

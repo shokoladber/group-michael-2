@@ -8,13 +8,15 @@ const UserRoleSelection = () => {
     const [error, setError] = useState('');
 
     const handleRoleSelection = async (role) => {
+        console.log(`Attempting to set role to ${role}`);
         try {
-            await api.post('/api/user/select-role', { role });
+            const response = await api.post('/api/user/select-role', { role });
+            console.log('Role set successfully', response);
 
             if (role === 'PET_GUARDIAN') {
-                navigate('/profile/pet-guardian');
+                navigate('/api/pet-profiles');
             } else if (role === 'PET_TRAINER') {
-                navigate('/profile/pet-trainer');
+                navigate('/api/trainer-profiles');
             }
         } catch (error) {
             console.error("Role selection error:", error.response ? error.response.data : "An error occurred during role selection.");
@@ -38,3 +40,4 @@ const UserRoleSelection = () => {
 };
 
 export default UserRoleSelection;
+

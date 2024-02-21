@@ -5,7 +5,7 @@ import org.launchcode.caninecoach.dtos.SignupDto;
 import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
-import org.launchcode.caninecoach.exceptions.AppException;
+import org.launchcode.caninecoach.handlers.AppException;
 import org.launchcode.caninecoach.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -17,10 +17,8 @@ public class UserDto implements UserDetails {
     private String password;
     private String token;
 
-
     public UserDto() {
     }
-
 
     public UserDto(Long id, String name, String email, UserRole role, String password) {
         this.id = id;
@@ -30,15 +28,13 @@ public class UserDto implements UserDetails {
         this.password = password;
     }
 
-
     public UserDto(Long id, String name, String email, UserRole role, String password, String token) {
-        this(id, name, email, role, password); // Call the main constructor
+        this(id, name, email, role, password);
         this.token = token;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // This grants authority based on the UserRole enum. Adjust as necessary for your application's roles.
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
@@ -53,9 +49,23 @@ public class UserDto implements UserDetails {
     }
 
 
-
     @Override
     public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
         return true;
     }
 
@@ -106,7 +116,6 @@ public class UserDto implements UserDetails {
 
     @Override
     public String toString() {
-
         return "UserDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

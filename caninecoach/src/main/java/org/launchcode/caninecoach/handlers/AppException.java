@@ -1,4 +1,4 @@
-package org.launchcode.caninecoach.exceptions;
+package org.launchcode.caninecoach.handlers;
 
 import org.springframework.http.HttpStatus;
 

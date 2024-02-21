@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface FavoriteRepository extends CrudRepository<Favorite, Integer> {
 
 
-    Object findAll(User user);
+  //  Object findAll(User user);
 
     boolean existsByCourseAndUser(Course course, User user);
 

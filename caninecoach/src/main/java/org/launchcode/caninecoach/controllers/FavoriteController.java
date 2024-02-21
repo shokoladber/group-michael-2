@@ -1,6 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
 import org.launchcode.caninecoach.entities.Course;
+import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.services.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
