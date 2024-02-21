@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-233.14015.106">
+  <component name="dataSourceStorageLocal" created-in="IU-233.14475.28">
     <data-source name="caninecoach@localhost" uuid="24da6054-1759-4a32-a6b1-c1cce395b746">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
-        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <user-name>caninecoach</user-name>
