@@ -1,18 +1,19 @@
 package org.launchcode.caninecoach.services;
 
+import com.sendgrid.*;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,32 +23,55 @@ public class EmailService {
 
     private static final Logger log = LoggerFactory.getLogger(EmailService.class);
 
-    private final JavaMailSender mailSender;
-    private final FreeMarkerConfigurer freemarkerConfigurer;
+    private final Configuration freemarkerConfig;
+
+    @Value("${sendgrid.api-key}")
+    private String sendGridApiKey;
 
     @Autowired
-    public EmailService(JavaMailSender mailSender, FreeMarkerConfigurer freemarkerConfigurer) {
-        this.mailSender = mailSender;
-        this.freemarkerConfigurer = freemarkerConfigurer;
+    public EmailService(Configuration freemarkerConfig) {
+        this.freemarkerConfig = freemarkerConfig;
     }
 
-    public void sendTemplateVerificationEmail(String to, String subject, String verificationLink) throws IOException, MessagingException, TemplateException {
-        Template template = freemarkerConfigurer.getConfiguration().getTemplate("verificationEmailTemplate.ftl");
+    public void sendTemplateVerificationEmail(String to, String subject, String verificationLink) throws IOException {
+        log.info("Preparing to send verification email to {}", to);
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("verificationUrl", verificationLink);
+        try {
+            // Get the FreeMarker template
+            Template template = freemarkerConfig.getTemplate("verificationEmailTemplate.ftl");
 
-        String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+            // Prepare the model for the template
+            Map<String, Object> model = new HashMap<>();
+            model.put("verificationUrl", verificationLink);
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "utf-8");
-        message.setFrom("caninecoachapp@gmail.com");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(content, true);
+            // Process the template into a String
+            String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
 
-        mailSender.send(mimeMessage);
+            // Construct the email using SendGrid's classes
+            Email fromEmail = new Email("caninecoachapp@gmail.com");
+            Email toEmail = new Email(to);
+            Content emailContent = new Content("text/html", content);
+            Mail mail = new Mail(fromEmail, subject, toEmail, emailContent);
+
+            // Send the email using SendGrid
+            SendGrid sg = new SendGrid(sendGridApiKey);
+            Request request = new Request();
+
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+
+            Response response = sg.api(request);
+
+            log.info("Verification email sent successfully to {}", to);
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+            System.out.println(response.getHeaders());
+
+        } catch (IOException | TemplateException e) {
+            log.error("Exception occurred when sending email to {}: {}", to, e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
     }
 
 }
-
