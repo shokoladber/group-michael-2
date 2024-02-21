@@ -9,25 +9,24 @@ import java.util.List;
 public class Favorite {
 
     @Id
-    @GeneratedValue
-    private long favorite_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @ManyToOne
-    @JoinColumn(name= "course_id")
+    @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    private List<User> user;
+    private User user;
 
-
-    public Favorite(long favorite_id, Course course, List<User> user) {
-        this.favorite_id = favorite_id;
+    public Favorite(Course course, User user) {
         this.course = course;
         this.user = user;
     }
 
-    public Favorite() {
+    public long getId() {
+        return id;
     }
 
     public Course getCourse() {
@@ -38,15 +37,12 @@ public class Favorite {
         this.course = course;
     }
 
-    public List<User> getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(User user) {
         this.user = user;
     }
-
-    public long getFavorite_id() {
-        return favorite_id;
-    }
 }
+
