@@ -6,16 +6,16 @@
     border-radius: 5px;
     outline: none;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
 }
-.btn--primary{
-    background-color: linear-gradient(to top,rgb(233, 67, 166) 0%, rgb(231, 150, 83) 100%);;
+.btn--primary {
+    background: linear-gradient(to top, rgb(233, 67, 166) 0%, rgb(231, 150, 83) 100%);
     color: black;
-    border: 1px solid rgb(66, 168, 168); 
+    border: 1px solid rgb(66, 168, 168);
 }
 .btn--outline {
     background-color: transparent;
-    color: linear-gradient(to top,rgb(233, 67, 166) 0%, rgb(231, 150, 83) 100%);;
+    color: var(--primary);
     padding: 8px 20px;
     border: 1px solid rgb(42, 44, 44);
     transition: all 0.3s ease-out;
@@ -31,5 +31,5 @@
 .btn--medium:hover, .btn--large:hover {
     background: rgb(199, 167, 230);
     color: rgb(32, 3, 46);
-    transform: 250ms;
+    transition: background 250ms, color 250ms;
 }

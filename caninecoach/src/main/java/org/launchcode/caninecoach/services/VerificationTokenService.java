@@ -2,50 +2,57 @@ package org.launchcode.caninecoach.services;
 
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.VerificationToken;
+import org.launchcode.caninecoach.repositories.UserRepository;
 import org.launchcode.caninecoach.repositories.VerificationTokenRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class VerificationTokenService {
 
     private static final Logger log = LoggerFactory.getLogger(VerificationTokenService.class);
-
     private final VerificationTokenRepository verificationTokenRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public VerificationTokenService(VerificationTokenRepository verificationTokenRepository) {
+    public VerificationTokenService(VerificationTokenRepository verificationTokenRepository,
+                                    UserRepository userRepository) {
         this.verificationTokenRepository = verificationTokenRepository;
+        this.userRepository = userRepository;
     }
 
-    public VerificationToken createTokenForUser(User user, String token) {
-        VerificationToken verificationToken = new VerificationToken();
-        verificationToken.setUser(user);
-        verificationToken.setToken(token);
-        verificationToken.setExpiryDate(calculateExpiryDate(24)); // 24 hours
-        return verificationTokenRepository.save(verificationToken);
+    public String createTokenForUser(User user) {
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken(token, user);
+        verificationTokenRepository.save(verificationToken);
+        return token;
     }
 
-    private Date calculateExpiryDate(int expiryTimeInHours) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.HOUR, expiryTimeInHours);
-        return new Date(cal.getTimeInMillis());
+    // Validates the verification token the update user role
+    public boolean verifyToken(String token) {
+        Optional<VerificationToken> verificationTokenOpt = verificationTokenRepository.findByToken(token);
+        if (verificationTokenOpt.isPresent()) {
+            VerificationToken verificationToken = verificationTokenOpt.get();
+            if (verificationToken.getExpiryDate().after(new Date())) {
+                User user = verificationToken.getUser();
+                user.setVerified(true);
+                userRepository.save(user);
+                verificationTokenRepository.delete(verificationToken); // Deletes after verified
+
+                return true;
+            } else {
+                log.info("Verification token is expired.");
+            }
+        } else {
+            log.info("Invalid verification token.");
+        }
+        return false;
     }
 
-    public Optional<VerificationToken> validateVerificationToken(String token) {
-        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-        return verificationToken.filter(vToken -> vToken.getExpiryDate().after(new Date()));
-    }
-
-    public void setVerifiedTrue(User user) {
-        user.setVerified(true);
-        //userRepository.save(user);
-    }
 }

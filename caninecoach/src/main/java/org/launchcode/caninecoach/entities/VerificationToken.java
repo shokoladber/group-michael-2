@@ -1,22 +1,16 @@
 package org.launchcode.caninecoach.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
+@Table(name = "verification_token")
 public class VerificationToken {
 
-    private static final int EXPIRATION = 24 * 60;
+    private static final int EXPIRATION = 60 * 24; // 24 hours
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +29,13 @@ public class VerificationToken {
     public VerificationToken() {
     }
 
+    public VerificationToken(String token, User user) {
+        this.token = token;
+        this.user = user;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -50,6 +51,7 @@ public class VerificationToken {
     public Date getExpiryDate() {
         return expiryDate;
     }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -67,9 +69,10 @@ public class VerificationToken {
         this.expiryDate = expiryDate;
     }
 
+
     private Date calculateExpiryDate(int expiryTimeInMinutes) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
+        cal.setTimeInMillis(new Date().getTime());
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(cal.getTime().getTime());
     }
@@ -77,6 +80,20 @@ public class VerificationToken {
     public void setExpiryDateFromNow() {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof VerificationToken)) return false;
+        VerificationToken that = (VerificationToken) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(token, that.token) &&
+                Objects.equals(user, that.user) &&
+                Objects.equals(expiryDate, that.expiryDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, token, user, expiryDate);
+    }
 }
-
-

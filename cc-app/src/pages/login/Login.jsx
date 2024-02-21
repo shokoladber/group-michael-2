@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
+import UserLogin from '../../Components/auth/UserLogin';
 import './Login.css';
-import { LoginSignup } from '../../Components/common'
 
 function Login() {
-  return (
-    <div>
-        <LoginSignup />
-
-    </div>
-  )
+    return (
+        <div>
+            <UserLogin/>
+        </div>
+    );
 }
 
-export default Login
+export default Login;
+

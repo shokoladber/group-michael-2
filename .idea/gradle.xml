@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-<<<<<<< HEAD
-        <option name="externalProjectPath" value="$PROJECT_DIR$/canine-coach" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/canine-coach" />
-=======
         <option name="externalProjectPath" value="$PROJECT_DIR$/caninecoach" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/caninecoach" />
->>>>>>> main
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/cc-app" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/cc-app" />
           </set>
         </option>
       </GradleProjectSettings>

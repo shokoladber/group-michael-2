@@ -5,50 +5,71 @@ plugins {
 	id 'com.github.ben-manes.versions' version '0.51.0'
 }
 
-
 group = 'org.launchcode'
 version = '0.0.1-SNAPSHOT'
-
 
 
 java {
 	sourceCompatibility = '17'
 }
 
+
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+	set('springCloudVersion', "2023.0.0")
+	junitVersion = '5.9.2'
+}
+
+dependencies {
+	// Spring
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.data:spring-data-elasticsearch'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+	implementation 'com.mysql:mysql-connector-j:8.3.0'
+
+	// Google
+	implementation 'com.google.api-client:google-api-client-gson:2.3.0'
+	implementation 'com.google.apis:google-api-services-serviceusage:v1-rev20231217-2.0.0'
+	implementation 'com.google.apis:google-api-services-classroom:v1-rev20231121-2.0.0'
+	implementation 'com.google.auth:google-auth-library-oauth2-http:1.23.0'
+	implementation 'com.google.oauth-client:google-oauth-client-jetty:1.35.0'
+
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0-M1'
+	implementation 'com.auth0:java-jwt:4.3.0'
+
+	// Mail
+	implementation 'jakarta.mail:jakarta.mail-api:2.1.2'
+	implementation 'com.sun.mail:jakarta.mail:2.0.1'
+	implementation 'com.sendgrid:sendgrid-java:4.7.1'
+	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
 
-	ext {
-		set('springCloudVersion', "2023.0.0")
+	// Test
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: 'junit', module: 'junit'
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation "org.junit.jupiter:junit-jupiter"
+	testImplementation 'org.springframework.security:spring-security-test'
 
-
-	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-		implementation 'org.springframework.boot:spring-boot-starter-validation'
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.data:spring-data-elasticsearch'
-		implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
-		implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
-		implementation 'org.springframework.boot:spring-boot-starter-security'
-		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-		implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
-		implementation 'com.mysql:mysql-connector-j:8.3.0'
-		implementation 'com.google.api-client:google-api-client-gson:2.3.0'
-		implementation 'com.google.apis:google-api-services-serviceusage:v1-rev20231217-2.0.0'
-		implementation 'com.google.apis:google-api-services-classroom:v1-rev20231121-2.0.0'
-		implementation 'com.google.auth:google-auth-library-oauth2-http:1.22.0'
-		implementation 'com.google.oauth-client:google-oauth-client-jetty:1.31.5'
-		implementation 'org.springframework.boot:spring-boot-starter-mail'
-		developmentOnly 'org.springframework.boot:spring-boot-devtools'
-		runtimeOnly 'com.mysql:mysql-connector-j'
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	}
-
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-gson:0.11.2'
+}
 
 	/*dependencyManagement {
 		imports {
@@ -57,7 +78,11 @@ repositories {
 	}*/
 
 
-	tasks.named('test') {
-		useJUnitPlatform()
-	}
+tasks.named('test') {
+	useJUnitPlatform()
 }
+
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << "-Xlint:deprecation"
+}
+

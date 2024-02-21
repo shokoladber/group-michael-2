@@ -47,6 +47,7 @@ out/
 ### Google Crendentials ###
 src/main/resources/application-secret.properties
 src/main/resources/google-classroom-api.json
+src/main/resources/application.properties
 
 
 

@@ -2,6 +2,7 @@ import React from "react";
 import './Header.css';
 import pix1 from '../../Assets/px5.jpg';
 import pix2 from '../../Assets/px6.jpg';
+import PetProfilePage from "../profile/PetProfilePage";
 import Search from "../../common/search/Search";
 import { Link } from "react-router-dom";
 
@@ -19,7 +20,7 @@ function Header() {
           <li className='nav__item'>
             <Link to="/sign up" className='header-input__1'><button>Sign Up</button></Link>
           </li>
-          
+
         </div>
 
         <div className="header-trainers">
@@ -27,7 +28,7 @@ function Header() {
           <p>Trusted Trainers</p>
         </div>
       </div>
-      
+
       <div className="header-image">
         <img src={pix1} alt='' className="header-img" />
       </div>

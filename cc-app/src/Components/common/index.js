@@ -1,8 +1,8 @@
 export { default as Header} from './header/Header';
 export { default as Navbar} from './navbar/Navbar';
-export { default as LoginSignup} from './LoginSignup/LoginSignup';
+export { default as UserLogin} from '../auth/UserLogin';
 export { default as BlogPost} from './blogpost/BlogPost';
-export { default as PetProfilePage} from './petProfilePage/PetProfilePage';
+export { default as PetProfilePage} from './profile/PetProfilePage';
 export { default as FileUpload} from './fileUpload/FileUpload';
 export { default as ContactUs} from './contact2/ContactUs';
 export { default as Button} from './button/Button';
