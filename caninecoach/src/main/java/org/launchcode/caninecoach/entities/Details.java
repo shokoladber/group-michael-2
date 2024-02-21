@@ -1,13 +1,9 @@
 package org.launchcode.caninecoach.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.launchcode.caninecoach.entities.AbstractEntity;
-import org.launchcode.caninecoach.entities.Course;
-
 @Entity
 public class Details extends AbstractEntity {
     @NotBlank
@@ -18,18 +14,18 @@ public class Details extends AbstractEntity {
 
     private Integer price;
 
-    @OneToOne
-    @NotNull
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @OneToOne(mappedBy = "details")
+    private CourseInfo courseInfo;;
 
     public Details() {
     }
 
-    public Details(String length, String description, Integer price, Course course) {
+
+    public Details(String length, String description, Integer price, CourseInfo courseInfo) {
         this.length = length;
         this.description = description;
         this.price = price;
+        this.courseInfo = courseInfo;
     }
 
     public String getLength() {
@@ -56,7 +52,11 @@ public class Details extends AbstractEntity {
         this.price = price;
     }
 
-    public Course getCourse() {
-        return course;
+    public CourseInfo getCourseInfo() {
+        return courseInfo;
+    }
+
+    public void setCourseInfo(CourseInfo courseInfo) {
+        this.courseInfo = courseInfo;
     }
 }
