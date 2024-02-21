@@ -1,8 +1,5 @@
 package org.launchcode.caninecoach.controllers;
 
-
-import org.launchcode.caninecoach.repositories.CourseRepository;
-import org.launchcode.caninecoach.services.CourseService;
 import com.google.api.services.classroom.model.Student;
 import org.launchcode.caninecoach.repositories.CourseRepository;
 import org.launchcode.caninecoach.services.GoogleClassroomService;
@@ -20,32 +17,20 @@ import java.util.List;
 @RequestMapping("/api/classroom")
 public class ClassroomController {
     private static final Logger log = LoggerFactory.getLogger(ClassroomController.class);
-
-
-
-    private final CourseRepository courseRepository;
-
-
-    private final CourseService courseService;
+    private final GoogleClassroomService googleClassroomService;
 
     private final CourseRepository courseRepository;
 
     @Autowired
-    public ClassroomController(CourseRepository courseRepository, CourseService courseService) {
-
-        this.courseRepository = courseRepository;
-        this.courseService = courseService;
-      
     public ClassroomController(GoogleClassroomService googleClassroomService, CourseRepository courseRepository) {
         this.googleClassroomService = googleClassroomService;
         this.courseRepository = courseRepository;
-
     }
 
     @GetMapping("/courses")
-    public ResponseEntity<List<Object[]>> getCourses() {
+    public ResponseEntity<List<Course>> getCourses() {
         try {
-            List<Object[]> courses = courseRepository.findAllCoursesWithDetails();
+            List<Course> courses = googleClassroomService.listCourses();
             if (courses.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
@@ -56,7 +41,7 @@ public class ClassroomController {
         }
     }
 
-   /* @PostMapping("/enrollStudent")
+    @PostMapping("/enrollStudent")
     public ResponseEntity<?> enrollStudent(@RequestParam String courseId, @RequestParam String studentEmail) {
         try {
             Student student = googleClassroomService.addStudentToCourse(courseId, studentEmail);
@@ -66,6 +51,6 @@ public class ClassroomController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error enrolling student");
         }
 
-    }*/
+    }
 }
 
