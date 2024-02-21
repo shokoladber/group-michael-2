@@ -3,6 +3,7 @@ package org.launchcode.caninecoach.controllers;
 import com.google.api.services.classroom.model.Announcement;
 import com.google.api.services.classroom.model.Course;
 import com.google.api.services.classroom.model.Student;
+import org.launchcode.caninecoach.repositories.CourseRepository;
 import org.launchcode.caninecoach.services.GoogleClassroomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,12 @@ public class ClassroomController {
     private static final Logger log = LoggerFactory.getLogger(ClassroomController.class);
     private final GoogleClassroomService googleClassroomService;
 
+    private final CourseRepository courseRepository;
+
     @Autowired
-    public ClassroomController(GoogleClassroomService googleClassroomService) {
+    public ClassroomController(GoogleClassroomService googleClassroomService, CourseRepository courseRepository) {
         this.googleClassroomService = googleClassroomService;
+        this.courseRepository = courseRepository;
     }
 
     // Trainer can create course

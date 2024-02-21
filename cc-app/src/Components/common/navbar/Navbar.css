@@ -72,19 +72,19 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
-  /* Dropdown item */
+  
   .dropdown-item {
     padding: 10px;
   }
   
-  /* Dropdown link */
+  
   .dropdown-link {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
-  /* Show dropdown on hover */
+  
   .nav__item:hover .dropdown {
     display: flex;
   }
@@ -101,7 +101,7 @@
     }
   
     .nav__menu {
-      display: none;
+      display: flex;
       flex-direction: column;
       position: absolute;
       top: 80px;

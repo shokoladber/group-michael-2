@@ -1,70 +1,61 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, {useState} from 'react';
 import { contactConfig } from './Content_Option';
-import './ContactUs.css';
+import './ContactUs.css'; 
 
 function Contact() {
-  return (
-    <Container>
-      <Row className='mb-5 mt-3'>
-        <Col lg='8'>
-          <h1 className='display-4 mb-4'>Contact Us</h1>
-        </Col>
-      </Row>
+  const [formData, setFormData]=useState({
+    name:'',
+    email:'',
+    message:'',
+    
+  });
 
-      <Row className='sec_sp text-center'>
-        <Col lg='5' className='mb-5'>
-          <h3 className='color_sec py-4'>Get in Contact</h3>
-          <address>
-            <strong>Email : caninecoach314@gmail.com </strong>
-            <br />
-            <br />
-            <p>
-              <strong>Phone : 314 xxx xxxx</strong>
-            </p>
-          </address>
+  const handleChange = (e)=> {
+      const {name, value} = e.target;
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+  };
+  const handleSubmit =(e)=> {
+    e.preventDefault();
+
+    console.log(formData);
+    setFormData({
+      name:'',
+      email:'',
+      message:'',
+    });
+  };
+  
+  return (
+    <form onSubmit={handleSubmit} className='contact-form' action='https://formspree.io/f/xpzvdbyp' method='POST' data-email='caninecoach314@gmail.com'>
+      <div className='form-group'>
+         <h1>Contact Us</h1>
+         <br/>
+
+          <h2><strong> caninecoach314@gmail.com </strong></h2>
+          <br/>
           <p>{contactConfig.description}</p>
-        </Col>
-        <Col lg='7'>
-          <div className='contact-form-container'>
-            <form className='contact-form'>
-              <Row>
-                <Col lg='6' className='form-group'>
-                  <input
-                    className='form-control'
-                    id='name'
-                    placeholder='Name'
-                    type='text'
-                  />
-                </Col>
-                <Col lg='6' className='form-group'>
-                  <input
-                    className='form-control rounded-0'
-                    id='email'
-                    placeholder='Email'
-                    type='email'
-                  />
-                </Col>
-              </Row>
-              <textarea
-                className='form-control rounded-0'
-                id='message'
-                name='message'
-                placeholder='Message'
-                rows='5'
-              ></textarea>
-              <br />
-              <div className='form-group'>
-                <button className='btn ac_btn' type='submit'>
-                  Send
-                </button>
-              </div>
-            </form>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+          <br/>
+
+        
+          <label htmlFor='name'>Name:</label>
+          <input type='text' id='name' name='name' value={formData.name} onChange={handleChange}/>
+      </div>
+      <div className='form-group'>
+          <label htmlFor='email'>Email:</label>
+          <input type='email' id='email' name='email' value={formData.email} onChange={handleChange}/>
+      </div>
+      <div className='form-group'>
+          <label htmlFor='message'>Message:</label>
+          <textarea id='message' name='message' value={formData.message} onChange={handleChange}/>
+      </div>
+        <button type='submit'>Submit</button>
+    
+    </form>
   );
-}
+};
 
 export default Contact;
+

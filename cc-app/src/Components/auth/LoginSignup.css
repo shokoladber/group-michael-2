@@ -1,12 +1,12 @@
-.container {
+.container{
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 90px;
+    margin-top: 100px;
     width: 500px;
-    background: transparent;
-    border: 2px solid rgb(188, 142, 142);
-    backdrop-filter: blur(30px);
+    background-color: #efe4d8;
+    border:2px solid rgb(188, 142, 142) ;
+    backdrop-filter: blur (30px);
     box-shadow: 0 0 10px black;
     padding-bottom: 30px;
     border-radius: 60px;
@@ -16,48 +16,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 40px;   
     width: 100%;
     margin-top: 10px;
 }
-
 .text {
-    color: #007bff;
-    font-size: 50px;
+    color:#fa4118;
+    font-size: 50px;    
     font-weight: 700;
 }
-
-.underline {
+.underline{
     width: 200px;
     height: 6px;
-    background: #007bff;
+    background: #fa4118;
     border-radius: 9px;
-}
 
-.inputs {
+}
+.inputs{
     margin-top: 55px;
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
-
-.input {
+.input{
     display: flex;
     align-items: center;
     margin: auto;
     width: 480px;
     height: 80px;
-    background: rgba(24, 22, 22, 0.13);
-    border-radius: 6px;
+    background: rgba(135, 20, 20, 0.13);
+    border-radius: 16px;
 }
-
-.input img {
-    margin: 0 22px;
+.input img{
+    margin: 0px 22px;
 }
-
-.input input {
+.input input{
     height: 5px;
-    width: calc(100% - 40px);
+    width: 400px;
     background: transparent;
     border: none;
     outline: none;
@@ -66,89 +61,50 @@
     padding: 20px 20px 20px;
 }
 
-.error-message {
-    color: #007bff;
-    text-align: center;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.forgot-password {
+.forgot-password{
     padding-left: 62px;
     margin-top: 27px;
     color: rgb(31, 30, 30);
     font-size: 20px;
 }
-
-.forgot-password span {
-    color: #007bff;
+.forgot-password span{
+    color: #fa4118;
     cursor: pointer;
 }
-
-.forgot-password span:hover {
+.forgot-password span:hover{
     color: rgb(227, 43, 11);
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: underline ;
 }
-
-.submit-container {
+.submit-container{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
-    margin: 30px auto;
+    gap: 30px;
+    margin: 60px auto;
 }
-
-.submit, .gray {
+.submit{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 220px;
     height: 59px;
     color: #f5f5dc;
-    background: #007bff;
+    background:#fa4118;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
-    outline: none;
-    border: none;
+}
+.gray{
+    background: rgb(241, 223, 149);
+    color: rgb(202, 213, 213);
 }
 
-.gray {
-    background: #007bff;
-    color: #f5f5dc;
-}
-
-.footer {
-    text-align: center;
-    margin-top: 40px;
-    color: #007bff;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.footer a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-    color: #0056b3;
-}
-
-/* Mobile Version (Responsiveness) */
-@media only screen and (max-width: 600px) {
-    .container {
-        width: 90%;
-        margin-top: 30px;
+/* @media only screen and (max-width: 600px) {
+    .container,
+    .header
+    {
+        width: 80%;
+        bottom: 60px;
     }
-
-    .input {
-        width: calc(100% - 40px);
-    }
-}
+    
+} */

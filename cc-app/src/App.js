@@ -1,37 +1,38 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, Blog, Classes, NoPage } from './pages';
-import { Header, Navbar, BlogPost, PetProfilePage, Button, Footer, FileUpload, ContactUs } from './Components/common';
-import { UserLogin, UserSignup, UserRoleSelection, OAuth2RedirectHandler, VerifyEmail } from './Components/auth/authIndex';
-import Contact from './Components/common/contact2/ContactUs';
-import BuyClasses from './Components/common/buy/BuyClasses';
+import { Home, Blog, Classes, Login, NoPage} from './pages';
+import { Header, Navbar, LoginSignup, BlogPost, PetProfilePage, Button, Footer, FileUpload, ContactUs } from './Components/common';
 import { Dropdown } from 'react-bootstrap';
-//import PetGuardianProfile from './Components/common/profile/pet-guardian/PetGuardianProfile';
-//import PetTrainerProfile from './Components/common/profile/pet-trainer/PetTrainerProfile';
-
+import Contact from './Components/common/contact2/ContactUs';
+import BuyClasses from './Components/common/buy/BuyClasses'
 
 function App() {
   return (
+    <Router>
       <>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/classes" element={<Classes />} />
-            <Route path="/login" element={<UserLogin />} />
-            <Route path="/signup" element={<UserSignup />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/select-role" element={<UserRoleSelection />} />
-            <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
-            <Route path="*" element={<NoPage />} />
-          </Routes>
-        </Router>
+        <Navbar />
+               
+        {/* <FileUpload /> */}
+        {/* <Header /> */}
+        {/* <Dropdown /> */}
+        {/* <PetProfilePage /> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/petprofile" element={<PetProfilePage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/classes" element={<Classes />} />
+          <Route path="/purchase" element={<BuyClasses />} />
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/SIGN UP" element={<LoginSignup />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
       </>
+    </Router>
   );
 }
 
 export default App;
+

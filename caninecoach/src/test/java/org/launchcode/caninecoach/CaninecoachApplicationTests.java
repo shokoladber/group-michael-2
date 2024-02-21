@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
-class CaninecoachApplicationTests {
+class CanineCoachApplicationTests {
 
 	@Test
 	void contextLoads() {
