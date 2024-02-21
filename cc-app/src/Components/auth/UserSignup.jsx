@@ -8,7 +8,7 @@ const UserSignup = () => {
         name: '',
         email: '',
         password: '',
-        confirmPassword: '', // Added state for confirmPassword
+        confirmPassword: '',
     });
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
@@ -26,7 +26,6 @@ const UserSignup = () => {
             return;
         }
         try {
-            // Use the Axios instance for the API request
             await api.post('/api/auth/signup', {
                 name: userDetails.name,
                 email: userDetails.email,

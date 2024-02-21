@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// Replace direct axios import with custom Axios instance
-import api from '../../utils/api'; // Adjust the import path to where your api.js file is located
+import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
 
@@ -10,10 +9,8 @@ const UserRoleSelection = () => {
 
     const handleRoleSelection = async (role) => {
         try {
-            // Use the Axios instance for the API request
             await api.post('/api/user/select-role', { role });
 
-            // Navigate based on the selected role
             if (role === 'PET_GUARDIAN') {
                 navigate('/profile/pet-guardian');
             } else if (role === 'PET_TRAINER') {
@@ -21,7 +18,7 @@ const UserRoleSelection = () => {
             }
         } catch (error) {
             console.error("Role selection error:", error.response ? error.response.data : "An error occurred during role selection.");
-            setError(error.response ? error.response.data.message : "An error occurred during role selection."); // Adjusted to potentially access error message directly
+            setError(error.response ? error.response.data.message : "An error occurred during role selection.");
         }
     };
 

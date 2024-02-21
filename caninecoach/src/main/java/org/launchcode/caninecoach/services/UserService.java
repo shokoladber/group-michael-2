@@ -89,18 +89,20 @@ public class UserService {
                 .orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
     }
 
-    public UserDto processOAuth2User(String email, UserRole defaultRole) {
-        User user = userRepository.findByEmail(email)
+    // Inside UserService class
+
+    public User processOAuth2User(String email, UserRole defaultRole) {
+        return userRepository.findByEmail(email)
                 .orElseGet(() -> {
                     User newUser = new User();
                     newUser.setEmail(email);
+                    newUser.setName("Default Name"); // Set a default name
+                    newUser.setPassword(passwordEncoder.encode("RandomPassword!123")); // Set a placeholder password
                     newUser.setRole(defaultRole);
                     newUser.setUsingOAuth2(true);
                     newUser.setVerified(true);
                     return userRepository.save(newUser);
                 });
-
-        return toUserDto(user);
     }
 
     public boolean isNewUser(String email) {

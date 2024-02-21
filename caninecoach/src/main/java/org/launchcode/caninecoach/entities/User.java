@@ -34,7 +34,7 @@ public class User {
     @Column(name = "role", nullable = false)
     private UserRole role;
 
-    // Constructors
+
     public User() {
     }
 

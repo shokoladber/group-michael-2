@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import api from '../../utils/api'; // Adjust the path as necessary
+import api from '../../utils/api';
 
 const VerifyEmail = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [status, setStatus] = useState('verifying'); // Possible states: 'verifying', 'success', 'failure'
+    const [status, setStatus] = useState('verifying');
 
     useEffect(() => {
         const verifyEmail = async () => {
@@ -14,18 +14,17 @@ const VerifyEmail = () => {
 
             if (!token) {
                 setStatus('failure');
-                return; // Exit early if no token is present
+                return;
             }
 
             try {
-                // Use the Axios instance to make the API call
                 await api.get(`/api/auth/verify-email`, { params: { token } });
 
-                // If the request is successful, update the status and navigate accordingly
+                // Update the user's verified status
                 setStatus('success');
                 setTimeout(() => navigate('/verification-success'), 3000); // Redirect after 3 seconds to a success page
             } catch (error) {
-                // If there's an error, update the status and navigate accordingly
+                // Failed to verify the email
                 setStatus('failure');
                 setTimeout(() => navigate('/verification-failed'), 3000); // Redirect after 3 seconds to a failure page
             }

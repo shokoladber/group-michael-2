@@ -39,7 +39,7 @@ public class VerificationTokenService {
         Optional<VerificationToken> verificationTokenOpt = verificationTokenRepository.findByToken(token);
         if (verificationTokenOpt.isPresent()) {
             VerificationToken verificationToken = verificationTokenOpt.get();
-            if (verificationToken.getExpiryDate().after(new Date())) { // Token is valid
+            if (verificationToken.getExpiryDate().after(new Date())) {
                 User user = verificationToken.getUser();
                 user.setVerified(true);
                 userRepository.save(user);

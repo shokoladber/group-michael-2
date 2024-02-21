@@ -3,7 +3,6 @@ package org.launchcode.caninecoach.dtos;
 public class ErrorResponseDto {
     private String message;
 
-    // Default constructor for JSON deserialization
     public ErrorResponseDto() {
     }
 
@@ -11,7 +10,7 @@ public class ErrorResponseDto {
         this.message = message;
     }
 
-    // Getter and Setter
+
     public String getMessage() {
         return message;
     }

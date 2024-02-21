@@ -14,6 +14,9 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +25,7 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
     private final Logger log = LoggerFactory.getLogger(CustomOAuth2UserDetailsService.class);
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
     public CustomOAuth2UserDetailsService(UserRepository userRepository) {
@@ -33,19 +37,27 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
         OAuth2User oauthUser = super.loadUser(userRequest);
 
         String email = oauthUser.getAttribute("email");
-        String name = oauthUser.getAttribute("name");
+        String nameFromOAuth = oauthUser.getAttribute("name");
+
+        // Oauth2 default name if not initially provided, keep getting error
+        final String finalName = (nameFromOAuth == null || nameFromOAuth.isBlank()) ? "Default Name" : nameFromOAuth;
+        final String finalPlaceholderPassword = generateRandomPlaceholderPassword();
 
         User user = userRepository.findByEmail(email).orElseGet(() -> {
             User newUser = new User();
             newUser.setEmail(email);
-            newUser.setName(name != null ? name : "Default Name");
+            newUser.setName(finalName);
+            newUser.setPassword(finalPlaceholderPassword);
             newUser.setRole(UserRole.TEMPORARY);
+            newUser.setUsingOAuth2(true);
+            newUser.setVerified(true);
             return userRepository.save(newUser);
         });
 
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         addRoleSpecificAuthorities(user.getRole(), authorities);
+
 
         return new DefaultOAuth2User(authorities, oauthUser.getAttributes(), "email");
     }
@@ -66,5 +78,12 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
                     new SimpleGrantedAuthority("ACCESS_VIEW_ROSTER")
             ));
         }
+    }
+
+    // Password generator to complete database entry
+    private String generateRandomPlaceholderPassword() {
+        byte[] randomBytes = new byte[24];
+        RANDOM.nextBytes(randomBytes);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
     }
 }

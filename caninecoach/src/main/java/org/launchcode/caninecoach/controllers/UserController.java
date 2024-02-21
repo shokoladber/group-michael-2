@@ -72,7 +72,7 @@ public class UserController {
         }
 
         try {
-            user = userService.findUserByEmail(email); // Use the new method to fetch the User entity
+            user = userService.findUserByEmail(email);
             String roleName = request.get("role");
             UserRole role = UserRole.valueOf(roleName);
             user.setRole(role);

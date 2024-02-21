@@ -40,20 +40,20 @@ public class EmailService {
             // Get the FreeMarker template
             Template template = freemarkerConfig.getTemplate("verificationEmailTemplate.ftl");
 
-            // Prepare the model for the template
+
             Map<String, Object> model = new HashMap<>();
             model.put("verificationUrl", verificationLink);
 
-            // Process the template into a String
+
             String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
 
-            // Construct the email using SendGrid's classes
+
             Email fromEmail = new Email("caninecoachapp@gmail.com");
             Email toEmail = new Email(to);
             Content emailContent = new Content("text/html", content);
             Mail mail = new Mail(fromEmail, subject, toEmail, emailContent);
 
-            // Send the email using SendGrid
+
             SendGrid sg = new SendGrid(sendGridApiKey);
             Request request = new Request();
 
