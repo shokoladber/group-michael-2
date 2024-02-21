@@ -5,36 +5,33 @@ import org.launchcode.caninecoach.dtos.SignupDto;
 import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
-import org.launchcode.caninecoach.entities.VerificationToken;
 import org.launchcode.caninecoach.exceptions.AppException;
 import org.launchcode.caninecoach.repositories.UserRepository;
-import org.launchcode.caninecoach.repositories.VerificationTokenRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.UUID;
 
 @Service
 public class UserService {
 
     private static final Logger Log = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
-    private final VerificationTokenRepository verificationTokenRepository;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
+    private final VerificationTokenService verificationTokenService;
 
     @Autowired
     public UserService(UserRepository userRepository,
-                       VerificationTokenRepository verificationTokenRepository,
                        EmailService emailService,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       VerificationTokenService verificationTokenService) {
         this.userRepository = userRepository;
-        this.verificationTokenRepository = verificationTokenRepository;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.verificationTokenService = verificationTokenService;
     }
 
     public UserDto login(LoginDto loginDto) {
@@ -61,10 +58,8 @@ public class UserService {
         user.setVerified(false);
         User savedUser = userRepository.save(user);
 
-        // Generate and save the verification token
-        String token = UUID.randomUUID().toString();
-        VerificationToken verificationToken = new VerificationToken(token, savedUser);
-        verificationTokenRepository.save(verificationToken);
+
+        String token = verificationTokenService.createTokenForUser(savedUser);
 
         // Send verification email
         String verificationLink = "http://localhost:3000/verify-email?token=" + token;
@@ -72,18 +67,16 @@ public class UserService {
             emailService.sendTemplateVerificationEmail(savedUser.getEmail(), "Verify Your Email", verificationLink);
         } catch (Exception e) {
             Log.error("Error sending verification email", e);
-            // Optionally handle this more gracefully
+
         }
 
         return toUserDto(savedUser);
     }
 
-
     public UserDto save(User user) {
         User savedUser = userRepository.save(user);
         return toUserDto(savedUser);
     }
-
 
     public UserDto findByEmail(String email) {
         User user = userRepository.findByEmail(email)
@@ -103,7 +96,7 @@ public class UserService {
                     newUser.setEmail(email);
                     newUser.setRole(defaultRole);
                     newUser.setUsingOAuth2(true);
-                    newUser.setVerified(true); // Automatically verify OAuth2 users
+                    newUser.setVerified(true);
                     return userRepository.save(newUser);
                 });
 
@@ -115,12 +108,13 @@ public class UserService {
                 .map(User::isProfileCreated)
                 .orElse(true);
     }
+
     public boolean isProfileComplete(String email) {
-        // Assuming 'isProfileCreated' is a boolean field in your User entity that checks for profile completeness
         return userRepository.findByEmail(email)
                 .map(User::isProfileCreated)
-                .orElse(false); // If user is not found, we consider the profile incomplete
+                .orElse(false);
     }
+
     public void updateUserRole(Long userId, UserRole newRole) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new AppException("User not found with ID: " + userId, HttpStatus.NOT_FOUND));
@@ -134,9 +128,6 @@ public class UserService {
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole());
-        // Password should not be sent to the client
-        // Token is managed elsewhere if needed
         return userDto;
     }
 }
-

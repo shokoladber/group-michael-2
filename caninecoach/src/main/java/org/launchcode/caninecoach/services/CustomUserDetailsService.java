@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
 
-        // Assign TEMPORARY role if the user has no role
+
         if (user.getRole() == null) {
             user.setRole(UserRole.TEMPORARY);
             userRepository.save(user);

@@ -3,9 +3,9 @@ package org.launchcode.caninecoach.dtos;
 public class SignupDto {
     private String name;
     private String email;
-    private String password; // Changed from char[] for compatibility with JSON processing
+    private String password;
 
-    // Default constructor for JSON deserialization
+
     public SignupDto() {
     }
 
@@ -15,7 +15,7 @@ public class SignupDto {
         this.password = password;
     }
 
-    // Getters and Setters
+
     public String getName() {
         return name;
     }

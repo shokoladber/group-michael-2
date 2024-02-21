@@ -19,8 +19,6 @@ repositories {
 
 ext {
 	set('springCloudVersion', "2023.0.0")
-	lombokVersion = '1.18.26'
-	mapstructVersion = '1.5.3.Final'
 	junitVersion = '5.9.2'
 }
 
@@ -50,16 +48,11 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0-M1'
 	implementation 'com.auth0:java-jwt:4.3.0'
-	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 
 	// Mail
-	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'jakarta.mail:jakarta.mail-api:2.1.2'
 	implementation 'com.sun.mail:jakarta.mail:2.0.1'
 
-	// MapStruct
-	//implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-	//annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
 	// Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {

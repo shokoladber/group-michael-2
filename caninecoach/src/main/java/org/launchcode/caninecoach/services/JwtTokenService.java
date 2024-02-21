@@ -51,7 +51,7 @@ public class JwtTokenService {
             verifier.verify(token);
             return true;
         } catch (JWTVerificationException exception) {
-            // Log token verification failure
+
             return false;
         }
     }

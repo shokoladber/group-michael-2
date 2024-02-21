@@ -36,12 +36,10 @@ public class AuthController {
         return ResponseEntity.ok(userDto);
     }
 
-    // Inside your controller class
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto> register(@RequestBody @Valid SignupDto signupDto) {
         UserDto createdUser = userService.register(signupDto);
-        // Do not set the JWT token here, as you're currently handling email verification
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{id}")
                 .buildAndExpand(createdUser.getId()).toUri();

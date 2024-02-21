@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .authenticationEntryPoint(new UserAuthenticationEntryPoint())
                 )
                 .formLogin(form -> form
-                        .loginPage("/api/auth/login")
+                        .loginPage("/login")
                         .defaultSuccessUrl("/home")
                         .permitAll()
                 )

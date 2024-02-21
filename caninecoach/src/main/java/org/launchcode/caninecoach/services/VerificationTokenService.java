@@ -17,17 +17,16 @@ import java.util.UUID;
 public class VerificationTokenService {
 
     private static final Logger log = LoggerFactory.getLogger(VerificationTokenService.class);
-
     private final VerificationTokenRepository verificationTokenRepository;
-    private final UserRepository userRepository; // Needed to update the User's verified status
+    private final UserRepository userRepository;
 
     @Autowired
-    public VerificationTokenService(VerificationTokenRepository verificationTokenRepository, UserRepository userRepository) {
+    public VerificationTokenService(VerificationTokenRepository verificationTokenRepository,
+                                    UserRepository userRepository) {
         this.verificationTokenRepository = verificationTokenRepository;
         this.userRepository = userRepository;
     }
 
-    // Generates verification token for the user
     public String createTokenForUser(User user) {
         String token = UUID.randomUUID().toString();
         VerificationToken verificationToken = new VerificationToken(token, user);
@@ -35,22 +34,19 @@ public class VerificationTokenService {
         return token;
     }
 
-    // Validates the verification token and updates user's verification status
+    // Validates the verification token the update user role
     public boolean verifyToken(String token) {
         Optional<VerificationToken> verificationTokenOpt = verificationTokenRepository.findByToken(token);
         if (verificationTokenOpt.isPresent()) {
             VerificationToken verificationToken = verificationTokenOpt.get();
             if (verificationToken.getExpiryDate().after(new Date())) { // Token is valid
                 User user = verificationToken.getUser();
-                user.setVerified(true); // Assuming User entity has a setVerified method
+                user.setVerified(true);
                 userRepository.save(user);
-
-                // Optionally, delete the token after successful verification to prevent reuse
-                verificationTokenRepository.delete(verificationToken);
+                verificationTokenRepository.delete(verificationToken); // Deletes after verified
 
                 return true;
             } else {
-                // Token is expired
                 log.info("Verification token is expired.");
             }
         } else {
@@ -58,4 +54,5 @@ public class VerificationTokenService {
         }
         return false;
     }
+
 }

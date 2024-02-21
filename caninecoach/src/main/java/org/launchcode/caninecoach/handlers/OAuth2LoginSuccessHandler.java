@@ -29,16 +29,15 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         String email = oAuth2User.getAttribute("email");
 
         UserRole defaultRole = UserRole.TEMPORARY;
-        // Process the OAuth2 user, no need to assign the result to userDto since it's not used
         userService.processOAuth2User(email, defaultRole);
 
-        // Check if the user's profile is complete using the email
+
         boolean isProfileComplete = userService.isProfileComplete(email);
 
-        // Determine if they are new, and if not, whether their profile is complete
+
         boolean isNewUser = userService.isNewUser(email);
 
-        String baseUrl = "http://localhost:3000"; // The URL of your React front-end application
+        String baseUrl = "http://localhost:3000";
         String redirectUrl;
 
         if (isNewUser) {

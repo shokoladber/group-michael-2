@@ -18,7 +18,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
     private final JwtTokenService jwtTokenService;
 
-    @Autowired // Use constructor injection
+    @Autowired
     public JwtAuthTokenFilter(JwtTokenService jwtTokenService) {
         this.jwtTokenService = jwtTokenService;
     }

@@ -4,7 +4,7 @@ public class LoginDto {
     private String email;
     private String password;
 
-    // Default constructor for framework use
+
     public LoginDto() {
     }
 
@@ -13,7 +13,7 @@ public class LoginDto {
         this.password = password;
     }
 
-    // Getters and setters
+
     public String getEmail() {
         return email;
     }

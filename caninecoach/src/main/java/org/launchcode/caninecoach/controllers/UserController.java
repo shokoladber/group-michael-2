@@ -75,8 +75,8 @@ public class UserController {
             user = userService.findUserByEmail(email); // Use the new method to fetch the User entity
             String roleName = request.get("role");
             UserRole role = UserRole.valueOf(roleName);
-            user.setRole(role); // Update the role directly on the User entity
-            userService.save(user); // Assuming there's a save method in UserService to save User entities
+            user.setRole(role);
+            userService.save(user);
             response.put("message", "Role updated successfully.");
         } catch (AppException ex) {
             response.put("error", "User not found.");

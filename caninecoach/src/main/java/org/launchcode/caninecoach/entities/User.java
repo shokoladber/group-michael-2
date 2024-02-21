@@ -49,7 +49,7 @@ public class User {
         this.role = role;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -114,7 +114,7 @@ public class User {
         this.role = role;
     }
 
-    // toString, equals, and hashCode methods
+
     @Override
     public String toString() {
         return "User{" +

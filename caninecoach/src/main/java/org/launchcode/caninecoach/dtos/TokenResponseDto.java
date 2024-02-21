@@ -10,7 +10,6 @@ public class TokenResponseDto {
         this.isNewUser = isNewUser;
     }
 
-    // Getters and Setters
     public String getToken() {
         return token;
     }

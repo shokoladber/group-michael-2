@@ -15,13 +15,13 @@ public class UserDto implements UserDetails {
     private String email;
     private UserRole role;
     private String password;
-    private String token; // Optional token field, useful for JWT handling but not part of UserDetails
+    private String token;
 
-    // Default constructor
+
     public UserDto() {
     }
 
-    // Constructor with fields, excluding token for UserDetails compatibility
+
     public UserDto(Long id, String name, String email, UserRole role, String password) {
         this.id = id;
         this.name = name;
@@ -30,13 +30,12 @@ public class UserDto implements UserDetails {
         this.password = password;
     }
 
-    // Constructor with all fields, including token
+
     public UserDto(Long id, String name, String email, UserRole role, String password, String token) {
         this(id, name, email, role, password); // Call the main constructor
         this.token = token;
     }
 
-    // UserDetails implementation methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // This grants authority based on the UserRole enum. Adjust as necessary for your application's roles.
@@ -53,14 +52,14 @@ public class UserDto implements UserDetails {
         return email;
     }
 
-    // The following methods are defaulting to true for simplicity.
-    // Implement more complex logic if your application requires it.
+
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -107,13 +106,12 @@ public class UserDto implements UserDetails {
 
     @Override
     public String toString() {
-        // Note: Be cautious with logging sensitive information like passwords or tokens.
+
         return "UserDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                // Optionally comment out the next line in production for security
                 ", token='" + token + '\'' +
                 '}';
     }

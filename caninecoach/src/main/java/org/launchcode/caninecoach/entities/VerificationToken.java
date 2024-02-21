@@ -25,7 +25,7 @@ public class VerificationToken {
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiryDate;
 
-    // Constructors
+
     public VerificationToken() {
     }
 
@@ -35,7 +35,7 @@ public class VerificationToken {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    // Getters
+
     public Long getId() {
         return id;
     }
@@ -52,7 +52,7 @@ public class VerificationToken {
         return expiryDate;
     }
 
-    // Setters
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -69,7 +69,7 @@ public class VerificationToken {
         this.expiryDate = expiryDate;
     }
 
-    // Calculate the expiry date from the moment this method is called
+
     private Date calculateExpiryDate(int expiryTimeInMinutes) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(new Date().getTime());
