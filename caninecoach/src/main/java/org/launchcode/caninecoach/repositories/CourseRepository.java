@@ -1,37 +1,16 @@
 package org.launchcode.caninecoach.repositories;
 
+
 import jakarta.persistence.Id;
 import org.launchcode.caninecoach.entities.Course;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Integer> {
+public interface CourseRepository extends CrudRepository <Course, Integer> {
 
 
-    Optional<Course> findById(int id);
-
-    @Query("SELECT c.name, t.name, d.description " +
-            "FROM Course c " +
-            "JOIN c.courseInfo ci " +
-            "JOIN ci.type t " +
-            "JOIN ci.details d " +
-            "WHERE c.name LIKE %:keyword% OR t.name LIKE %:keyword% OR d.description LIKE %:keyword%")
-    List<Object[]> searchCoursesWithKeyword(@Param("keyword") String keyword);
-
-    @Query("SELECT c, ci.details " +
-            "FROM Course c " +
-            "JOIN c.courseInfo ci " +
-            "JOIN ci.type t " +
-            "JOIN ci.details d " +
-            "ORDER BY t.name ASC")
-    List<Object[]> findAllCoursesWithDetails();
-
-
-
+    Optional<Course> findById(Id id);
 }
