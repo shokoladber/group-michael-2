@@ -9,8 +9,8 @@ import java.util.List;
 public class Favorite {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
@@ -23,6 +23,10 @@ public class Favorite {
     public Favorite(Course course, User user) {
         this.course = course;
         this.user = user;
+    }
+
+    public Favorite() {
+
     }
 
     public long getId() {
