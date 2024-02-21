@@ -1,0 +1,16 @@
+.course-form{
+    max-width: 500px;
+    position: absolute;
+    padding: 40px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 120px;
+    background-color: #efe4d8;
+    border: 1px solid #110909;
+    border-radius: 5px; 
+}
+.four-group{
+    position: absolute;
+    top: 125px;
+}

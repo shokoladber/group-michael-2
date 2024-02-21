@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aae567a-ec78-4b37-b92c-02ac5c0b8736" name="Changes" comment="git ignore amended">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Favorite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/FavoriteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/services/FavoriteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/CanineCoachApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Blog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Blog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/entities/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/BlogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/launchcode/caninecoach/repositories/CourseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/launchcode/caninecoach/CanineCoachApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,6 +101,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "search-controller",
+    "git-widget-placeholder": "favorites",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/erins/Downloads/Java Classwork/techjobs-mvc-java-graded-17",
@@ -105,12 +115,11 @@
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
+
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "mysql"
-    ]
-  }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -194,6 +203,8 @@
       <option name="presentableId" value="Default" />
       <updated>1707589414990</updated>
       <workItem from="1707963219909" duration="3075000" />
+      <workItem from="1707963219909" duration="4209000" />
+      <workItem from="1708186174032" duration="1695000" />
     </task>
     <task id="LOCAL-00001" summary="git ignore amended">
       <option name="closed" value="true" />

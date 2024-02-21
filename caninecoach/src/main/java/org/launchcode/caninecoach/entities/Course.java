@@ -29,6 +29,13 @@ public class Course extends AbstractEntity {
 
     }
 
+    public ArrayList<Type> getType() {
+        return type;
+    }
+
+    public void setType(ArrayList<Type> type) {
+        this.type = type;
+    }
 
     public CourseInfo getCourseInfo() {
         return courseInfo;

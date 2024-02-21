@@ -1,7 +1,12 @@
 package org.launchcode.caninecoach.controllers;
 
+
 import org.launchcode.caninecoach.repositories.CourseRepository;
 import org.launchcode.caninecoach.services.CourseService;
+import com.google.api.services.classroom.model.Student;
+import org.launchcode.caninecoach.repositories.CourseRepository;
+import org.launchcode.caninecoach.services.GoogleClassroomService;
+import com.google.api.services.classroom.model.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +28,18 @@ public class ClassroomController {
 
     private final CourseService courseService;
 
+    private final CourseRepository courseRepository;
+
     @Autowired
     public ClassroomController(CourseRepository courseRepository, CourseService courseService) {
 
         this.courseRepository = courseRepository;
         this.courseService = courseService;
+      
+    public ClassroomController(GoogleClassroomService googleClassroomService, CourseRepository courseRepository) {
+        this.googleClassroomService = googleClassroomService;
+        this.courseRepository = courseRepository;
+
     }
 
     @GetMapping("/courses")

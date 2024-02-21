@@ -3,13 +3,13 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 50px 20px;
+    padding: 30px 20px;
   }
   
   
   .header-content {
     max-width: 800px;
-    margin-top: 40px;
+    margin-top: 10px;
   }
   
   
@@ -24,7 +24,7 @@
     margin-bottom: 20px;
   }
   
-  /* Header input field and button */
+  
   .header-input {
     display: flex;
     justify-content: center;
@@ -42,15 +42,19 @@
   }
   
   .header-input button {
-    padding: 10px 20px;
+    padding: 10px 30px;
     background-color: #fa4118;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
+  .header-input button:hover{
+    background-color: #bbb46f;
+         
+  }
   
-  /* Header content for trusted trainers */
+
   .header-trainers {
     display: flex;
     align-items: center;
@@ -63,7 +67,8 @@
     margin-right: 10px;
   }
   
-  /* Media query for mobile responsiveness */
+  
+  
   @media screen and (max-width: 768px) {
     .header-title {
       font-size: 2rem;

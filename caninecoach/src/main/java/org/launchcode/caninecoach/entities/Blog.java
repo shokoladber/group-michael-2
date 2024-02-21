@@ -19,7 +19,9 @@ public class Blog extends AbstractEntity{
         this.author = author;
     }
 
+
     @Column(name ="created_on")
+    @Column(name ="created_at")
     private Date dateCreated;
 
     @NotNull
@@ -53,6 +55,5 @@ public class Blog extends AbstractEntity{
     public void setAuthor(String author) {
         this.author = author;
     }
-
 
 }
