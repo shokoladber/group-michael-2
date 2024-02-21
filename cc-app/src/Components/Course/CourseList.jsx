@@ -1,6 +1,7 @@
 // src/Components/Course/CourseList.jsx
 import React, { useEffect, useState } from 'react';
 import { ClassroomService } from '../../services/ClassroomService';
+import axios from "axios";
 
 function CourseList() {
     const [courses, setCourses] = useState([]);
@@ -66,7 +67,10 @@ function CourseList() {
                 </div>
             ))}
         </div>
-    );
+
+
+);
+
 }
 
 export default CourseList;
