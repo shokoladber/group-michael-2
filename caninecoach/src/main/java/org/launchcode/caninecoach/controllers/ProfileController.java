@@ -16,8 +16,8 @@ import java.util.Optional;
 @RequestMapping("/api/profile")
 public class ProfileController {
 
-    private ProfileRepository profileRepository;
-
+    private final ProfileRepository profileRepository;
+    @Autowired
     public ProfileController(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }

@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class CourseService {
 
+    @Autowired
     private final CourseRepository courseRepository;
 
     @Autowired

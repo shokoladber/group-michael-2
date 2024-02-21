@@ -1,11 +1,12 @@
 package org.launchcode.caninecoach.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-
+@Entity
 public class Profile extends AbstractEntity{
 
-    @JoinColumn(name = "user_id")
-    private User user_id;
+    //@JoinColumn(name = "user_id")
+    //private User user_id;
 
     private String name;
 
@@ -15,8 +16,8 @@ public class Profile extends AbstractEntity{
 
     private String photoUrl;
 
-    public Profile(User user_id, String name, String breed, String age, String photoUrl) {
-        this.user_id = user_id;
+    public Profile(String name, String breed, String age, String photoUrl) {
+        //this.user_id = user_id;
         this.name = name;
         this.breed = breed;
         this.age = age;
@@ -59,13 +60,6 @@ public class Profile extends AbstractEntity{
         this.photoUrl = photoUrl;
     }
 
-    public User getUser_id() {
-        return user_id;
-    }
-    @Override
-    public String toString() {
-        return "Profile{id=" + id + /* Other fields */ "}";
-    }
 
 
 }

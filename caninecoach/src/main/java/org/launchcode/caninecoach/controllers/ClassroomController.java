@@ -1,10 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
-import com.google.api.services.classroom.model.Student;
 import org.launchcode.caninecoach.repositories.CourseRepository;
 import org.launchcode.caninecoach.services.CourseService;
-import org.launchcode.caninecoach.services.GoogleClassroomService;
-import com.google.api.services.classroom.model.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +15,25 @@ import java.util.List;
 @RequestMapping("/api/classroom")
 public class ClassroomController {
     private static final Logger log = LoggerFactory.getLogger(ClassroomController.class);
-    private final GoogleClassroomService googleClassroomService;
 
-    @Autowired
+
+
     private final CourseRepository courseRepository;
 
-    @Autowired
+
     private final CourseService courseService;
 
     @Autowired
-    public ClassroomController(GoogleClassroomService googleClassroomService, CourseRepository courseRepository, CourseService courseService) {
-        this.googleClassroomService = googleClassroomService;
+    public ClassroomController(CourseRepository courseRepository, CourseService courseService) {
+
         this.courseRepository = courseRepository;
         this.courseService = courseService;
     }
 
     @GetMapping("/courses")
-    public ResponseEntity<List<Course>> getCourses() {
+    public ResponseEntity<List<Object[]>> getCourses() {
         try {
-            List<Course> courses = courseRepository.listCourses();
+            List<Object[]> courses = courseRepository.findAllCoursesWithDetails();
             if (courses.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
@@ -47,7 +44,7 @@ public class ClassroomController {
         }
     }
 
-    @PostMapping("/enrollStudent")
+   /* @PostMapping("/enrollStudent")
     public ResponseEntity<?> enrollStudent(@RequestParam String courseId, @RequestParam String studentEmail) {
         try {
             Student student = googleClassroomService.addStudentToCourse(courseId, studentEmail);
@@ -57,6 +54,6 @@ public class ClassroomController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error enrolling student");
         }
 
-    }
+    }*/
 }
 
