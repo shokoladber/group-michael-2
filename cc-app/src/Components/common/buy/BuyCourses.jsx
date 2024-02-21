@@ -32,17 +32,28 @@ function Purchase() {
             onChange={(e) => setSelectedCourse(e.target.value)}
           >
             <option value="">Select a course...</option>
-            <option value="Puppy">Puppy</option>
+           
+            <option value="class">Class</option>
+            {/* <option value="Puppy">Puppy</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
-            <option value="Reavtive">Reactive</option>
-            <option value="Beginner Agility">Beginner Agility</option>
+            <option value="Reactive">Reactive</option>
+             */}
+            <option value="Agility">Agility</option>
+            {/* <option value="Beginner Agility">Beginner Agility</option>
             <option value="Open Agility">Open Agility</option>
-            <option value="In-Home">In-Home</option>
+             */}
+            <option value="Privat">Private</option>
+            {/* <option value="In-Home">In-Home</option>
             <option value="At Facility">At Facility</option>
-            <option value="Puppy Play">Puppy Play</option>
+             */}
+            <option value="Social">Social</option>
+            {/* <option value="Puppy Play">Puppy Play</option>
             <option value="Teen Play">Teen Play</option>
-            <option value="Adult Play">Adult Play</option>
+            <option value="Adult Play">Adult Play</option> 
+             */}
+           
+           
           </select>
           <button className="purchase-button" onClick={handlePurchase}>
             Purchase

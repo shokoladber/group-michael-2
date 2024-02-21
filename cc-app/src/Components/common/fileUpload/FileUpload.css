@@ -1,11 +1,14 @@
 .file-upload-container {
-  margin: 40px auto;
-  top: 80px;
-  padding: 20px;
-  width: 50%;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    max-width: 500px;
+    position: absolute;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #efe4d8;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    border: 1px solid #ccc;
+    border-radius: 5px; 
 }
 
 .upload-form {
@@ -14,11 +17,12 @@
 }
 
 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 label {
-  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 input[type="text"],
@@ -40,3 +44,4 @@ button {
 button:hover {
   background-color: #dbd761;
 }
+

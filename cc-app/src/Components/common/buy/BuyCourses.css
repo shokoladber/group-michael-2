@@ -1,5 +1,5 @@
 .purchase-container {
-    max-width: 700px;
+    max-width: 500px;
     margin-top:100px ;
     padding: 20px;
     display: flex;
@@ -9,12 +9,14 @@
   }
   
   .purchase-form {
-    display: absolute;
+    max-width: 500px;
+    offset-position: absolute;
+    margin: 0 auto;
     align-items: center;
     top:10px ;
     right: 10px;
     padding: 40px;
-    background-color: #ece8e8;
+    background-color: #efe4d8;
     padding: 100px;
     border-radius: 8px;
     margin-bottom: 20px; 

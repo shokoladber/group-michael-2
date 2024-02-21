@@ -6,7 +6,8 @@ function Contact() {
   return (
     <div className='contact__container'>
       
-      <h2>Contact Page</h2>
+      <h1>Contact Page</h1>
+  
       <ContactUs />
     </div>
   );

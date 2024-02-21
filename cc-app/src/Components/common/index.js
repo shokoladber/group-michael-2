@@ -9,5 +9,6 @@ export { default as Button} from './button/Button';
 export { default as Dropdown} from './dropdown/Dropdown';
 export { default as BuyCourses} from './buy/BuyCourses';
 export { default as Search} from './search/Search';
+export {default as CourseList} from './courseList/CourseList';
 
 

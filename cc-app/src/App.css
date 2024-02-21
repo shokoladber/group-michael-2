@@ -3,7 +3,7 @@
   margin:0;
   padding: 0;
   scroll-behavior: smooth;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family:fantasy;
 }
 body{
   background: var(--color-bg)

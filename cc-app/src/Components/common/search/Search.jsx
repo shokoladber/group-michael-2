@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Search.css'; 
+import { Link } from 'react-router-dom';
 
 function Search() {
   const [query, setQuery] = useState('');
@@ -23,9 +24,12 @@ function Search() {
         placeholder="Search..."
         className="search-input"
       />
-      <button type="submit" className="search-button">
+      {/* <li className='nav__item'>
+            <Link to="/sign up" className='header-input__1'><button>Sign Up</button></Link>
+          </li> */}
+      <Link to="/search" className='search-input__1'><button type="submit" className="search-button">
         Search
-      </button>
+      </button></Link>
     </form>
   );
 }

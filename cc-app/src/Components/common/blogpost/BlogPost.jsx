@@ -11,7 +11,7 @@ const BlogPost = ({ postId }) => {
   });
 
   useEffect(() => {
-    console.log('Post ID:', postId); // Log the postId when it changes
+    console.log('Post ID:', postId); // Log the postId upon changes
     fetchPost();
   }, [postId]);
 
@@ -29,7 +29,7 @@ const BlogPost = ({ postId }) => {
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get(`/api/posts/${postId}`); // Replace with actual API endpoint
+      const response = await axios.get(`/api/posts/${postId}`); // API endpoint
       setPost(response.data);
     } catch (error) {
       console.error('Error fetching post:', error);
@@ -39,7 +39,7 @@ const BlogPost = ({ postId }) => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/posts/${postId}`, formData); // Replace with actual API endpoint
+      await axios.put(`/api/posts/${postId}`, formData); // API endpoint
       setPost(formData);
       setIsEditing(false);
     } catch (error) {
@@ -104,3 +104,15 @@ const BlogPost = ({ postId }) => {
 };
 
 export default BlogPost;
+
+// This code will render a loading message while fetching data, 
+// display an error message if there's an issue fetching the post data, 
+// and render the post content if it's successfully fetched. 
+// If no post is found, it will display a message indicating that no post was found.
+
+
+
+
+
+
+

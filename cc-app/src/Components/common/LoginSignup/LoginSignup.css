@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 90px;
+    margin-top: 100px;
     width: 500px;
-    background: transparent;
+    background-color: #efe4d8;
     border:2px solid rgb(188, 142, 142) ;
     backdrop-filter: blur (30px);
     box-shadow: 0 0 10px black;
@@ -99,6 +99,12 @@
     color: rgb(202, 213, 213);
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
+    .container,
+    .header
+    {
+        width: 80%;
+        bottom: 60px;
+    }
     
-}
+} */
