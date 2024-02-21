@@ -14,7 +14,6 @@ public class Course extends AbstractEntity {
     private ArrayList<Type> type = new ArrayList<>();
 
     @OneToOne
-    @NotNull
     @JoinColumn(name = "details_id")
     private Details details;
 
