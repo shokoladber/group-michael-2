@@ -1,39 +1,32 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom'
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import Contact from './pages/Contact';
-import Services from './pages/Services';
-import NoPage from './pages/NoPage';
-import { LoginSignup, Navbar } from './Components/common';
-
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Home, Blog, Courses,NoPage, PetProfile} from './pages';
+import { Navbar, LoginSignup, ContactUs } from './Components/common';
+import BuyCourses from './Components/common/buy/BuyCourses'
 
 function App() {
   return (
-    <>
-      
-      <BrowserRouter>
+    <Router>
+      <>
+        <Navbar />
         <Routes>
-         
-          <Route index element= {<Home/>} />
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/blog" element={<Blog/>}/>       
-          <Route path="/contact" element={<Contact/>}/>       
-          <Route path="/services" element={<Services/>}/>
-          <Route path="/LoginSignup" element={<LoginSignup/>}/>  
-
-          <Route path="*" element={<NoPage/>}/>       
-        
-       
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/petProfile" element={<PetProfile />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/purchase" element={<BuyCourses />} />
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/SIGN UP" element={<LoginSignup />} />
+          <Route path="/search" element={<Courses />} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
-        {/* <LoginSignup/> */}
-      </BrowserRouter>
-
-
-    </>
+      </>
+    </Router>
   );
 }
 
 export default App;
+

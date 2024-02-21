@@ -1,76 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import './Navbar.css';
-import {Link} from 'react-router-dom'
-import Button from '../button';
-import { RiLockPasswordFill, GiSittingDog } from "react-icons/ri";
 import { LiaAccusoft } from "react-icons/lia";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Dropdown from '../dropdown/Dropdown'; // Import the Dropdown component
+import './Navbar.css'; // Import CSS file for styling
 
-function Navbar (){
+function Navbar() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const [click, setClick]= useState(false);
-    const [button, setButton]= useState(false);
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
-    const handleClick = ()=> setClick(!click);
-    const closeMobileMenu= ()=>setClick(false);
-    const showButton = () => {
-        if (window.innerWidth <= 960){
-            setButton(false);
-        }else{
-            setButton(true);
-        }
+  return (
+    <nav className='navbar'>
 
-    };
-    useEffect(() =>{
-        showButton();
-    }, []);
-    
-    window.addEventListener('resize',showButton);
+      <div className='navbar-container'>
+        <Link to='/' className='navbar__logo'> <LiaAccusoft />  Canine Coach</Link>
+        <div className='menu__icon' onClick={toggleDropdown}>
+          <i className='fas fa-bars'></i>
+        </div>
 
-        return(
-            <div className='navbar'>
-                <h2> <LiaAccusoft />  Cc</h2>
-                
-                <div>
-                    
-               
-                </div>
-                
-                <ul className= {click?'nav-menu active':'nav-menu'}>
-                <li className='nav-item'>
-                    <Link to="/" className='nav-links' onClick={closeMobileMenu}>Home</Link>
-                </li>
-                <li className='nav-item'>
-                    <Link to="/services" className='nav-links' onClick={closeMobileMenu}>Services</Link>
-                </li>
-                <li className='nav-item'>
-                    <Link to="/blog" className='nav-links' onClick={closeMobileMenu}>Blog</Link>
-                </li>
-                <li className='nav-item'>
-                    <Link to="/contact" className='nav-links' onClick={closeMobileMenu}>Contact</Link>
-                </li>
-                </ul>
-                {button && <Button buttonStyle= 'btn--outline'>Login/Signup</Button>}
-            </div>
+        <ul className={dropdownOpen ? 'nav__menu active' : 'nav__menu'}>
 
-    
-        // <section className="navbar">
-        //     <ul className='navbar-item'>
-        //         <li className='nav-item'>
-        //             <Link to="/" className='nav-links' onClick={closeMobileMenu}>Home</Link>
-        //         </li>
-        //         <li className='nav-item'>
-        //             <Link to="/services" className='nav-links' onClick={closeMobileMenu}>Services</Link>
-        //         </li>
-        //         <li className='nav-item'>
-        //             <Link to="/blog" className='nav-links' onClick={closeMobileMenu}>Blog</Link>
-        //         </li>
-        //         <li className='nav-item'>
-        //             <Link to="/contact" className='nav-links' onClick={closeMobileMenu}>Contact</Link>
-        //         </li>
-        //     </ul>
-        // </section>
+          <li className='nav__item'>
+            <Link to="/" className='nav__links' onClick={() => setDropdownOpen(false)}>Home</Link>
+          </li>
 
-         );
+          <li className='nav__item'>
+            <Link to="/courses" className='nav__links' onClick={() => setDropdownOpen(false)}>Courses <i className='fas fa-caret-down' /></Link>
+            {/* <Dropdown /> */}
+          </li>
 
+          <li className='nav__item'>
+            <Link to="/blog" className='nav__links' onClick={() => setDropdownOpen(false)}>Blog</Link>
+          </li>
+
+          <li className='nav__item'>
+            <Link to="/petProfile" className='nav__links' onClick={() => setDropdownOpen(false)}>Pet Profile</Link>
+          </li>
+
+          <li className='nav__item'>
+            <Link to="/contact" className='nav__links' onClick={() => setDropdownOpen(false)}>Contact</Link>
+          </li>
+
+          <li className='nav__item'>
+            <Link to="/purchase" className='nav__links' onClick={() => setDropdownOpen(false)}>Purchase</Link>
+          </li>
+
+          <li className='nav__item'>
+            <Link to="/login" className='nav__links' onClick={() => setDropdownOpen(false)}>Login</Link>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  );
 }
+
 export default Navbar;
+
+
+  

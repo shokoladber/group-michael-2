@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 200px;
-    width: 600px;
-    background: transparent;
+    margin-top: 100px;
+    width: 500px;
+    background-color: #efe4d8;
     border:2px solid rgb(188, 142, 142) ;
     backdrop-filter: blur (30px);
     box-shadow: 0 0 10px black;
@@ -16,19 +16,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;   
+    gap: 40px;   
     width: 100%;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .text {
-    color: rgb(98, 77, 203);
+    color:#fa4118;
     font-size: 50px;    
     font-weight: 700;
 }
 .underline{
     width: 200px;
     height: 6px;
-    background: rgb(98, 77, 203);
+    background: #fa4118;
     border-radius: 9px;
 
 }
@@ -44,8 +44,8 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: rgba(40, 37, 36, 0.13);
-    border-radius: 6px;
+    background: rgba(135, 20, 20, 0.13);
+    border-radius: 16px;
 }
 .input img{
     margin: 0px 22px;
@@ -56,7 +56,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: rgba(9, 10, 0, 0.772);
+    color: rgba(19, 19, 18, 0.772);
     font-size: 18px;
     padding: 20px 20px 20px;
 }
@@ -68,11 +68,11 @@
     font-size: 20px;
 }
 .forgot-password span{
-    color: rgb(52, 52, 166);
+    color: #fa4118;
     cursor: pointer;
 }
 .forgot-password span:hover{
-    color: rgb(208, 12, 107);
+    color: rgb(227, 43, 11);
     cursor: pointer;
     text-decoration: underline ;
 }
@@ -88,18 +88,23 @@
     width: 220px;
     height: 59px;
     color: #f5f5dc;
-    background: rgb(76, 48, 115);
+    background:#fa4118;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
 }
 .gray{
-    background: cornsilk;
-    color: rgb(200, 216, 216);
+    background: rgb(241, 223, 149);
+    color: rgb(202, 213, 213);
 }
-/* Mobile Version (Responsiveness)*/
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
+    .container,
+    .header
+    {
+        width: 80%;
+        bottom: 60px;
+    }
     
-}
+} */

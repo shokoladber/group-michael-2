@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/blog")
+
+
+@Controller
+@RequestMapping("blog")
 public class BlogController {
 
     @Autowired
@@ -33,11 +34,10 @@ public class BlogController {
         return blogService.getAllBlogs();
     }
 
-
-
     @GetMapping("/formdata")
     public String displayCreateBlogForm(){
-        return "/formdata";
+        //template here?
+        return "blog/create";
     }
 
     @PostMapping
@@ -50,6 +50,5 @@ public class BlogController {
     public String deleteBlogById(@PathVariable int blogId) {
         return "Blog post with ID " + blogId + " has been deleted";
     }
-
 
 }

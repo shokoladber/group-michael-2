@@ -1,0 +1,8 @@
+export {default as Home} from './home/Home'
+export {default as Blog} from './blog/Blog'
+export {default as PetProfile} from './petProfile/PetProfile'
+export {default as Courses} from './courses/Courses'
+export {default as Contact} from './contact/Contact'
+export {default as Login} from './login/Login'
+export {default as Purchase} from './purchase/Purchase'
+export {default as NoPage} from './noPage/NoPage'
