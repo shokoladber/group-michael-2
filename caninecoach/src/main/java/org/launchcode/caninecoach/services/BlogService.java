@@ -22,16 +22,16 @@ public class BlogService {
         public Blog createBlog(Blog blog) {
             return blogRepository.save(blog);
         }
-    public void deleteBlogById(int blogId) {
+        public void deleteBlogById(int blogId) {
 
-        Optional<Blog> optionalBlog = blogRepository.findById(blogId);
-        if (optionalBlog.isPresent()) {
+         Optional<Blog> optionalBlog = blogRepository.findById(blogId);
+            if (optionalBlog.isPresent()) {
 
             blogRepository.deleteById(blogId);
-        } else {
+            } else {
 
-            throw new RuntimeException("Blog post with ID " + blogId + " not found");
-        }
+                throw new RuntimeException("Blog post with ID " + blogId + " not found");
+            }
     }
 }
 
