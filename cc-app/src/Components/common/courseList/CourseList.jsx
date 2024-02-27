@@ -1,5 +1,5 @@
 import React from 'react'
-import './CourseList';
+import './CourseList.css';
 
 function CourseList() {
   return (

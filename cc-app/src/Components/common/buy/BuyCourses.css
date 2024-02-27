@@ -1,48 +1,38 @@
-.purchase-container {
-    max-width: 500px;
-    margin-top:100px ;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+   .purchase-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4in;
+    height: 6in;
+    border: 1px solid #ccc;
+    padding: 100px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+  }
+  
+  .purchase-success {
+    text-align: center;
   }
   
   .purchase-form {
-    max-width: 500px;
-    offset-position: absolute;
-    margin: 0 auto;
-    align-items: center;
-    top:10px ;
-    right: 10px;
-    padding: 40px;
-    background-color: #efe4d8;
-    padding: 100px;
-    border-radius: 8px;
-    margin-bottom: 20px; 
-    
+    text-align: center;
   }
   
-  .purchase-form label {
+  .class-select {
     margin-bottom: 10px;
   }
   
-  .purchase-form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .purchase-form button {
-    padding: 10px 20px;
-    background-color: #fa4118;
-    color: #fff;
+  .purchase-button {
+    padding: 8px 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    background-color: #e06929;
+    color: #fff;
   }
   
-  .purchase-form button:hover {
-    background-color:#bbb46f;
+  .purchase-button:hover {
+    background-color: #b09f82;
   }
   
