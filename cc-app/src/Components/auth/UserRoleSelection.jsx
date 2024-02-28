@@ -21,13 +21,13 @@ const UserRoleSelection = () => {
         setError(null);
 
         try {
-            // Submit the selected role to the backend
+
             await axios.post('/api/user/select-role', { role: selectedRole });
-            // Navigate to the corresponding profile creation page based on the role
+
             if (selectedRole === 'PET_GUARDIAN') {
-                navigate('/pet-profile'); // Adjust as per your route setup
+                navigate('/pet-profile');
             } else if (selectedRole === 'PET_TRAINER') {
-                navigate('/trainer-profile'); // Adjust as per your route setup
+                navigate('/trainer-profile');
             }
         } catch (error) {
             console.error('Error updating the role:', error);

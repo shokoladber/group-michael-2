@@ -43,4 +43,4 @@ function CourseList() {
   )
 }
 
-export default CourseList
+export default CourseList;

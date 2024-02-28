@@ -32,7 +32,7 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauthUser = super.loadUser(userRequest);
 
-        // Process the user with the default role TEMPORARY
+
         User user = userService.processOAuth2User(oauthUser, UserRole.TEMPORARY);
 
         Set<GrantedAuthority> authorities = new HashSet<>();

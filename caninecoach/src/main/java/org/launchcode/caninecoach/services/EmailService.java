@@ -37,7 +37,7 @@ public class EmailService {
         log.info("Preparing to send verification email to {}", to);
 
         try {
-            // Get the FreeMarker template
+
             Template template = freemarkerConfig.getTemplate("verificationEmailTemplate.ftl");
 
 

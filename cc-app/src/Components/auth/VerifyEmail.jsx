@@ -22,11 +22,11 @@ const VerifyEmail = () => {
 
                 // Update the user's verified status
                 setStatus('success');
-                setTimeout(() => navigate('/select-role'), 3000); // Redirect after 3 seconds to a success page
+                setTimeout(() => navigate('/select-role'), 3000);
             } catch (error) {
                 // Failed to verify the email
                 setStatus('failure');
-                setTimeout(() => navigate('/verification-failed'), 3000); // Redirect after 3 seconds to a failure page
+                setTimeout(() => navigate('/verification-failed'), 3000);
             }
         };
 

@@ -11,7 +11,7 @@ public class TrainerProfile {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user; // Link to the User entity
+    private User user;
 
     private String name;
     @Column(length = 1024)

@@ -17,5 +17,5 @@ export const ClassroomService = {
     deleteCourse: (courseId) => {
         return axios.delete(`${API_BASE_URL}/courses/${courseId}`);
     },
-    // Add more methods as needed for your application
+
 };

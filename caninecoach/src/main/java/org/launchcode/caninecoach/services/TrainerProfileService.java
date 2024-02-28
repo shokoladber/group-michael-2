@@ -25,5 +25,5 @@ public class TrainerProfileService {
         return trainerProfileRepository.save(trainerProfile);
     }
 
-    // Add more service methods as needed
+
 }

@@ -1,6 +1,7 @@
 package org.launchcode.caninecoach.handlers;
 
 import org.launchcode.caninecoach.entities.User;
+import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -38,22 +38,29 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             return;
         }
 
-        User user = userService.findUserByEmail(email)
-                .orElseThrow(() -> new IllegalStateException("User with email " + email + " not found after OAuth2 login"));
+        email = email.trim().toLowerCase();
 
-        // Determine the redirect URL based on the user's role
+
+        User user = userService.findUserByEmail(email)
+                .orElseGet(() -> userService.processOAuth2User(oAuth2User, UserRole.TEMPORARY));
+
+
         String redirectUrl = determineRedirectUrl(user);
         response.sendRedirect(redirectUrl);
     }
 
     private String determineRedirectUrl(User user) {
-        String baseUrl = "http://localhost:3000"; // Development URL, consider using environment variables or application properties for production environments
+        String baseUrl = "http://localhost:3000";
 
-        return switch (user.getRole()) {
-            case TEMPORARY -> baseUrl + "/select-role";
-            case PET_GUARDIAN -> baseUrl + "/pet-profile";
-            case PET_TRAINER -> baseUrl + "/trainer-profile";
-            default -> baseUrl + "/home";
-        };
+        switch (user.getRole()) {
+            case TEMPORARY:
+                return baseUrl + "/select-role";
+            case PET_GUARDIAN:
+                return baseUrl + "/pet-profile";
+            case PET_TRAINER:
+                return baseUrl + "/trainer-profile";
+            default:
+                return baseUrl + "/home";
+        }
     }
 }

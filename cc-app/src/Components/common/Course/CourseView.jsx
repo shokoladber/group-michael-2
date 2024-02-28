@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ClassroomService } from '../../services/ClassroomService';
+import { ClassroomService } from '../../../services/ClassroomService';
 
 function CourseView({ user }) {
     const [courses, setCourses] = useState([]);

@@ -19,7 +19,7 @@ public class LoginDto {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.trim().toLowerCase();
     }
 
     public String getPassword() {

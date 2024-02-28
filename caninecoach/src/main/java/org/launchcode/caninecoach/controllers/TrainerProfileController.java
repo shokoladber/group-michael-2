@@ -31,5 +31,5 @@ public class TrainerProfileController {
         return ResponseEntity.ok(createdTrainerProfile);
     }
 
-    // Add more endpoints as needed
+
 }

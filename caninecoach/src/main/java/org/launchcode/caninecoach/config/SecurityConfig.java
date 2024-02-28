@@ -60,7 +60,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/auth/signup", "/api/auth/login", "/api/user/select-role").permitAll()
+                        .requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/user/select-role").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup", "/api/auth/login").permitAll()
                         .requestMatchers("/api/user/verify-email").permitAll()
                         .requestMatchers("/api/pet-profile").hasAuthority("ROLE_PET_GUARDIAN")

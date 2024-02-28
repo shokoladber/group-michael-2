@@ -1,6 +1,6 @@
 // src/Components/Course/CourseList.jsx
 import React, { useEffect, useState } from 'react';
-import { ClassroomService } from '../../services/ClassroomService';
+import { ClassroomService } from '../../../services/ClassroomService';
 
 function CourseList() {
     const [courses, setCourses] = useState([]);

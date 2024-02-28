@@ -93,35 +93,46 @@ public class UserService {
     }
 
     public UserDto updateUserRoleByEmail(String email, UserRole newRole) {
-        if (email == null || email.equals("anonymousUser")) {
+        if (email == null || email.isEmpty() || email.equals("anonymousUser")) {
             throw new AppException("Invalid email", HttpStatus.BAD_REQUEST);
         }
 
-        User user = findUserByEmail(email)
-                .orElseThrow(() -> new AppException("User not found with email: " + email, HttpStatus.NOT_FOUND));
+        Optional<User> userOptional = findUserByEmail(email);
+        if (!userOptional.isPresent()) {
+            throw new AppException("User not found with email: " + email, HttpStatus.NOT_FOUND);
+        }
 
+        User user = userOptional.get();
         user.setRole(newRole);
         User updatedUser = userRepository.save(user);
         return toUserDto(updatedUser);
     }
 
 
+
     public User processOAuth2User(OAuth2User oAuth2User, UserRole defaultRole) {
         String email = oAuth2User.getAttribute("email");
-        String name = oAuth2User.getAttribute("name");
+        Optional<User> existingUser = userRepository.findByEmail(email);
 
-        return userRepository.findByEmail(email)
-                .orElseGet(() -> {
-                    User newUser = new User();
-                    newUser.setEmail(email);
-                    newUser.setName(name != null && !name.isBlank() ? name : "Default Name");
-                    newUser.setPassword(generateRandomPlaceholderPassword());
-                    newUser.setRole(defaultRole);
-                    newUser.setUsingOAuth2(true);
-                    newUser.setVerified(true);
-                    return userRepository.save(newUser);
-                });
+        if (existingUser.isPresent()) {
+
+            User user = existingUser.get();
+
+            return userRepository.save(user);
+        } else {
+
+            String name = oAuth2User.getAttribute("name");
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setName(name != null && !name.isBlank() ? name : "Default Name");
+            newUser.setPassword(generateRandomPlaceholderPassword());
+            newUser.setRole(defaultRole);
+            newUser.setUsingOAuth2(true);
+            newUser.setVerified(true);
+            return userRepository.save(newUser);
+        }
     }
+
 
     private String generateRandomPlaceholderPassword() {
         byte[] randomBytes = new byte[24];

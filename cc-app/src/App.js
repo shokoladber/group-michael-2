@@ -20,7 +20,7 @@ function App() {
             <Route path="/petprofile" element={<PetProfilePage />} />
             <Route path="/contact" element={<Contact />} />
             // Update the component for the '/classes' route to 'Courses'
-            <Route path="/classes" element={<Courses />} />
+            <Route path="/courses" element={<Courses />} />
             <Route path="/purchase" element={<BuyClasses />} />
             <Route path="/login" element={<UserLogin />} />
             <Route path="/signup" element={<UserSignup />} />

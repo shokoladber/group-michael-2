@@ -37,7 +37,7 @@ public class GoogleClassroomService {
                     .build();
         } catch (GeneralSecurityException e) {
             log.error("Failed to initialize Google Classroom service", e);
-            throw e; // Rethrowing the exception to ensure it's properly handled upstream.
+            throw e;
         }
     }
 

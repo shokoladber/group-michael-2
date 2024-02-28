@@ -34,7 +34,6 @@ public class VerificationTokenService {
         return token;
     }
 
-    // Validates the verification token the update user role
     public boolean verifyToken(String token) {
         Optional<VerificationToken> verificationTokenOpt = verificationTokenRepository.findByToken(token);
         if (verificationTokenOpt.isPresent()) {
@@ -43,7 +42,7 @@ public class VerificationTokenService {
                 User user = verificationToken.getUser();
                 user.setVerified(true);
                 userRepository.save(user);
-                verificationTokenRepository.delete(verificationToken); // Deletes after verified
+                verificationTokenRepository.delete(verificationToken);
 
                 return true;
             } else {

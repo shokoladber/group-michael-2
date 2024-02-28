@@ -14,7 +14,7 @@ const OAuth2RedirectHandler = () => {
         if (isNewUser) {
             navigate('/select-role');
         } else if (!profileComplete) {
-            // Redirect to profile creation page if the user's profile is not complete
+
             navigate('/select-role');
         } else {
             navigate('/home');
