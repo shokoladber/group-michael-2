@@ -11,6 +11,10 @@ public class AppException extends RuntimeException {
         this.status = status;
     }
 
+    public AppException(String message) {
+        this(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     public HttpStatus getStatus() {
         return status;
     }

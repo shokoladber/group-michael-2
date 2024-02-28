@@ -14,9 +14,9 @@ const UserRoleSelection = () => {
             console.log('Role set successfully', response);
 
             if (role === 'PET_GUARDIAN') {
-                navigate('/api/pet-profiles');
+                navigate('/pet-profiles');
             } else if (role === 'PET_TRAINER') {
-                navigate('/api/trainer-profiles');
+                navigate('/trainer-profiles');
             }
         } catch (error) {
             console.error("Role selection error:", error.response ? error.response.data : "An error occurred during role selection.");

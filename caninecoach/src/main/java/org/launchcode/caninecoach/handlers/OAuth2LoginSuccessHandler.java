@@ -27,29 +27,24 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        String email = oAuth2User.getAttribute("email");
 
         UserRole defaultRole = UserRole.TEMPORARY;
-        User user = userService.processOAuth2User(email, defaultRole);
-
+        User user = userService.processOAuth2User(oAuth2User, defaultRole);
 
         if (user == null) {
             throw new IllegalStateException("User cannot be null after processing OAuth2 user");
         }
 
         String redirectUrl = determineRedirectUrl(user);
-
         response.sendRedirect(redirectUrl);
     }
 
     private String determineRedirectUrl(User user) {
         String baseUrl = "http://localhost:3000";
 
-
         if (userService.isNewUser(user.getEmail()) || user.getRole() == UserRole.TEMPORARY) {
-            return baseUrl + "/api/select-role";
+            return baseUrl + "/select-role";
         } else {
-
             return switch (user.getRole()) {
                 case PET_GUARDIAN -> baseUrl + "/pet-profiles";
                 case PET_TRAINER -> baseUrl + "/trainer-profiles";
@@ -57,5 +52,4 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             };
         }
     }
-
 }

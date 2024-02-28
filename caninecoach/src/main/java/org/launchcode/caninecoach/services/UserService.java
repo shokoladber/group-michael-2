@@ -12,7 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import java.security.SecureRandom;
+import java.util.Base64;
 
 @Service
 public class UserService {
@@ -22,6 +26,7 @@ public class UserService {
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenService verificationTokenService;
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
     public UserService(UserRepository userRepository,
@@ -58,7 +63,6 @@ public class UserService {
         user.setVerified(false);
         User savedUser = userRepository.save(user);
 
-
         String token = verificationTokenService.createTokenForUser(savedUser);
 
         // Send verification email
@@ -67,7 +71,6 @@ public class UserService {
             emailService.sendTemplateVerificationEmail(savedUser.getEmail(), "Verify Your Email", verificationLink);
         } catch (Exception e) {
             Log.error("Error sending verification email", e);
-
         }
 
         return toUserDto(savedUser);
@@ -89,20 +92,27 @@ public class UserService {
                 .orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
     }
 
-    // Inside UserService class
+    public User processOAuth2User(OAuth2User oAuth2User, UserRole defaultRole) {
+        String email = oAuth2User.getAttribute("email");
+        String name = oAuth2User.getAttribute("name"); // This should be the full name provided by Google
 
-    public User processOAuth2User(String email, UserRole defaultRole) {
         return userRepository.findByEmail(email)
                 .orElseGet(() -> {
                     User newUser = new User();
                     newUser.setEmail(email);
-                    newUser.setName("Default Name"); // Set a default name
-                    newUser.setPassword(passwordEncoder.encode("RandomPassword!123")); // Set a placeholder password
+                    newUser.setName(name != null && !name.isBlank() ? name : "Default Name");
+                    newUser.setPassword(generateRandomPlaceholderPassword());
                     newUser.setRole(defaultRole);
                     newUser.setUsingOAuth2(true);
                     newUser.setVerified(true);
                     return userRepository.save(newUser);
                 });
+    }
+
+    private String generateRandomPlaceholderPassword() {
+        byte[] randomBytes = new byte[24];
+        RANDOM.nextBytes(randomBytes);
+        return passwordEncoder.encode(Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes));
     }
 
     public boolean isNewUser(String email) {

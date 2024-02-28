@@ -9,23 +9,29 @@ public class PetProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false) // Ensures the name cannot be null in the database
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
-    @Column(nullable = false) // Ensures the type cannot be null
-    private String type;
+    private String guardianName;
+    private String petName;
+    private Integer petAge;
+    private String petBreed;
+    @Column(length = 1024)
+    private String petBio;
 
-    @Column(nullable = true) // Age can be null if not provided
-    private Integer age;
+    public PetProfile() {
+    }
 
-    @Column(length = 500) // Example of customizing column definition
-    private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY) // LAZY loading: guardian details are loaded on demand
-    @JoinColumn(name = "guardian_id", nullable = false) // Specifies the foreign key column
-    private User guardian;
-
-    // Standard getters and setters
+    public PetProfile(Long id, User user, String guardianName, String petName, Integer petAge, String petBreed, String petBio) {
+        this.id = id;
+        this.user = user;
+        this.guardianName = guardianName;
+        this.petName = petName;
+        this.petAge = petAge;
+        this.petBreed = petBreed;
+        this.petBio = petBio;
+    }
 
     public Long getId() {
         return id;
@@ -35,70 +41,52 @@ public class PetProfile {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getType() {
-        return type;
+    public String getGuardianName() {
+        return guardianName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGuardianName(String guardianName) {
+        this.guardianName = guardianName;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPetName() {
+        return petName;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPetName(String petName) {
+        this.petName = petName;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getPetAge() {
+        return petAge;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPetAge(Integer petAge) {
+        this.petAge = petAge;
     }
 
-    public User getGuardian() {
-        return guardian;
+    public String getPetBreed() {
+        return petBreed;
     }
 
-    public void setGuardian(User guardian) {
-        this.guardian = guardian;
+    public void setPetBreed(String petBreed) {
+        this.petBreed = petBreed;
     }
 
-    // Example toString method for debugging purposes
-    @Override
-    public String toString() {
-        return "PetProfile{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", age=" + age +
-                ", description='" + description + '\'' +
-                ", guardianId=" + guardian.getId() + // For simplicity, just show guardian ID
-                '}';
+    public String getPetBio() {
+        return petBio;
     }
 
-    // Implement equals and hashCode based on ID for entity comparison
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PetProfile that = (PetProfile) o;
-        return id != null && id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void setPetBio(String petBio) {
+        this.petBio = petBio;
     }
 }
+

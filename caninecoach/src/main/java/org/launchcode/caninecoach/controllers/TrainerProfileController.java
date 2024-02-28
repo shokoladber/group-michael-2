@@ -1,15 +1,15 @@
 package org.launchcode.caninecoach.controllers;
 
-import org.launchcode.caninecoach.dtos.TrainerProfileDto;
+import org.launchcode.caninecoach.entities.TrainerProfile;
 import org.launchcode.caninecoach.services.TrainerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/trainer-profiles")
+@RequestMapping("/api/trainer-profile")
 public class TrainerProfileController {
 
     private final TrainerProfileService trainerProfileService;
@@ -19,16 +19,17 @@ public class TrainerProfileController {
         this.trainerProfileService = trainerProfileService;
     }
 
-    @GetMapping
-    public ResponseEntity<TrainerProfileDto> getTrainerProfile(@AuthenticationPrincipal UserDetails userDetails) {
-        TrainerProfileDto profile = trainerProfileService.getTrainerProfile(userDetails.getUsername());
-        return ResponseEntity.ok(profile);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TrainerProfile>> getTrainerProfilesByUserId(@PathVariable Long userId) {
+        List<TrainerProfile> trainerProfiles = trainerProfileService.findByUserId(userId);
+        return ResponseEntity.ok(trainerProfiles);
     }
 
-    @PutMapping
-    public ResponseEntity<TrainerProfileDto> updateTrainerProfile(@AuthenticationPrincipal UserDetails userDetails,
-                                                                  @RequestBody TrainerProfileDto trainerProfileDto) {
-        TrainerProfileDto updatedProfile = trainerProfileService.updateTrainerProfile(userDetails.getUsername(), trainerProfileDto);
-        return ResponseEntity.ok(updatedProfile);
+    @PostMapping("/create")
+    public ResponseEntity<TrainerProfile> createTrainerProfile(@RequestBody TrainerProfile trainerProfile) {
+        TrainerProfile createdTrainerProfile = trainerProfileService.createTrainerProfile(trainerProfile);
+        return ResponseEntity.ok(createdTrainerProfile);
     }
+
+    // Add more endpoints as needed
 }

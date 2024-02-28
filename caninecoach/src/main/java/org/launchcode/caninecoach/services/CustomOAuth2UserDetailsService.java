@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import static org.hibernate.annotations.UuidGenerator.Style.RANDOM;
 
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -23,41 +24,27 @@ import java.util.Set;
 @Service
 public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
 
-    private final UserRepository userRepository;
-    private final Logger log = LoggerFactory.getLogger(CustomOAuth2UserDetailsService.class);
     private static final SecureRandom RANDOM = new SecureRandom();
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final Logger logger = LoggerFactory.getLogger(CustomOAuth2UserDetailsService.class);
 
     @Autowired
-    public CustomOAuth2UserDetailsService(UserRepository userRepository) {
+    public CustomOAuth2UserDetailsService(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauthUser = super.loadUser(userRequest);
 
-        String email = oauthUser.getAttribute("email");
-        String nameFromOAuth = oauthUser.getAttribute("name");
-
-        // Oauth2 default name if not initially provided, keep getting error
-        final String finalName = (nameFromOAuth == null || nameFromOAuth.isBlank()) ? "Default Name" : nameFromOAuth;
-        final String finalPlaceholderPassword = generateRandomPlaceholderPassword();
-
-        User user = userRepository.findByEmail(email).orElseGet(() -> {
-            User newUser = new User();
-            newUser.setEmail(email);
-            newUser.setName(finalName);
-            newUser.setPassword(finalPlaceholderPassword);
-            newUser.setRole(UserRole.TEMPORARY);
-            newUser.setUsingOAuth2(true);
-            newUser.setVerified(true);
-            return userRepository.save(newUser);
-        });
+        UserRole defaultRole = UserRole.TEMPORARY;
+        User user = userService.processOAuth2User(oauthUser, defaultRole);
 
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         addRoleSpecificAuthorities(user.getRole(), authorities);
-
 
         return new DefaultOAuth2User(authorities, oauthUser.getAttributes(), "email");
     }

@@ -1,5 +1,7 @@
 package org.launchcode.caninecoach.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.launchcode.caninecoach.dtos.UserDto;
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
@@ -17,11 +19,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final VerificationTokenService verificationTokenService;
 
@@ -61,31 +64,47 @@ public class UserController {
     @PostMapping("/select-role")
     public ResponseEntity<Map<String, String>> updateRole(@AuthenticationPrincipal OAuth2User oAuth2User, @RequestBody Map<String, String> request) {
         Map<String, String> response = new HashMap<>();
-        String email;
-        User user;
-
-        if (oAuth2User != null) {
-            email = oAuth2User.getAttribute("email");
-        } else {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            email = authentication.getName();
-        }
-
         try {
-            user = userService.findUserByEmail(email);
+            String email = extractEmail(oAuth2User);
+            Optional<User> optionalUser = Optional.ofNullable(userService.findUserByEmail(email));
+            User user = optionalUser.orElseThrow(() -> new AppException("User not found."));
+
             String roleName = request.get("role");
-            UserRole role = UserRole.valueOf(roleName);
-            user.setRole(role);
-            userService.save(user);
-            response.put("message", "Role updated successfully.");
+            if (isValidRole(roleName)) {
+                UserRole role = UserRole.valueOf(roleName);
+                user.setRole(role);
+                userService.save(user);
+                response.put("message", "Role updated successfully.");
+                logger.info("Role updated successfully for user: {}", email);
+            } else {
+                response.put("error", "Invalid role specified.");
+                return ResponseEntity.badRequest().body(response);
+            }
         } catch (AppException ex) {
-            response.put("error", "User not found.");
-            return ResponseEntity.badRequest().body(response);
-        } catch (IllegalArgumentException e) {
-            response.put("error", "Invalid role specified.");
+            logger.error("Error updating role: {}", ex.getMessage());
+            response.put("error", ex.getMessage());
+            // Adjust the response based on your AppException structure and what it supports
             return ResponseEntity.badRequest().body(response);
         }
 
         return ResponseEntity.ok(response);
+    }
+
+    private String extractEmail(OAuth2User oAuth2User) {
+        if (oAuth2User != null) {
+            return oAuth2User.getAttribute("email");
+        } else {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return authentication.getName();
+        }
+    }
+
+    private boolean isValidRole(String roleName) {
+        try {
+            UserRole.valueOf(roleName);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 }
