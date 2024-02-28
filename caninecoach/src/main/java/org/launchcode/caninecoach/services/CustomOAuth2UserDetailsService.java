@@ -2,7 +2,6 @@ package org.launchcode.caninecoach.services;
 
 import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
-import org.launchcode.caninecoach.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +13,18 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import static org.hibernate.annotations.UuidGenerator.Style.RANDOM;
 
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
 
-    private static final SecureRandom RANDOM = new SecureRandom();
-    private final UserRepository userRepository;
-    private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(CustomOAuth2UserDetailsService.class);
+    private final UserService userService;
 
     @Autowired
-    public CustomOAuth2UserDetailsService(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public CustomOAuth2UserDetailsService(UserService userService) {
         this.userService = userService;
     }
 
@@ -39,8 +32,8 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauthUser = super.loadUser(userRequest);
 
-        UserRole defaultRole = UserRole.TEMPORARY;
-        User user = userService.processOAuth2User(oauthUser, defaultRole);
+        // Process the user with the default role TEMPORARY
+        User user = userService.processOAuth2User(oauthUser, UserRole.TEMPORARY);
 
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
@@ -48,6 +41,7 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
 
         return new DefaultOAuth2User(authorities, oauthUser.getAttributes(), "email");
     }
+
 
     private void addRoleSpecificAuthorities(UserRole role, Set<GrantedAuthority> authorities) {
         // PET_GUARDIAN authorities
@@ -65,12 +59,5 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
                     new SimpleGrantedAuthority("ACCESS_VIEW_ROSTER")
             ));
         }
-    }
-
-    // Password generator to complete database entry
-    private String generateRandomPlaceholderPassword() {
-        byte[] randomBytes = new byte[24];
-        RANDOM.nextBytes(randomBytes);
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
     }
 }

@@ -22,7 +22,7 @@ const VerifyEmail = () => {
 
                 // Update the user's verified status
                 setStatus('success');
-                setTimeout(() => navigate('/verification-success'), 3000); // Redirect after 3 seconds to a success page
+                setTimeout(() => navigate('/select-role'), 3000); // Redirect after 3 seconds to a success page
             } catch (error) {
                 // Failed to verify the email
                 setStatus('failure');

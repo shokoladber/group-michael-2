@@ -18,4 +18,8 @@ public class AppException extends RuntimeException {
     public HttpStatus getStatus() {
         return status;
     }
+
+    public int getHttpStatus() {
+        return status.value();
+    }
 }

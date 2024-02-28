@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -87,14 +88,27 @@ public class UserService {
         return toUserDto(user);
     }
 
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
+
+    public UserDto updateUserRoleByEmail(String email, UserRole newRole) {
+        if (email == null || email.equals("anonymousUser")) {
+            throw new AppException("Invalid email", HttpStatus.BAD_REQUEST);
+        }
+
+        User user = findUserByEmail(email)
+                .orElseThrow(() -> new AppException("User not found with email: " + email, HttpStatus.NOT_FOUND));
+
+        user.setRole(newRole);
+        User updatedUser = userRepository.save(user);
+        return toUserDto(updatedUser);
+    }
+
 
     public User processOAuth2User(OAuth2User oAuth2User, UserRole defaultRole) {
         String email = oAuth2User.getAttribute("email");
-        String name = oAuth2User.getAttribute("name"); // This should be the full name provided by Google
+        String name = oAuth2User.getAttribute("name");
 
         return userRepository.findByEmail(email)
                 .orElseGet(() -> {
@@ -125,13 +139,6 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .map(User::isProfileCreated)
                 .orElse(false);
-    }
-
-    public void updateUserRole(Long userId, UserRole newRole) {
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new AppException("User not found with ID: " + userId, HttpStatus.NOT_FOUND));
-        user.setRole(newRole);
-        userRepository.save(user);
     }
 
     private UserDto toUserDto(User user) {

@@ -3,7 +3,6 @@ package org.launchcode.caninecoach.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.launchcode.caninecoach.dtos.UserDto;
-import org.launchcode.caninecoach.entities.User;
 import org.launchcode.caninecoach.entities.UserRole;
 import org.launchcode.caninecoach.handlers.AppException;
 import org.launchcode.caninecoach.services.UserService;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -55,7 +53,7 @@ public class UserController {
     public RedirectView verifyEmail(@RequestParam("token") String token) {
         boolean verificationStatus = verificationTokenService.verifyToken(token);
         if (verificationStatus) {
-            return new RedirectView("http://localhost:3000/verification-success");
+            return new RedirectView("http://localhost:3000/select-role");
         } else {
             return new RedirectView("http://localhost:3000/verification-failed");
         }
@@ -66,28 +64,19 @@ public class UserController {
         Map<String, String> response = new HashMap<>();
         try {
             String email = extractEmail(oAuth2User);
-            Optional<User> optionalUser = Optional.ofNullable(userService.findUserByEmail(email));
-            User user = optionalUser.orElseThrow(() -> new AppException("User not found."));
-
-            String roleName = request.get("role");
-            if (isValidRole(roleName)) {
-                UserRole role = UserRole.valueOf(roleName);
-                user.setRole(role);
-                userService.save(user);
-                response.put("message", "Role updated successfully.");
-                logger.info("Role updated successfully for user: {}", email);
-            } else {
-                response.put("error", "Invalid role specified.");
-                return ResponseEntity.badRequest().body(response);
-            }
+            UserRole newRole = UserRole.valueOf(request.get("role"));
+            userService.updateUserRoleByEmail(email, newRole);
+            response.put("message", "Role updated successfully for user: " + email);
+            return ResponseEntity.ok(response);
         } catch (AppException ex) {
             logger.error("Error updating role: {}", ex.getMessage());
             response.put("error", ex.getMessage());
-            // Adjust the response based on your AppException structure and what it supports
+            return ResponseEntity.status(ex.getHttpStatus()).body(response);
+        } catch (IllegalArgumentException e) {
+            logger.error("Invalid role specified", e);
+            response.put("error", "Invalid role specified.");
             return ResponseEntity.badRequest().body(response);
         }
-
-        return ResponseEntity.ok(response);
     }
 
     private String extractEmail(OAuth2User oAuth2User) {
@@ -95,16 +84,11 @@ public class UserController {
             return oAuth2User.getAttribute("email");
         } else {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            return authentication.getName();
-        }
-    }
-
-    private boolean isValidRole(String roleName) {
-        try {
-            UserRole.valueOf(roleName);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
+            if (authentication != null) {
+                return authentication.getName(); // This might return "anonymousUser" for unauthenticated sessions
+            } else {
+                return null; // Consider how to handle this case in your application logic
+            }
         }
     }
 }

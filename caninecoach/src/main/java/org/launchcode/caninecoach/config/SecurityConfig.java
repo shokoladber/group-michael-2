@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -36,10 +37,10 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
 
     @Autowired
-    public SecurityConfig(CustomOAuth2UserDetailsService customOAuth2UserService,
+    public SecurityConfig(@Lazy CustomOAuth2UserDetailsService customOAuth2UserDetailsService,
                           OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler,
                           AuthenticationConfiguration authenticationConfiguration) {
-        this.customOAuth2UserDetailsService = customOAuth2UserService;
+        this.customOAuth2UserDetailsService = customOAuth2UserDetailsService;
         this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
         this.authenticationConfiguration = authenticationConfiguration;
     }
@@ -60,10 +61,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/home", "/login", "/oauth2/**", "/api/auth/signup", "/api/auth/login", "/api/user/select-role").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/signup, /api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/signup", "/api/auth/login").permitAll()
                         .requestMatchers("/api/user/verify-email").permitAll()
-                        .requestMatchers("/api/pet-profiles").hasAuthority("ROLE_PET_GUARDIAN")
-                        .requestMatchers("/api/trainer-profiles").hasAuthority("ROLE_PET_TRAINER")
+                        .requestMatchers("/api/pet-profile").hasAuthority("ROLE_PET_GUARDIAN")
+                        .requestMatchers("/api/trainer-profile").hasAuthority("ROLE_PET_TRAINER")
                                 .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling

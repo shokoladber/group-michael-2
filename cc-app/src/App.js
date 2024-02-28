@@ -27,8 +27,8 @@ function App() {
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/select-role" element={<UserRoleSelection />} />
             <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
-            <Route path="/pet-profiles" element={<PetProfilePage />} />
-            <Route path="/trainer-profiles" element={<TrainerProfilePage />} />
+            <Route path="/pet-profile" element={<PetProfilePage />} />
+            <Route path="/trainer-profile" element={<TrainerProfilePage />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </>

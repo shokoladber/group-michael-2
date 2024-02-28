@@ -1,43 +1,61 @@
 import React, { useState } from 'react';
-import api from '../../utils/api';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './LoginSignup.css';
+import './UserRoleSelection.css';
+
+axios.defaults.baseURL = 'http://localhost:8080';
 
 const UserRoleSelection = () => {
+    const [selectedRole, setSelectedRole] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const [error, setError] = useState('');
 
-    const handleRoleSelection = async (role) => {
-        console.log(`Attempting to set role to ${role}`);
+    const handleRoleChange = (event) => {
+        setSelectedRole(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        setError(null);
+
         try {
-            const response = await api.post('/api/user/select-role', { role });
-            console.log('Role set successfully', response);
-
-            if (role === 'PET_GUARDIAN') {
-                navigate('/pet-profiles');
-            } else if (role === 'PET_TRAINER') {
-                navigate('/trainer-profiles');
+            // Submit the selected role to the backend
+            await axios.post('/api/user/select-role', { role: selectedRole });
+            // Navigate to the corresponding profile creation page based on the role
+            if (selectedRole === 'PET_GUARDIAN') {
+                navigate('/pet-profile'); // Adjust as per your route setup
+            } else if (selectedRole === 'PET_TRAINER') {
+                navigate('/trainer-profile'); // Adjust as per your route setup
             }
         } catch (error) {
-            console.error("Role selection error:", error.response ? error.response.data : "An error occurred during role selection.");
-            setError(error.response ? error.response.data.message : "An error occurred during role selection.");
+            console.error('Error updating the role:', error);
+            setError('Failed to update role. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
-        <div className="container">
-            <div className="header">
-                <div className="text">Select Your Role</div>
-                <div className="underline"></div>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-            <div className="submit-container">
-                <button onClick={() => handleRoleSelection('PET_GUARDIAN')} className="submit">Pet Guardian</button>
-                <button onClick={() => handleRoleSelection('PET_TRAINER')} className="submit">Pet Trainer</button>
-            </div>
+        <div className="user-role-selection">
+            <h2>Select Your Role</h2>
+            {error && <p className="error">{error}</p>}
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Role:
+                    <select value={selectedRole} onChange={handleRoleChange} disabled={isLoading}>
+                        <option value="">--Select Role--</option>
+                        <option value="PET_GUARDIAN">Pet Guardian</option>
+                        <option value="PET_TRAINER">Pet Trainer</option>
+                    </select>
+                </label>
+                <button type="submit" disabled={isLoading || !selectedRole}>
+                    Submit
+                </button>
+            </form>
         </div>
     );
 };
 
 export default UserRoleSelection;
-
